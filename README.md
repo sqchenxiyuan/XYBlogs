@@ -1,3 +1,4 @@
 # XYBlogs
-博客的文章
-123
+这是sqchenxiyuan的文章集散地
+
+[博客地址](http://www.cxyblogbiu.com/)
