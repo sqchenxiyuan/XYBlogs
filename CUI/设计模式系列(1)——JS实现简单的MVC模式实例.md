@@ -30,8 +30,84 @@ Controller是Model和View之间的中介，当用户操作View时(点击、输�
 
 在MVC里面，就我的理解是这样的
 
->Model(模型):拥有View接受通知的接口，
+>Model(模型):给View提供数据获取接口并通知改变事件，给Controller提供数据设置接口
 >
->View(视图):拥有获取Model数据的接口，拥有触发Controller事件的接口
+>View(视图):给Controller提供控制接口并通知用户事件
 >
->Controller(控制器):拥有改变Model数据的接口，拥有改变View状态的接口
+>Controller(控制器):控制
+
+![](http://o7yupdhjc.bkt.clouddn.com/16-9-18/74405755.jpg)
+
+## 简单示例
+
+``` html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input id="test" /><br>
+		1:<p class="test"></p><br>
+		2:<p class="test"></p><br>
+		3:<p class="test"></p><br>
+		 <script>
+      //模块
+		  var testModle={
+				data:"",
+        //提供设置数据的方法
+				setData:function(data){
+					this.data=data;
+					this.dataChange();
+				},
+        //提供获取数据的方法
+				getData:function(data){
+					return this.data;
+				},
+        //数据更改事件
+				dataChange:function(){
+					testView.update();
+				}
+			}
+
+      //视图
+			var testView={
+        //初始化
+				init:function(){
+					document.getElementById("test").addEventListener('keyup',this.onchange);
+					document.getElementById("test").addEventListener('keydown',this.onchange);
+					document.getElementById("test").addEventListener('keyup',function(){
+						console.log(234);
+					})
+				},
+        //改变事件
+				onchange:function(){
+					testControl.putdata();
+				},
+        //数据更新
+				update:function(){
+					var ps=document.getElementsByClassName('test');
+					for(var i=0;ps[i];i++){
+						ps[i].innerHTML=testModle.getData();
+					}
+				}
+			};
+
+      //控制器
+			var testControl={
+        //初始化
+				init:function(){
+					testView.init();
+				},
+        //设置数值
+				putdata:function(){
+					testModle.setData(document.getElementById("test").value);
+				}
+			}
+
+			testView.init();
+		 </script>
+	</body>
+</html>
+```
