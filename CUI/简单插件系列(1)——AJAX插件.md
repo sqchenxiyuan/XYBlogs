@@ -94,7 +94,7 @@ AJAX一般是用来获取后台的数据，然后反馈给用户，所以我们�
 
 ## 封装的的插件
 
-### AJAX(obj)
+### ajax(obj)
 
 这个是基础方法，后面会基于这个方法扩展多个方法。
 
@@ -111,38 +111,56 @@ AJAX一般是用来获取后台的数据，然后反馈给用户，所以我们�
         reqBefore:发送请求前的函数
 */
 function ajax(obj){
-  var reqURL=obj.reqURL;
-  var reqMethod=obj.reqMethod||"get";
-  var reqAsync=obj.reqAsync||true;
-  var reqData=obj.reqData||"";//直接传数据不解析
-  var reqHeader=obj.reqHeader;
-  var reqSuccess=obj.reqSuccess;
-  var reqError=obj.reqError;
-  var reqBefore=obj.reqBefore;
+	var reqURL=obj.reqURL;
+	var reqMethod=obj.reqMethod||"get";
+	var reqAsync=obj.reqAsync||true;
+	var reqData=obj.reqData||"";//直接传数据不解析
+	var reqHeader=obj.reqHeader;
+	var reqSuccess=obj.reqSuccess;
+	var reqError=obj.reqError;
+	var reqBefore=obj.reqBefore;
+	var reqUserName=obj.reqUserName||"";
+	var reqUserPassWord=obj.reqUserPassWord||"";
 
-  var req=new XMLHttpRequest();
-  req.onreadystatechange=function(){
-    if(req.readyState==4)
-    {
-      if(req.status==200){
-        if(reqSuccess)reqSuccess(req.responseText);
-      }else{
-        if(reqError)reqError(req.responseText);
-      }
-    }
-  };
-  req.open(reqMethod,reqURL,reqAsync);
-  if(reqHeader){
-    for(var head in reqHeader){
-      req.setRequestHeader(head,reqHeader[head]);
-    }
-  }
-  if(reqBefore)reqBefore();
-  req.send(reqData);
+	var req=new XMLHttpRequest();
+	req.onreadystatechange=function(){
+		if(req.readyState==4)
+		{
+			if(req.status==200){
+				if(reqSuccess)reqSuccess(req.responseText);
+			}else{
+				if(reqError)reqError(req.responseText);
+			}
+		}
+	};
+	req.open(reqMethod,reqURL,reqAsync,reqUserName,reqUserPassWord);
+	if(reqHeader){
+		for(var head in reqHeader){
+			req.setRequestHeader(head,reqHeader[head]);
+		}
+	}
+	if(reqBefore)reqBefore(req);
+	req.send(reqData);
 }
+```
+
+### get(url,data,success)
+
+基于ajax方法的扩展
+
+``` javascript
+function get(url,data,success){
+  ajax({
+    reqURL:url,
+    reqData:JSON.stringify(data),
+    reqSuccess:success
+    });
+  }
 ```
 
 ## 版本
 还在修改中，在学习和开发过程中遇到问题会及时修正和更新~~
 
->V 0.1.4 --- 2016/9/16
+>V 0.1.5 --- 2016/9/27 添加用户名和密码，添加开始reqBefore前设置XMLHttpRequest对象 添加get方法
+>
+>V 0.1.4 --- 2016/9/16 建立
