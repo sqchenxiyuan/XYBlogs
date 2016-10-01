@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    div{
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="dragEx" style="left:100px;top:100px"></div>
+  <script type="text/javascript">
+    var div=document.getElementById("dragEx");
+    //old
+    // var draging=false;
+    // var startX;
+    // var startY;
+    // var DivstartX;
+    // var DivstartY;
+    // div.addEventListener("mousedown",function(e){
+    //   draging=true;
+    //   startX=e.clientX;
+    //   startY=e.clientY;
+    //   DivstartX=div.offsetLeft;
+    //   DivstartY=div.offsetTop;
+    // });
+    // div.addEventListener("mouseup",function(){
+    //   draging=false;
+    // });
+    // div.addEventListener("mousemove",function(e){
+    //   if(draging){
+    //     div.style.left=DivstartX+e.clientX-startX+'px';
+    //     div.style.top=DivstartY+e.clientY-startY+'px';
+    //     console.log(div.style.left,div.style.top)
+    //   }
+    // });
+    var startX;
+    var startY;
+    var DivstartX;
+    var DivstartY;
+    div.addEventListener("mousedown",function(e){
+      startX=e.clientX;
+      startY=e.clientY;
+      DivstartX=div.offsetLeft;
+      DivstartY=div.offsetTop;
+      document.addEventListener("mousemove",move);
+    });
+    div.addEventListener("mouseup",function(){
+      document.removeEventListener("mousemove",move);
+    });
+    function move(e){
+      div.style.left=DivstartX+e.clientX-startX+'px';
+      div.style.top=DivstartY+e.clientY-startY+'px';
+      console.log(div.style.left,div.style.top)
+    }
+  </script>
+</body>
+</html>
