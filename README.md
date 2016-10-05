@@ -4,6 +4,6 @@
 ---
 准备写的的:
 > JS 继承
-> 如何拖拽超出块后依然有效
+> DOM对象获取client坐标函数的实现
 
 [博客地址](http://www.cxyblogbiu.com/)
