@@ -1,0 +1,7 @@
+{
+	"name":"杂项之NODEJS搭建HTTPS服务器DEMO",
+	"version":"1.0.0",
+	"dependencies":{
+		"express":"4.14.0"
+	}
+}
