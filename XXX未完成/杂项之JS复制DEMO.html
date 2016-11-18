@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+
+  // var a = 1;//number类型
+  // var b = 'string';//string类型
+  // var c = true;//布尔类型
+  // var d = undefined;//未定义
+  // var e = null;//未赋值
+  //
+  // var a1 = a;
+  // var b1 = b;
+  // var c1 = b;
+  // var d1 = d;
+  // var e1 = e;
+  //
+  // var a1 = 2;
+  // console.log(a);//1
+  // console.log(a1);//2
+  //
+  // var b1 = 'string2';
+  // console.log(b);//string
+  // console.log(b1);//string2
+  //
+  // var c1 = false;
+  // console.log(c);//1
+  // console.log(c1);//1
+  //
+  // var d1 = null;
+  // console.log(d);//undefined
+  // console.log(d1);//null
+  //
+  // var e1 = undefined;
+  // console.log(e);//null
+  // console.log(e1);//undefined
+
+
+  // var f = {
+  //   name:"string",
+  //   age:12
+  // };
+  //
+  // var f1 = f;
+  //
+  // console.log(f);//{name:"string",age:12}
+  // console.log(f1);//{name:"string",age:12}
+  // f1.name="string22222";
+  // console.log(f);//{name:"string22222",age:12}
+  // console.log(f1);//{name:"string22222",age:12}
+
+
+  // var g={
+  //   a:"string",
+  //   b:123,
+  //   c:false,
+  //   d:null,
+  //   f:undefined,
+  //   g:[123123,"asdasd"],
+  //   h:{
+  //     hahah:234
+  //   },
+  //   i:function(){
+  //     return "asd";
+  //   }
+  // };
+  //
+  // var g1=JSON.parse(JSON.stringify(g));
+  //
+  // console.log(g);
+  // console.log(g1);
+  //
+  // console.log(g.a)//string
+  // console.log(g1.a)//string
+  // g1.a="string233";
+  // console.log(g.a)//string
+  // console.log(g1.a)//string233
+
+
+  var h=[
+    "string",
+    123,
+    false,
+    null,
+    undefined,
+    [123123,"asdasd"],
+    {
+      hah:234
+    },
+    function(){
+      return "asd";
+    }
+  ];
+
+  var h1=h.slice(0,h.length);
+
+  console.log(h);
+  console.log(h1);
+
+  console.log(h[0])//string
+  console.log(h1[0])//string
+  h1[0]="string233";
+  console.log(h[0])//string
+  console.log(h1[0])//string233
+
+  console.log(h[6])//{hah:234}
+  console.log(h1[6])//{hah:234}
+  h1[6].hah="string233";
+  console.log(h[6])//{hah:string233}
+  console.log(h1[6])//{hah:string233}
+  console.log(h[6]===h1[6])//true
+  console.log(h[7]===h1[7])//true
+
+</script>
+</html>
