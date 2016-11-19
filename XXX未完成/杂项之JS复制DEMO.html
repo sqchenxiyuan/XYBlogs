@@ -84,39 +84,101 @@
   // console.log(g1.a)//string233
 
 
-  var h=[
-    "string",
-    123,
-    false,
-    null,
-    undefined,
-    [123123,"asdasd"],
-    {
-      hah:234
-    },
-    function(){
-      return "asd";
+  // var h=[
+  //   "string",
+  //   123,
+  //   false,
+  //   null,
+  //   undefined,
+  //   [123123,"asdasd"],
+  //   {
+  //     hah:234
+  //   },
+  //   function(){
+  //     return "asd";
+  //   }
+  // ];
+  //
+  // var h1=h.slice(0,h.length);
+  //
+  // console.log(h);
+  // console.log(h1);
+  //
+  // console.log(h[0])//string
+  // console.log(h1[0])//string
+  // h1[0]="string233";
+  // console.log(h[0])//string
+  // console.log(h1[0])//string233
+  //
+  // console.log(h[6])//{hah:234}
+  // console.log(h1[6])//{hah:234}
+  // h1[6].hah="string233";
+  // console.log(h[6])//{hah:string233}
+  // console.log(h1[6])//{hah:string233}
+  // console.log(h[6]===h1[6])//true
+  // console.log(h[7]===h1[7])//true
+
+
+    var obj=function(){
+      this.name="haha";
+      this.age=123;
+      this.obj={
+        newname:this
+      }
     }
-  ];
 
-  var h1=h.slice(0,h.length);
+    obj.prototype={
+      foo:function(){return this.name;},
+      num:123
+    }
 
-  console.log(h);
-  console.log(h1);
+    var i=new obj();
+    var i1=copy(i);
 
-  console.log(h[0])//string
-  console.log(h1[0])//string
-  h1[0]="string233";
-  console.log(h[0])//string
-  console.log(h1[0])//string233
+    console.log(i);
+    console.log(i1);
 
-  console.log(h[6])//{hah:234}
-  console.log(h1[6])//{hah:234}
-  h1[6].hah="string233";
-  console.log(h[6])//{hah:string233}
-  console.log(h1[6])//{hah:string233}
-  console.log(h[6]===h1[6])//true
-  console.log(h[7]===h1[7])//true
+    console.log(i.num);
+    console.log(i1.num);
+    obj.prototype.num="haha233";
+    console.log(i.num);
+    console.log(i1.num);
+
+    function copy(obj){
+      var objlist=[];
+      return clone(obj);
+
+      function clone(oldobj){
+        var Constructor=function(){};
+        Constructor.prototype=oldobj.__proto__;
+        var newobj=new Constructor();
+
+        objlist.push({
+          old:oldobj,
+          new:newobj
+        });
+
+        for(var name in oldobj){
+          if(!oldobj.hasOwnProperty(name)) continue;
+          if(typeof oldobj[name] === 'object'){
+            newobj[name]=getCloned(oldobj[name]);
+            if(!newobj[name])
+            newobj[name]=clone(oldobj[name]);
+          }else{
+            newobj[name]=oldobj[name];
+          }
+        }
+        return newobj;
+      }
+
+      function getCloned(obj){
+        var x=false;
+        objlist.forEach(function(a){
+          if(obj===a.old) x=a.new;
+        })
+        return x;
+      }
+    }
 
 </script>
 </html>
