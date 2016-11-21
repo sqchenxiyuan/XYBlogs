@@ -127,9 +127,9 @@ function ajax(obj){
 		if(req.readyState==4)
 		{
 			if(req.status==200){
-				if(reqSuccess)reqSuccess(req.responseText);
+				if(reqSuccess&&typeof reqSuccess === 'function')reqSuccess(req.responseText);
 			}else{
-				if(reqError)reqError(req.responseText);
+				if(reqError&&typeof reqError === 'function')reqError(req.responseText);
 			}
 		}
 	};
@@ -139,28 +139,52 @@ function ajax(obj){
 			req.setRequestHeader(head,reqHeader[head]);
 		}
 	}
-	if(reqBefore)reqBefore(req);
+	if(reqBefore&&typeof reqBefore === 'function')reqBefore(req);
 	req.send(reqData);
 }
 ```
 
-### get(url,data,success)
+### get(url,data,success,error)
 
 基于ajax方法的扩展
 
 ``` javascript
-function get(url,data,success){
+function get(url,data,success,error){
+  var arr=[];
+  for(var name in data){
+    arr.push(name+"="+data[name]);
+  }
+  url=url+'?'+arr.join('&');
+
   ajax({
     reqURL:url,
+    reqSuccess:success,
+    reqError:error
+  });
+}
+```
+
+### post(url,data,success,error)
+
+基于ajax方法的扩展
+
+``` javascript
+function get(url,data,success,error){
+  ajax({
+    reqURL:url,
+    reqMethod:'post',
     reqData:JSON.stringify(data),
-    reqSuccess:success
-    });
-  }
+    reqSuccess:success,
+    reqError:error
+  });
+}
 ```
 
 ## 版本
 还在修改中，在学习和开发过程中遇到问题会及时修正和更新~~
 
->V 0.1.5 --- 2016/9/27 添加用户名和密码，添加开始reqBefore前设置XMLHttpRequest对象 添加get方法
+> 2016-11-21  修改、添加post
 >
->V 0.1.4 --- 2016/9/16 建立
+> 2016/9/27   添加用户名和密码，添加开始reqBefore前设置XMLHttpRequest对象 添加get方法
+>
+> 2016/9/16   建立
