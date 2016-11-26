@@ -4,6 +4,8 @@
 
 ## 函数对象和普通对象
 
+JS除了5个基础类型:number,string,bool,null,undefined
+
 ## END
 
 >2016-11-19 立项
