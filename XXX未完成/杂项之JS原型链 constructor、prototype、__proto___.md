@@ -1,6 +1,8 @@
-# 杂项之JS原型链 constructor、prototype、__proto___
+# 杂项之JS原型链 prototype、\_\_proto\_\_ 、constructor
 
+前端时间研究JS对象的深复制，想要保持原有的原型链，折腾了半天才弄出来，主要是对原型链不太熟悉，只是知道一些简单的东西，这篇文章就主要来研究一下 原型链中prototype、\_\_proto\_\_ 、constructor 三者的关系
 
+## 函数对象和普通对象
 
 ## END
 
