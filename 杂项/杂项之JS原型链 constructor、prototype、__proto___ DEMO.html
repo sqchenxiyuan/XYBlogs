@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+  // var num=new Number('123');
+  // var num2=123;
+  //
+  // console.log(num);//123
+  // console.log(typeof num);//object
+  // console.log(num2);//123
+  // console.log(typeof num2);//number
+  // console.log(typeof (num+num2));//number
+  // console.log(num2==num);//true
+  // console.log(num2===num);//false
+  // console.log(num2===num+0);//true
+  // console.log(num2.constructor===num.constructor);//true
+  // console.log(num2.prototype===num.prototype);//true
+  // console.log(num2.__proto__===num.__proto__);//true
+  //
+  // var fun=new Function('a,b','return a+b');
+  // console.log(fun(1,2));
+  // console.log(typeof fun);
+
+  // var num=new Number('123');
+  // var num2=123;
+  // console.log(num);//Number {[[PrimitiveValue]]: 123}
+  // console.log(typeof num);//object
+  // console.log(num2);//123
+  // console.log(typeof num2);//number
+  //
+  // var str=new String('a');
+  // var str2='a';
+  // console.log(str);//String {0: "a", length: 1, [[PrimitiveValue]]: "a"}
+  // console.log(typeof str);//object
+  // console.log(str2);//a
+  // console.log(typeof str2);//string
+  //
+  // var bool=new Boolean(true);
+  // var bool2=true;
+  // console.log(bool);//Boolean {[[PrimitiveValue]]: true}
+  // console.log(typeof bool);//object
+  // console.log(bool2);//true
+  // console.log(typeof bool2);//boolean
+  //
+  // var arr=new Array();
+  // var arr2=[];
+  // console.log(arr);//[]
+  // console.log(typeof arr);//object
+  // console.log(arr2);//[]
+  // console.log(typeof arr2);//object
+  //
+  // var date=new Date();
+  // console.log(date);//Sat Nov 26 2016 19:05:24 GMT+0800 (中国标准时间)
+  // console.log(typeof date);//object
+  //
+  // var nu=null;
+  // var und=undefined;
+  // console.log(typeof nu);//object
+  // console.log(typeof und);//undefined;
+  //
+  // var foo=new Function('a,b','return a+b;');
+  // console.log(typeof foo);//function
+
+  // var foo1=new Function('a,b','return a+b;');
+  // var foo2=function(){this.name=1};
+  // function foo3(){}
+  //
+  // var obj1={name:1};
+  // var obj2=new Object(obj1);
+  // var obj3=new foo2();
+  //
+  // console.log(typeof foo1);//function
+  // console.log(typeof foo2);//function
+  // console.log(typeof foo3);//function
+  //
+  // console.log(typeof obj1);//object
+  // console.log(typeof obj2);//object
+  // console.log(typeof obj3);//object
+
+
+
+  function fun1(){
+    this.name='cat';
+    this.age=12
+  }
+
+  fun1.prototype.getName=function(){
+      return this.name;
+  };
+
+  var o1=new fun1();
+  // console.log(o1.name);//cat
+  // console.log(o1.getName());//cat
+
+  function fun2(){}
+
+  fun2.prototype=o1;
+
+
+  var o2=new fun2();
+  o2.name='dog';
+
+  // console.log(o2.name);//dog
+  // console.log(o2.getName());//dog
+
+  // console.log(o2.__proto__===fun2.prototype);//true
+  // console.log(fun2.prototype===o1);//true
+  // console.log(o2.__proto__===o1);//true
+  //
+  // console.log(o1.__proto__===fun1.prototype);//true
+  // console.log(fun1.__proto__===Function.prototype);//true
+  // console.log(Function.__proto__===Object.__proto__);//true
+  //
+  // console.log(o2.__proto__===fun2.prototype);//true
+  // console.log(fun2.prototype===o1);//true
+  // console.log(o2.__proto__===o1);//true
+
+  // console.log(o2.__proto__);
+  // console.log(o2.__proto__.__proto__);
+  // console.log(o2.__proto__.__proto__.__proto__);
+  // console.log(o2.__proto__.__proto__.__proto__.__proto__);
+  // console.log(o2.__proto__.__proto__.__proto__.__proto__.__proto__);
+
+  // console.log(fun1.prototype);//true
+  // console.log(fun1.prototype.constructor===fun1);//true
+
+  console.log(Object.prototype.constructor);
+  console.log(Object.prototype.constructor===Object);
+  console.log(Function.prototype.constructor);
+  console.log(Function.prototype.constructor===Function);//true
+
+  console.log(Object.__proto__===Function.__proto__);
+  console.log(Object.__proto__===Object.prototype);//false
+
+  // function f1(){}
+  // f1.prototype={getname:function(){}};
+  //
+  // function f2(){}
+  // f1.prototype.getname=function(){};
+  //
+  // console.log(f1.prototype.constructor);
+  // console.log(f1.prototype.constructor===Object.prototype.constructor);//true
+  // console.log(f2.prototype.constructor);
+
+
+  // var a={};
+  // var b={}
+  // a.__proto__=b;
+  // b.__proto__=Object;
+  // Object.__proto__=a;
+  // console.log(a.name);
+
+
+</script>
+</html>
