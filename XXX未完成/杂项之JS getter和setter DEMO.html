@@ -10,19 +10,145 @@
 
 </body>
 <script>
-  var obj={
-    _name:1,
-    get name(){
-      return this._name;
-    },
-    set name(value){
-      this._name=value;
-    }
-  };
+// var obj={
+//   _name:'123',
+//   set name(value){
+//     this._name=value;
+//   },
+//   get name(){
+//     return this._name;
+//   },
+//   get name2(){
+//     return 'hahh';
+//   }
+// };
+//
+// console.log(obj.name);//123
+// console.log(obj.name2);//hahh
+//
+// var obj={
+//   _name:'123',
+//   set name(value){
+//     this._name=value;
+//   }
+// };
+//
+// console.log(obj.name);//undefined
 
-  console.log(obj);
-  console.log(obj.name);
-  obj.name=1;
-  console.log(obj.name);
+// var obj={
+//   _name:'123',
+//   set name(value){
+//     this._name=value;
+//   },
+//   get name(){
+//     return this._name;
+//   }
+// };
+//
+// console.log(obj._name);//123
+// obj.name='223'
+// console.log(obj._name);//223
+//
+// var obj={
+//   _name:'123',
+//   get name(){
+//     return this._name;
+//   }
+// };
+//
+// console.log(obj._name);//123
+// obj.name='223'
+// console.log(obj._name);//123
+
+// var obj={
+//   _name:'123',
+//   set name(value){
+//     this._name=value;
+//   },
+//   get name(){
+//     return this._name;
+//   }
+// };
+//
+// console.log(obj.name);//123
+// obj.name='223'
+// console.log(obj.name);//223
+
+// var obj=Object.create(Object.prototype,{
+//   _name:{
+//     value:'123'
+//   },
+//   name:{
+//     get:function(){
+//       return this._name;
+//     },
+//     set:function(value){
+//       this._name=value;
+//     }
+//   }
+// })
+//
+// console.log(obj);//123
+// console.log(obj.name);//123
+// obj.name='223'
+// console.log(obj.name);//223
+
+// var obj={
+//   _name:'123'
+// }
+//
+// Object.defineProperty(obj,'name',{
+//   get:function(){
+//     return this._name;
+//   },
+//   set:function(value){
+//     this._name=value;
+//   }
+// })
+//
+// console.log(obj);
+// console.log(obj.name);//123
+// obj.name='223'
+// console.log(obj.name);//223
+
+
+// var obj={
+//   _name:'123'
+// }
+//
+// Object.defineProperties(obj,{
+//   name:{
+//     get:function(){
+//       return this._name;
+//     },
+//     set:function(value){
+//       this._name=value;
+//     }
+//   }
+// })
+//
+// console.log(obj);
+// console.log(obj.name);//123
+// obj.name='223'
+// console.log(obj.name);//223
+
+
+var obj={
+  _name:'123'
+}
+
+obj.__defineGetter__('name',function(){
+  return this._name;
+});
+obj.__defineSetter__('name',function(value){
+  this._name=value;
+})
+
+
+console.log(obj);
+console.log(obj.name);//123
+obj.name='223'
+console.log(obj.name);//223
+
 </script>
 </html>
