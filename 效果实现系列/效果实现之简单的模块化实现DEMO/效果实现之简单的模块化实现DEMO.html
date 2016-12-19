@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</script>
+<script type="text/javascript">
+var y=22;
+function require(path){
+	var exports={};
+	ajax({
+    reqURL:path,
+    reqAsync:false,
+    reqSuccess:function(data){
+    	data='"use strict";'+data;
+			new Function('exports',data)(exports);
+    }
+  });
+  return exports;
+}
+
+
+var test=require('./test.js');
+console.log(y);
+//test.biu();
+
+
+function ajax(obj){
+    var reqURL=obj.reqURL;
+    var reqMethod=obj.reqMethod||"get";
+    var reqAsync=obj.reqAsync&&true;
+    var reqData=obj.reqData||"";//直接传数据不解析
+    var reqHeader=obj.reqHeader;
+    var reqSuccess=obj.reqSuccess;
+    var reqError=obj.reqError;
+    var reqBefore=obj.reqBefore;
+    var reqUserName=obj.reqUserName||"";
+    var reqUserPassWord=obj.reqUserPassWord||"";
+    var req=new XMLHttpRequest();
+    req.onreadystatechange=function(){
+        if(req.readyState==4)
+        {
+            if(req.status==200){
+                if(reqSuccess&&typeof reqSuccess === 'function')reqSuccess(req.responseText);
+            }else{
+                if(reqError&&typeof reqError === 'function')reqError(req.responseText);
+            }
+        }
+    };
+    req.open(reqMethod,reqURL,reqAsync,reqUserName,reqUserPassWord);
+    if(reqHeader){
+        for(var head in reqHeader){
+            req.setRequestHeader(head,reqHeader[head]);
+        }
+    }
+    if(reqBefore&&typeof reqBefore === 'function')reqBefore(req);
+    req.send(reqData);
+}
+
+</script>
+</html>

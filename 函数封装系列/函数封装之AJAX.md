@@ -113,7 +113,7 @@ AJAX一般是用来获取后台的数据，然后反馈给用户，所以我们�
 function ajax(obj){
 	var reqURL=obj.reqURL;
 	var reqMethod=obj.reqMethod||"get";
-	var reqAsync=obj.reqAsync||true;
+	var reqAsync=obj.reqAsync&&true;
 	var reqData=obj.reqData||"";//直接传数据不解析
 	var reqHeader=obj.reqHeader;
 	var reqSuccess=obj.reqSuccess;
@@ -183,6 +183,8 @@ function get(url,data,success,error){
 ## 版本
 还在修改中，在学习和开发过程中遇到问题会及时修正和更新~~
 
+> 2016-12-19  修复BUG，异步为false时依然为true
+>
 > 2016-11-21  修改、添加post
 >
 > 2016/9/27   添加用户名和密码，添加开始reqBefore前设置XMLHttpRequest对象 添加get方法
