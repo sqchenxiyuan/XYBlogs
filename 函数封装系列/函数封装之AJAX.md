@@ -113,7 +113,7 @@ AJAX一般是用来获取后台的数据，然后反馈给用户，所以我们�
 function ajax(obj){
 	var reqURL=obj.reqURL;
 	var reqMethod=obj.reqMethod||"get";
-	var reqAsync=obj.reqAsync&&true;
+	var reqAsync=(obj.reqAsync===undefined?true:obj.reqAsync);
 	var reqData=obj.reqData||"";//直接传数据不解析
 	var reqHeader=obj.reqHeader;
 	var reqSuccess=obj.reqSuccess;
