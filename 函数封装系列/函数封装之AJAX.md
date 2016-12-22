@@ -183,7 +183,9 @@ function get(url,data,success,error){
 ## 版本
 还在修改中，在学习和开发过程中遇到问题会及时修正和更新~~
 
-> 2016-12-19  修复BUG，异步为false时依然为true
+> 2016-12-22  修复BUG，异步为false时依然为true
+>
+> 2016-12-19  修复BUG，异步为true时依然为false
 >
 > 2016-11-21  修改、添加post
 >
