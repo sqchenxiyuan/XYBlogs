@@ -7,8 +7,12 @@
   <title>Document</title>
 </head>
 <body>
-  <a href="#/qwe">qwe</a>
-  <button type="button" name="button" onclick="changeURL('#/123')">123</button>
+  <a href="#/qwe">#/qwe</a>
+  <a href="/qwe">!/qwe</a>
+  <a href="qwe">qwe</a>
+  <button type="button" name="button" onclick="changeURL('#/123')">changeURL('#/123')</button>
+  <button type="button" name="button" onclick="changeURL('/123')">changeURL('/123')</button>
+  <button type="button" name="button" onclick="changeURL('123')">changeURL('123')</button>
 </body>
 <script type="text/javascript">
   function changeURL(url){
