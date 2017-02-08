@@ -10,7 +10,7 @@
 AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。
 AJAX可以允许网页异步与服务器进行数据交换，是一个使用频率很高的技术，所以我们需要将他封装成一个简单的方法，方便调用。
 
-而且现在基本主流的浏览器都支持:
+而且现在主流的浏览器都支持:
 
 ![](http://o7yupdhjc.bkt.clouddn.com/16-9-16/93876512.jpg)
 
@@ -101,14 +101,18 @@ AJAX一般是用来获取后台的数据，然后反馈给用户，所以我们�
 ``` javascript
 /*
   obj选项：
-  必选： reqURL:请求地址    
+  必选： reqURL:请求地址
   可选： reqMethod:请求方法  默认:GET
         reqAsync:请求异同步 默认:异步
         reqData:请求数据    默认:空
         reqHeader:请求头    默认为空   传入JS对象即可
+				reqUserName:请求用户名	默认为空
+				reqUserPassWord:请求密码	默认为空
         reqSuccess(data):请求成功时间函数   传入返回的数据
-        reqError():请求失败时的响应函数
+        reqError(data):请求失败时的响应函数
         reqBefore:发送请求前的函数
+				reqProgress:请求获取的进度
+				reqUploadProgress:请求发出的进度
 */
 function ajax(obj){
 	var reqURL=obj.reqURL;
@@ -116,11 +120,14 @@ function ajax(obj){
 	var reqAsync=(obj.reqAsync===undefined?true:obj.reqAsync);
 	var reqData=obj.reqData||"";//直接传数据不解析
 	var reqHeader=obj.reqHeader;
+	var reqUserName=obj.reqUserName||"";
+	var reqUserPassWord=obj.reqUserPassWord||"";
+
 	var reqSuccess=obj.reqSuccess;
 	var reqError=obj.reqError;
 	var reqBefore=obj.reqBefore;
-	var reqUserName=obj.reqUserName||"";
-	var reqUserPassWord=obj.reqUserPassWord||"";
+	var reqProgress=obj.reqProgress;
+	var reqUploadProgress=obj.reqUploadProgress;
 
 	var req=new XMLHttpRequest();
 	req.onreadystatechange=function(){
@@ -133,6 +140,9 @@ function ajax(obj){
 			}
 		}
 	};
+	req.onprogress=reqProgress;
+	req.upload.onprogress=reqUploadProgress;
+
 	req.open(reqMethod,reqURL,reqAsync,reqUserName,reqUserPassWord);
 	if(reqHeader){
 		for(var head in reqHeader){
@@ -154,13 +164,25 @@ function get(url,data,success,error){
   for(var name in data){
     arr.push(name+"="+data[name]);
   }
-  url=url+'?'+arr.join('&');
+  if(arr.length>0)url=url+'?'+arr.join('&');
 
   ajax({
     reqURL:url,
     reqSuccess:success,
     reqError:error
   });
+}
+```
+
+### getJSON(url,data,success,error)
+
+基于get方法的扩展，转化json格式
+
+``` javascript
+function getJSON(url,data,success,error){
+	get(url,data,function(data){
+		success(JSON.parse(data));
+	},error);
 }
 ```
 
@@ -173,7 +195,7 @@ function post(url,data,success,error){
   ajax({
     reqURL:url,
     reqMethod:'post',
-    reqData:JSON.stringify(data),
+    reqData:data,
     reqSuccess:success,
     reqError:error
   });
@@ -183,14 +205,16 @@ function post(url,data,success,error){
 ## 版本
 还在修改中，在学习和开发过程中遇到问题会及时修正和更新~~
 
+> 2017-2-8    修复GET函数多个?的缺陷，增加请求进度的控制
+
 > 2017-1-13   修复BUG，post请求请求名错误
->
+
 > 2016-12-22  修复BUG，异步为false时依然为true
->
+
 > 2016-12-19  修复BUG，异步为true时依然为false
->
+
 > 2016-11-21  修改、添加post
->
+
 > 2016-9-27   添加用户名和密码，添加开始reqBefore前设置XMLHttpRequest对象 添加get方法
->
+
 > 2016-9-16   建立
