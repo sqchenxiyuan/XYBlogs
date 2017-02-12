@@ -14,13 +14,14 @@ function scrollExtend(obj){
   var end=obj.scrollend;
   var delay=obj.delay||200;
   return function(){
-      if(!handler&&start) start.call(this);
+      var that=this;
+      if(!handler&&start) start.call(that);
       if(handler) clearTimeout(handler);
-      if(scroll) scroll.call(this);
+      if(scroll) scroll.call(that);
       if(end&&delay){
           handler=setTimeout(function(){
               handler=null;
-              end.call(this);
+              end.call(that);
           },delay);
       }
   };
@@ -83,6 +84,8 @@ new Vue({
 主要就是使用settimeout()和clearTimeout()来延长时间，以及使用匿名函数的思想。
 
 ## END
+
+> 2017-2-12   修复直接使用this,无法传递this环境的BUG
 
 > 2017-2-12		结合VUE，可以直接使用，同时函数内的this环境为vue对象
 
