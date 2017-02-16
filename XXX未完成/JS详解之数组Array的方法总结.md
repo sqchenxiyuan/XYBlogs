@@ -55,6 +55,62 @@ console.log(Array.isArray(array));//true
 
 ```
 
+### [Array.of()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/of)
+
+#### 介绍
+
+Array.of()函数是用来创建一个新的数组的方法。
+
+#### 语法
+
+> Array.of(element0[, element1[, ...[, elementN]]])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|elementN|构成数组的参数，按顺序排列|
+
+#### 返回
+
+返回构建好的新的数组实例
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[5];
+let arr2=[1,2,3];
+let arr3=Array(5);
+let arr4=Array(1,2,3);
+let arr5=Array.of(5);
+let arr6=Array.of(1,2,3);
+
+console.log(arr1);//[5]
+console.log(arr2);//[1,2,3]
+console.log(arr3);//[undefined,undefined,undefined,undefined,undefined]
+console.log(arr4);//[1,2,3]
+console.log(arr5);//[5]
+console.log(arr6);//[1,2,3]
+
+```
+
+#### 注意
+
+> Array.of()和Array()存在区别，Array.of()输入一个数值时只是将参数当作一个元素，而Array()会将这个数值当为数组的长度
+
+``` JavaScript
+
+let arr1=Array(5);
+let arr2=Array.of(5);
+
+console.log(arr1);//[undefined,undefined,undefined,undefined,undefined]
+console.log(arr1.length);//5
+console.log(arr2);//[5]
+console.log(arr2.length);//1
+
+```
+
 ## ES6+
 
 这一部分讲述在ES6及其以后版本JS所规定的函数。[ES6的特性支持表看这里](http://kangax.github.io/compat-table/es6/)
@@ -84,7 +140,6 @@ console.log(Array.isArray(array));//true
 
 ## list
 
-### [Array.of()]()
 ### [Array.prototype.concat()]()
 ### [Array.prototype.copyWithin()]()
 ### [Array.prototype.entries()]()
@@ -117,6 +172,16 @@ console.log(Array.isArray(array));//true
 ### [Array.prototype.values()]()
 ### [Array.prototype[@@iterator]()]()
 ### [get Array[@@species]]()
+
+#### 介绍
+
+#### 语法
+
+#### 参数
+
+#### 返回
+
+#### 案例
 
 ## END
 
