@@ -99,17 +99,218 @@ console.log(arr6);//[1,2,3]
 
 > Array.of()和Array()存在区别，Array.of()输入一个数值时只是将参数当作一个元素，而Array()会将这个数值当为数组的长度
 
+> ``` JavaScript
+
+> let arr1=Array(5);
+> let arr2=Array.of(5);
+
+> console.log(arr1);//[undefined,undefined,undefined,undefined,undefined]
+> console.log(arr1.length);//5
+> console.log(arr2);//[5]
+> console.log(arr2.length);//1
+
+> ```
+
+### [Array.prototype.concat()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)
+
+#### 介绍
+
+这个方法主要是将两个或多个值或数组合并为一个 **新** 的数组，他不会改变原有数组
+
+#### 语法
+
+> array.concat(value1[, value2[, ...[, valueN]]])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|valueN|需要与原数组合并的数组或值|
+
+#### 返回
+
+返回按顺序合并的新数组。
+
+#### 案例
+
 ``` JavaScript
 
-let arr1=Array(5);
-let arr2=Array.of(5);
+let arr1=[1,2,3];
+let arr2=[4,5,6];
+let arr3=arr1.concat(arr2);
+let arr4=arr3.concat(7);
 
-console.log(arr1);//[undefined,undefined,undefined,undefined,undefined]
-console.log(arr1.length);//5
-console.log(arr2);//[5]
-console.log(arr2.length);//1
+console.log(arr1);//[1,2,3]
+console.log(arr2);//[4,5,6]
+console.log(arr3);//[1,2,3,4,5,6]
+console.log(arr4);//[1,2,3,4,5,6,7]
 
 ```
+
+#### 注意
+
+> 1.这个函数是返回的新数组
+
+> 2.这个函数是进行浅拷贝
+
+> ``` JavaScript
+
+> let arr1=[{x:1},{x:2},{x:3}];
+> let arr2=arr1.concat(arr1);
+
+> console.log(arr2);//[{x:1},{x:2},{x:3},{x:1},{x:2},{x:3}]
+> arr1[0].x=4;
+> console.log(arr2);//[{x:4},{x:2},{x:3},{x:4},{x:2},{x:3}]
+
+> ```
+
+
+### [Array.prototype.every()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
+
+#### 介绍
+
+Array.prototype.every() 方法测试数组的所有元素是否都通过了指定函数的测试。
+
+#### 语法
+
+> array.every(callback[, thisArg])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|callback|用来检测每个值的回调函数,callback 被调用时传入三个参数：元素值，元素的索引，原数组。|
+|thisArg|执行 callback 时使用的 this 值。|
+
+#### 返回
+
+返回检测的结果，为布尔值
+
+#### 案例
+
+``` JavaScript
+
+function bigthan10(element,index,array){
+  if(this.x){
+    return element/this.x>10
+  }else{
+    return element>10
+  }
+}
+
+let arr1=[11,22,3];
+console.log(arr1.every(bigthan10));//false
+let arr2=[11,22,33];
+console.log(arr2.every(bigthan10));//true
+
+let obj={
+  x:11
+};
+
+let arr3=[99,111,222];
+console.log(arr3.every(bigthan10,obj));//false
+
+```
+
+### [Array.prototype.some()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
+
+#### 介绍
+
+Array.prototype.some() 方法测试数组的是否有元素通过了指定函数的测试，与 Array.prototype.every() 方法相对。
+
+#### 语法
+
+> array.some(callback[, thisArg])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|callback|用来检测每个值的回调函数,callback 被调用时传入三个参数：元素值，元素的索引，原数组。|
+|thisArg|执行 callback 时使用的 this 值。|
+
+#### 返回
+
+返回检测的结果，为布尔值
+
+#### 案例
+
+``` JavaScript
+
+function smallthan10(element,index,array){
+  if(this.x){
+    return element/this.x<10
+  }else{
+    return element<10
+  }
+}
+
+let arr1=[11,22,3];
+console.log(arr1.some(smallthan10));//true
+let arr2=[11,22,33];
+console.log(arr2.some(smallthan10));//false
+
+let obj={
+  x:11
+};
+
+let arr3=[99,111,222];
+console.log(arr3.some(smallthan10,obj));//true
+
+```
+
+### [Array.prototype.sort()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+
+#### 介绍
+
+Array.prototype.sort() 方法在适当的位置对数组的元素进行排序，并返回数组。 sort 排序不一定是稳定的。默认排序顺序是根据字符串Unicode码点。
+
+#### 语法
+
+> array.sort(compareFunction)
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|compareFunction|用来排序的函数，传入相互比较的a、b对象，通过返回数字进行排序：负数表示不交换(a前b后)，正数表示交换(b前a后)，0表示不变。|
+
+#### 返回
+
+返回排序后的数组
+
+#### 案例
+
+``` JavaScript
+
+function comp(a,b){
+  return a-b;
+}
+
+let arr1=[11,22,3,1,323,443,5];
+console.log(arr1.sort(comp));//[1, 3, 5, 11, 22, 323, 443]
+console.log(arr1);//[1, 3, 5, 11, 22, 323, 443]
+
+```
+
+#### 注意
+
+> 1.当不输入compareFunction时，函数默认采用Unicode位点进行排序。
+
+> ``` JavaScript
+
+> let arr1=[11,22,3,1,323,443,5];
+> console.log(arr1.sort());//[1, 11, 22, 3, 323, 443, 5]
+> //这里将数字类型转化为了字符串进行比较
+
+> ```
+
+
+### [Array.prototype.pop()]()
+### [Array.prototype.push()]()
+### [Array.prototype.shift()]()
+### [Array.prototype.unshift()]()
+
 
 ## ES6+
 
@@ -134,16 +335,87 @@ console.log(arr2.length);//1
 |thisArg|可选参数，执行 mapFn 函数时 this 的值。|
 
 
+### [Array.prototype.copyWithin()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin)
 
+#### 介绍
+
+Array.prototype.copyWithin()方法会浅拷贝数组的部分元素到同一数组的不同位置，且不改变数组的大小，然后返回该数组。
+
+#### 语法
+
+> array.copyWithin(target[, start[, end]])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|target|序列复制到的索引位子。如果是负数，target 将从末尾开始计算,如果 target 大于等于 arr.length，将会不发生拷贝。如果 target 在 start 之后，复制的序列将被修改以符合 arr.length。|
+|start|开始复制元素的起始位置。如果是负数，start 将从末尾开始计算。默认为0|
+|end|开始复制元素的结束位置。copyWithin 将会拷贝到该位置，但不包括 end 这个位置的元素。如果是负数， end 将从末尾开始计算。默认为array.length|
+
+#### 返回
+
+返回修改后的数组
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3,4,5];
+console.log(arr1);//[1,2,3,4,5]
+let arr2=arr1.copyWithin(1);
+console.log(arr1);//[1,1,2,3,4]   会修改原始数字本身
+console.log(arr2);//[1,1,2,3,4]
+
+let arr3=[1,2,3,4,5];
+console.log(arr3.copyWithin(1,2,4));//[1,3,4,4,5]
+
+```
+
+#### 注意
+
+> 1.该函数会修改原始数组,并且不是插入，是进行的覆盖操作。
+
+> 2.start所在索引必须小于end
+
+### [Array.prototype.entries()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
+
+#### 介绍
+
+entries() 方法返回一个新的Array Iterator对象，该对象包含数组中每个索引的键/值对。
+
+#### 语法
+
+> arr.entries();
+
+#### 返回
+
+返回一个新的 Array 迭代器对象。
+
+#### 案例
+
+``` JavaScript
+
+let arr = ['a','b','c',1,2,3];
+let iterator = arr.entries();
+console.log(iterator);//ArrayIterator {}
+
+for (let data of iterator) {
+    console.log(data);
+}
+//[0, "a"]
+//[1, "b"]
+//[2, "c"]
+//[3, 1]
+//[4, 2]
+//[5, 3]
+
+```
 
 
 
 ## list
 
-### [Array.prototype.concat()]()
-### [Array.prototype.copyWithin()]()
-### [Array.prototype.entries()]()
-### [Array.prototype.every()]()
 ### [Array.prototype.fill()]()
 ### [Array.prototype.filter()]()
 ### [Array.prototype.find()]()
@@ -155,20 +427,14 @@ console.log(arr2.length);//1
 ### [Array.prototype.keys()]()
 ### [Array.prototype.lastIndexOf()]()
 ### [Array.prototype.map()]()
-### [Array.prototype.pop()]()
-### [Array.prototype.push()]()
 ### [Array.prototype.reduce()]()
 ### [Array.prototype.reduceRight()]()
 ### [Array.prototype.reverse()]()
-### [Array.prototype.shift()]()
 ### [Array.prototype.slice()]()
-### [Array.prototype.some()]()
-### [Array.prototype.sort()]()
 ### [Array.prototype.splice()]()
 ### [Array.prototype.toLocaleString()]()
 ### [Array.prototype.toSource()]()
 ### [Array.prototype.toString()]()
-### [Array.prototype.unshift()]()
 ### [Array.prototype.values()]()
 ### [Array.prototype[@@iterator]()]()
 ### [get Array[@@species]]()
