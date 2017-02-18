@@ -259,6 +259,58 @@ console.log(arr3.some(smallthan10,obj));//true
 
 ```
 
+### [Array.prototype.filter()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+
+#### 介绍
+
+filter() 方法使用指定的函数测试所有元素，并返回一个包含所有通过测试的元素的新数组。
+
+#### 语法
+
+> array.filter(callback[, thisArg])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|callback|用来检测每个值的回调函数,callback 被调用时传入三个参数：元素值，元素的索引，原数组。|
+|thisArg|执行 callback 时使用的 this 值。|
+
+#### 返回
+
+返回由满足函数的元素组成的新的数组。
+
+#### 案例
+
+``` JavaScript
+
+function smallthan10(element,index,array){
+  if(this.x){
+    return element/this.x<10
+  }else{
+    return element<10
+  }
+}
+
+let arr1=[11,22,3];
+console.log(arr1.filter(smallthan10));//[3]
+console.log(arr1);//[11,22,3]  原数组不变
+let arr2=[11,22,33];
+console.log(arr2.filter(smallthan10));//[]
+
+let obj={
+  x:11
+};
+
+let arr3=[99,111,222];
+console.log(arr3.filter(smallthan10,obj));//[99]
+
+```
+
+
+
+
+
 ### [Array.prototype.sort()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 
 #### 介绍
@@ -306,13 +358,128 @@ console.log(arr1);//[1, 3, 5, 11, 22, 323, 443]
 > ```
 
 
-### [Array.prototype.pop()]()
-### [Array.prototype.push()]()
-### [Array.prototype.shift()]()
-### [Array.prototype.unshift()]()
+### [Array.prototype.pop()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)
+
+#### 介绍
+
+Array.prototype.pop() 方法从数组中删除最后一个元素，并返回该元素。该方法会将数组视为一个堆栈，pop为出栈函数。
+
+#### 语法
+
+> arr.pop()
+
+#### 返回
+
+返回弹出的栈顶元素
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3,4,5];
+let p=arr1.pop();
+
+console.log(arr1);//[1,2,3,4]
+console.log(p);//5
+
+```
 
 
-## ES6+
+### [Array.prototype.push()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
+
+#### 介绍
+
+push() 方法将一个或多个元素添加到数组的末尾，并返回数组的新长度。该方法会将数组视为一个堆栈，push为入栈函数。
+
+#### 语法
+
+> arr.push(element1, ..., elementN)
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|elementN|需要入栈的元素，按顺序入栈|
+
+#### 返回
+
+返回改变后的数组的长度
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3,4];
+let p=arr1.push('a','b','c');
+
+console.log(arr1);//[1,2,3,4,'a','b','c']
+console.log(p);//7
+
+
+```
+
+### [Array.prototype.shift()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/shift)
+
+#### 介绍
+
+Array.prototype.shift() 方法从数组中弹出第一个元素，并返回该元素的值。这个方法类似于pop()函数。
+
+#### 语法
+
+> array.shift()
+
+#### 返回
+
+返回弹出的元素
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3,4,5];
+let p=arr1.shift();
+
+console.log(arr1);//[2,3,4,5]
+console.log(p);//1
+
+```
+
+
+### [Array.prototype.unshift()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)
+
+#### 介绍
+
+Array.prototype.unshift() 方法将一个或多个元素添加到数组的开头，并返回新数组的长度。
+
+#### 语法
+
+> array.unshift(element1, ..., elementN)
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|elementN|需要入栈的元素，按倒序入栈，像是两个数组拼接|
+
+#### 返回
+
+返回改变后的数组的长度
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3];
+let p=arr1.unshift('a','b','c');
+
+console.log(arr1);//['a','b','c',1,2,3]
+console.log(6);//7
+
+
+```
+
+
+## ES6+ ==================================================================================================
 
 这一部分讲述在ES6及其以后版本JS所规定的函数。[ES6的特性支持表看这里](http://kangax.github.io/compat-table/es6/)
 
@@ -412,12 +579,49 @@ for (let data of iterator) {
 
 ```
 
+### [Array.prototype.fill()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)
+
+#### 介绍
+
+Array.prototype.fill() 方法将一个数组的所有元素从开始索引填充到具有静态值的结束索引
+
+#### 语法
+
+> arr.fill(value, start, end)
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|value|需要用来填充的元素|
+|start|开始索引，默认为0,如果开始索引为负数则从后往前算|
+|end|结束索引，默认为arr.length，结束索引所在的位置不会被覆盖|
+
+#### 返回
+
+返回改变后的数组本身
+
+#### 案例
+
+``` JavaScript
+
+let arr1 = [1,2,3,4,5];
+let p = arr1.fill(0);
+console.log(arr1);//[0,0,0,0,0]
+
+let arr2 = [1,2,3,4,5];
+p = arr2.fill(0,1,2);
+console.log(arr2);//[1,0,3,4,5]
+
+let arr3 = [1,2,3,4,5];
+p = arr3.fill(0,-2,-1);
+console.log(arr3);//[1,2,3,0,5]
+
+```
 
 
 ## list
 
-### [Array.prototype.fill()]()
-### [Array.prototype.filter()]()
 ### [Array.prototype.find()]()
 ### [Array.prototype.findIndex()]()
 ### [Array.prototype.forEach()]()
