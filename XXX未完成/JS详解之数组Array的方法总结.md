@@ -944,7 +944,7 @@ console.log(myArr.toLocaleString());//1337,Sun Feb 19 2017 19:08:50 GMT+0800 (�
 ```
 
 
-## ES6+ ==================================================================================================
+## ES6+
 
 这一部分讲述在ES6及其以后版本JS所规定的函数。[ES6的特性支持表看这里](http://kangax.github.io/compat-table/es6/)
 
@@ -952,7 +952,7 @@ console.log(myArr.toLocaleString());//1337,Sun Feb 19 2017 19:08:50 GMT+0800 (�
 
 #### 介绍
 
-待写
+Array.from() 方法从类似数组或可迭代对象创建一个新的数组实例。
 
 #### 语法
 
@@ -966,6 +966,25 @@ console.log(myArr.toLocaleString());//1337,Sun Feb 19 2017 19:08:50 GMT+0800 (�
 |mapFn|可选参数，如果指定了该参数，则最后生成的数组会经过该函数的加工处理后再返回。|
 |thisArg|可选参数，执行 mapFn 函数时 this 的值。|
 
+#### 返回
+
+返回一个新的Array实例
+
+#### 案例
+
+``` JavaScript
+
+function fromtest(){
+  console.log(arguments,Array.isArray(arguments));
+  let args=Array.from(arguments);
+  console.log(args,Array.isArray(args));
+}
+
+fromtest(1,2,3,4,5);
+//[1, 2, 3, 4, 5] false
+//[1, 2, 3, 4, 5] true
+
+```
 
 ### [Array.prototype.copyWithin()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin)
 
@@ -1298,8 +1317,8 @@ console.log([1,2,{1:2}].includes({1:2}));//false
 
 ## 未解决
 
-### [Array.prototype[@@iterator]()]()
-### [get Array[@@species]]()
+### Array.prototype[@@iterator]()
+### get Array[@@species]
 
 ## END
 
