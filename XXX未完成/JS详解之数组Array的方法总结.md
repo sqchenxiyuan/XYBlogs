@@ -307,8 +307,81 @@ console.log(arr3.filter(smallthan10,obj));//[99]
 
 ```
 
+### [Array.prototype.forEach()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+
+#### 介绍
+
+forEach() 方法对数组的每个元素执行一次提供的函数。
+
+#### 语法
+
+> array.forEach(callback[, thisArg])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|callback|对每个参数进行处理的函数,callback 被调用时传入三个参数：元素值，元素的索引，原数组。|
+|thisArg|执行 callback 时使用的 this 值。|
+
+#### 返回
+
+返回 `undefined`
+
+#### 案例
+
+``` JavaScript
+
+function biger(element,index,array){
+  array[index]=element*10;
+}
+
+let arr1=[1,2,3];
+console.log(arr1.forEach(biger));//undefined
+console.log(arr1);//[10, 20, 30]
+
+```
+
+#### 注意
+
+> 1.forEach 遍历的范围在第一次调用 callback 前就会确定。调用forEach 后添加到数组中的项不会被 callback 访问到。
+
+> ``` JavaScript
+
+> function add(element,index,array){
+>   array.push(index+'a');
+>   console.log(element);
+> }
+
+> let arr1=[1,2,3];
+> console.log(arr1.forEach(add));
+> //1
+> //2
+> //3
+> //undefined
+> console.log(arr1);//[1, 2, 3, "0a", "1a", "2a"]
+>
+> ```
+
+> 2.如果已经存在的值被改变，则传递给 callback 的值是 forEach 遍历到他们那一刻的值。已删除的项不会被遍历到。
 
 
+> ``` JavaScript
+
+> function del(element,index,array){
+>    console.log(element);
+>   //  delete array[index];
+> }
+
+> let arr1=[1,2,3];
+> delete arr1[1];
+> console.log(arr1.forEach(del));
+> //1
+> //3
+> //undefined
+> console.log(arr1);//[1, 2:, 3]
+
+> ```
 
 
 ### [Array.prototype.sort()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
@@ -478,6 +551,104 @@ console.log(6);//7
 
 ```
 
+### [Array.prototype.indexOf()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
+
+#### 介绍
+
+Array.prototype.indexOf()方法返回在数组中可以找到给定元素的第一个索引，如果不存在，则返回-1。
+
+#### 语法
+
+> arr.indexOf(searchElement[, fromIndex = 0])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|searchElement|需要查找的元素值。|
+|fromIndex|从该索引处开始查找 searchElement。如果为负值，则按升序从 array.length + fromIndex 的索引开始搜索。默认为 0|
+
+#### 返回
+
+返回首个被找到的元素在数组中的索引位置; 若没有找到则返回 -1
+
+#### 案例
+
+``` JavaScript
+
+console.log([1,2,3].indexOf(2));//1
+console.log([1,2,3].indexOf(2,1));//1
+console.log([1,2,3].indexOf(2,2));//-1
+console.log([1,2,3].indexOf(5));//-1
+console.log([1,2,{1:2}].indexOf({1:2}));//-1
+
+```
+
+### [Array.prototype.lastIndexOf()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf)
+
+#### 介绍
+
+Array.prototype.lastIndexOf()方法返回在数组中可以找到给定元素的最后一个索引，如果不存在，则返回-1。
+
+#### 语法
+
+> array.lastIndexOf(searchElement[, fromIndex = array.length - 1])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|searchElement|需要查找的元素值。|
+|fromIndex|从该索引处开始逆向查找 searchElement。如果为负值，则按升序从 array.length + fromIndex 的索引开始搜索。默认为 array.length - 1|
+
+#### 返回
+
+返回首个被找到的元素在数组中的索引位置; 若没有找到则返回 -1
+
+#### 案例
+
+``` JavaScript
+
+console.log([1,2,1].lastIndexOf(1));//2
+console.log([1,2,1].lastIndexOf(1,1));//0
+console.log([1,2,'1'].lastIndexOf(1));//0
+console.log([1,2,1].lastIndexOf(3));//-1
+
+```
+
+
+### [Array.prototype.join()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
+
+#### 介绍
+
+Array.prototype.join() 方法将数组（或一个类数组对象）的所有元素连接到一个字符串中。
+
+#### 语法
+
+> array.join(separator)
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|separator|元素间间隔需要插入的字符串，默认为逗号(,)|
+
+#### 返回
+
+返回拼接好的字符串
+
+#### 案例
+
+``` JavaScript
+
+let arr=[1,2,3,'a','b',{x:1}];
+
+console.log(arr.join());//1,2,3,a,b,[object Object]
+console.log(arr.join(''));//123ab[object Object]
+console.log(arr.join('---'));//1---2---3---a---b---[object Object]
+
+```
+
 
 ## ES6+ ==================================================================================================
 
@@ -549,7 +720,7 @@ console.log(arr3.copyWithin(1,2,4));//[1,3,4,4,5]
 
 #### 介绍
 
-entries() 方法返回一个新的Array Iterator对象，该对象包含数组中每个索引的键/值对。
+Array.prototype.entries() 方法返回一个新的Array Iterator对象，该对象包含数组中每个索引的键/值对。
 
 #### 语法
 
@@ -578,6 +749,88 @@ for (let data of iterator) {
 //[5, 3]
 
 ```
+
+### [Array.prototype.keys()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)
+
+#### 介绍
+
+Array.prototype.keys() 方法返回一个新的Array迭代器，它包含数组中每个索引的键。
+
+#### 语法
+
+> arr.keys();
+
+#### 返回
+
+返回一个新的Array迭代器，它包含数组中每个索引的键。
+
+#### 案例
+
+``` JavaScript
+
+let arr = ['a','b','c',1,2,3];
+let iterator = arr.keys();
+console.log(iterator);//ArrayIterator {}
+
+for (let data of iterator) {
+    console.log(data);
+}
+//0
+//1
+//2
+//3
+//4
+//5
+
+```
+
+#### 注意
+
+> 1.与Object的keys存在一定区别，索引迭代器会包含那些没有对应元素的索引。
+
+> ``` JavaScript
+
+> let arr = [1,,3,,5];
+> console.log(Object.keys(arr));//["0", "2", "4"]
+> console.log([...arr.keys()])//[0, 1, 2, 3, 4]
+
+> ```
+
+
+### [Array.prototype.values()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/values)
+
+#### 介绍
+
+Array.prototype.values() 方法返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值。
+
+#### 语法
+
+> array.values()
+
+#### 返回
+
+返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值。
+
+#### 案例
+
+``` JavaScript
+
+let arr = ['a','b','c',1,2,3];
+let iterator = arr.values();
+console.log(iterator);//ArrayIterator {}
+
+for (let data of iterator) {
+    console.log(data);
+}
+//'a'
+//'b'
+//'c'
+//1
+//2
+//3
+
+```
+
 
 ### [Array.prototype.fill()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)
 
@@ -619,17 +872,140 @@ console.log(arr3);//[1,2,3,0,5]
 
 ```
 
+### [Array.prototype.find()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
+
+#### 介绍
+
+Array.prototype.find() 方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined。
+
+#### 语法
+
+> array.find(callback[, thisArg])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|callback|用来检测每个值的回调函数,callback 被调用时传入三个参数：元素值，元素的索引，原数组。|
+|thisArg|执行 callback 时使用的 this 值。|
+
+#### 返回
+
+返回第一个满足函数的元素。如果没有则返回 `undefined`。
+
+#### 案例
+
+``` JavaScript
+
+function smallthan10(element,index,array){
+  if(this.x){
+    return element/this.x<10
+  }else{
+    return element<10
+  }
+}
+
+let arr1=[11,22,3];
+console.log(arr1.find(smallthan10));//3
+let arr2=[11,22,33];
+console.log(arr2.find(smallthan10));//undefined
+
+let obj={
+  x:11
+};
+
+let arr3=[99,111,222];
+console.log(arr3.find(smallthan10,obj));//99
+
+```
+
+### [Array.prototype.findIndex()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
+
+#### 介绍
+
+Array.prototype.findIndex()方法返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1。
+
+#### 语法
+
+> array.findIndex(callback[, thisArg])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|callback|用来检测每个值的回调函数,callback 被调用时传入三个参数：元素值，元素的索引，原数组。|
+|thisArg|执行 callback 时使用的 this 值。|
+
+#### 返回
+
+返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1。
+
+#### 案例
+
+``` JavaScript
+
+function smallthan10(element,index,array){
+  if(this.x){
+    return element/this.x<10
+  }else{
+    return element<10
+  }
+}
+
+let arr1=[11,22,3];
+console.log(arr1.findIndex(smallthan10));//2
+let arr2=[11,22,33];
+console.log(arr2.findIndex(smallthan10));//-1
+
+let obj={
+  x:11
+};
+
+let arr3=[99,111,222];
+console.log(arr3.findIndex(smallthan10,obj));//0
+
+```
+
+### [Array.prototype.includes()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
+
+#### 介绍
+
+Array.prototype.includes() 方法用来判断当前数组是否包含某指定的值，如果是，则返回 true，否则返回 false。
+
+#### 语法
+
+> array.includes(searchElement[, fromIndex = 0])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|searchElement|需要查找的元素值。|
+|fromIndex|从该索引处开始查找 searchElement。如果为负值，则按升序从 array.length + fromIndex 的索引开始搜索。默认为 0|
+
+#### 返回
+
+返回布尔值，存在返回 `true` ,不存在返回 `false`
+
+#### 案例
+
+``` JavaScript
+
+console.log([1,2,3].includes(1));//true
+console.log([1,2,3].includes(1,1));//false
+console.log([1,2,3].includes(5));//false
+console.log([1,2,{1:2}].includes({1:2}));//false
+
+```
+
+#### 注意
+
+> 1. 对于对象的查找依然是按照引用查找
+
+
 
 ## list
 
-### [Array.prototype.find()]()
-### [Array.prototype.findIndex()]()
-### [Array.prototype.forEach()]()
-### [Array.prototype.includes()]()
-### [Array.prototype.indexOf()]()
-### [Array.prototype.join()]()
-### [Array.prototype.keys()]()
-### [Array.prototype.lastIndexOf()]()
 ### [Array.prototype.map()]()
 ### [Array.prototype.reduce()]()
 ### [Array.prototype.reduceRight()]()
@@ -639,7 +1015,6 @@ console.log(arr3);//[1,2,3,0,5]
 ### [Array.prototype.toLocaleString()]()
 ### [Array.prototype.toSource()]()
 ### [Array.prototype.toString()]()
-### [Array.prototype.values()]()
 ### [Array.prototype[@@iterator]()]()
 ### [get Array[@@species]]()
 
