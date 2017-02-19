@@ -307,6 +307,143 @@ console.log(arr3.filter(smallthan10,obj));//[99]
 
 ```
 
+### [Array.prototype.map()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+
+#### 介绍
+
+Array.prototype.map() 方法返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。
+
+#### 语法
+
+> array.map(callback[, thisArg])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|callback|用来计算每个值的回调函数,callback 被调用时传入三个参数：元素值，元素的索引，原数组。|
+|thisArg|执行 callback 时使用的 this 值。|
+
+#### 返回
+
+返回由每个元素根据函数的出的值组成的新数组。
+
+#### 案例
+
+``` JavaScript
+
+function big(element,index,array){
+  return element*10;
+}
+
+let arr1=[1,2,3,4];
+let arr2=arr1.map(big);
+console.log(arr1);//[1, 2, 3, 4]
+console.log(arr2);//[10, 20, 30, 40]
+
+```
+
+### [Array.prototype.reduce()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+
+#### 介绍
+
+Array.prototype.reduce() 方法对累加器的数值和数组的每个值应用一个函数 (从左到右)，计算出最终的一个值。
+
+#### 语法
+
+> array.reduce(callback,[initialValue])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|callback|用来计算最终值的回调函数,callback 被调用时传入四个参数：上一次调用回调返回的值(或者初始值)，数组中将要处理的元素，数据中将要处理的元素索引，原数组。|
+|initialValue|其值用于第一次调用 callback 的第一个参数，如果没有，reduce将会从第二个元素开始|
+
+#### 返回
+
+返回计算的结果
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3,4];
+console.log(arr1.reduce((a,b)=>{
+  console.log(b);
+  return a+b;
+}));
+//2
+//3
+//4
+//10
+console.log(arr1.reduce((a,b)=>{
+  return a+b;
+},10));//20
+
+let arr2=[{x:1}];
+console.log(arr2.reduce((a,b)=>{
+  console.log(a,b);
+  return a+b;
+}));//{x:1}
+
+```
+
+#### 注意
+
+> 1.当没有 initialValue 时，函数会直接从第二个元素开始。
+
+> 2.当数组只有一个元素时，且有 initialValue 时，函数直接返回那个元素，所以建议都加上 initialValue
+
+### [Array.prototype.reduceRight()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight)
+
+#### 介绍
+
+Array.prototype.reduceRight() 方法对累加器的数值和数组的每个值应用一个函数 (从右到左，与reduce()相反)，计算出最终的一个值。
+
+#### 语法
+
+> array.reduceRight(callback[, initialValue])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|callback|用来计算最终值的回调函数,callback 被调用时传入四个参数：上一次调用回调返回的值(或者初始值)，数组中将要处理的元素，数据中将要处理的元素索引，原数组。|
+|initialValue|其值用于第一次调用 callback 的第一个参数，如果没有，reduceRight()将会从倒数第二个元素开始|
+
+#### 返回
+
+返回计算出的值
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3,4];
+console.log(arr1.reduceRight((a,b,index,arr)=>{
+  console.log(b);
+  return a+b;
+}));
+//3
+//2
+//1
+//10
+
+console.log(arr1.reduceRight((a,b,index,arr)=>{
+  return a+b;
+},10));
+//20
+
+```
+
+#### 注意
+
+> 1.当没有 initialValue 时，函数会直接从第二个元素开始。
+
+> 2.当数组只有一个元素时，且有 initialValue 时，函数直接返回那个元素，所以建议都加上 initialValue
+
+
 ### [Array.prototype.forEach()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
 
 #### 介绍
@@ -551,6 +688,31 @@ console.log(6);//7
 
 ```
 
+### [Array.prototype.reverse()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
+
+#### 介绍
+
+Array.prototype.reverse() 方法会颠倒数组中元素的位置。
+
+#### 语法
+
+> array.reverse()
+
+#### 返回
+
+返回该数组
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3,4,5];
+console.log(arr1.reverse());//[5, 4, 3, 2, 1]
+console.log(arr1);//[5, 4, 3, 2, 1]
+
+```
+
+
 ### [Array.prototype.indexOf()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
 
 #### 介绍
@@ -646,6 +808,138 @@ let arr=[1,2,3,'a','b',{x:1}];
 console.log(arr.join());//1,2,3,a,b,[object Object]
 console.log(arr.join(''));//123ab[object Object]
 console.log(arr.join('---'));//1---2---3---a---b---[object Object]
+
+```
+
+### [Array.prototype.slice()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+
+#### 介绍
+
+Array.prototype.slice() 方法将数组的一部分浅拷贝, 返回到从开始到结束（不包括结束）选择的新数组对象。原始数组不会被修改。
+
+#### 语法
+
+> array.slice(start,end)
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|start|浅拷贝的开始索引，默认为0|
+|end|浅拷贝的结束索引，不会提取在结束索引位置的元素，默认为length|
+
+#### 返回
+
+返回提取出来的元素组成的新数组
+
+#### 案例
+
+``` JavaScript
+
+let arr=[1,2,3,'a','b'];
+
+console.log(arr.slice());//[1, 2, 3, "a", "b"]
+console.log(arr.slice()===arr);//false
+console.log(arr.slice(1));//[2, 3, "a", "b"]
+console.log(arr.slice(1,4));//[2, 3, "a"]
+
+```
+
+### [Array.prototype.splice()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
+
+#### 介绍
+
+Array.prototype.splice() 方法通过删除现有元素和/或添加新元素来更改数组的内容。
+
+#### 语法
+
+> array.splice(start[, deleteCount[, [item1, [item2,[itemN ...]]]]])
+
+#### 参数
+
+|参数名|参数描述|
+|:---|:---|
+|start|修改的开始位置,如果是负值，则表示从数组末位开始的第几位。|
+|deleteCount|整数，表示要移除的数组元素的个数。默认为arr.length - start|
+|itemN|需要从开始位置插入的元素，按顺序插入|
+
+#### 返回
+
+由被删除的元素组成的一个数组。
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3,'a','b'];
+console.log(arr1.splice());//[]
+console.log(arr1);//[1,2,3,'a','b']
+
+let arr2=[1,2,3,'a','b'];
+console.log(arr2.splice(2));//[3, "a", "b"]
+console.log(arr2);//[1, 2]
+
+let arr3=[1,2,3,'a','b'];
+console.log(arr3.splice(2,0));//[]
+console.log(arr3);//[1,2,3,'a','b']
+
+let arr4=[1,2,3,'a','b'];
+console.log(arr4.splice(2,2));//[3, "a"]
+console.log(arr4);//[1, 2, "b"]
+
+let arr5=[1,2,3,'a','b'];
+console.log(arr5.splice(2,1,'c'));//[3]
+console.log(arr5);//[1, 2, "c", "a", "b"]
+
+```
+
+### [Array.prototype.toString()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/toString)
+
+#### 介绍
+
+toString() 返回一个字符串，表示指定的数组及其元素。
+
+Array 对象覆盖了 Object 的 toString 方法。对于数组对象，toString 方法返回一个字符串，该字符串由数组中的每个元素的 toString() 返回值经调用 join() 方法连接（由逗号隔开）组成。
+
+#### 语法
+
+> array.toString()
+
+#### 返回
+
+返回表示数组内容的字符串
+
+#### 案例
+
+``` JavaScript
+
+let arr1=[1,2,3,'a','b'];
+console.log(arr1.toString());//1,2,3,a,b
+
+```
+
+### [Array.prototype.toLocaleString()]()
+
+#### 介绍
+
+Array.prototype.toLocaleString() 返回一个字符串表示数组中的元素。数组中的元素将使用各自的 toLocaleString 方法转成字符串，这些字符串将使用一个特定语言环境的字符串（例如一个逗号 ","）隔开。
+
+#### 语法
+
+> array.toLocaleString();
+
+#### 返回
+
+返回表示数组内容的使用一个特定语言环境的字符串。
+
+#### 案例
+
+``` JavaScript
+
+var myArr = [1337, new Date(), "foo"];
+
+console.log(myArr.toString());//1337,Sun Feb 19 2017 19:08:50 GMT+0800 (中国标准时间),foo
+console.log(myArr.toLocaleString());//1337,Sun Feb 19 2017 19:08:50 GMT+0800 (中国标准时间),foo
 
 ```
 
@@ -1002,32 +1296,13 @@ console.log([1,2,{1:2}].includes({1:2}));//false
 
 > 1. 对于对象的查找依然是按照引用查找
 
+## 未解决
 
-
-## list
-
-### [Array.prototype.map()]()
-### [Array.prototype.reduce()]()
-### [Array.prototype.reduceRight()]()
-### [Array.prototype.reverse()]()
-### [Array.prototype.slice()]()
-### [Array.prototype.splice()]()
-### [Array.prototype.toLocaleString()]()
-### [Array.prototype.toSource()]()
-### [Array.prototype.toString()]()
 ### [Array.prototype[@@iterator]()]()
 ### [get Array[@@species]]()
 
-#### 介绍
-
-#### 语法
-
-#### 参数
-
-#### 返回
-
-#### 案例
-
 ## END
+
+> 2017-2-19 完成
 
 > 2017-2-13 立项
