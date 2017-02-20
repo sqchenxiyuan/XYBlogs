@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JS详解之this？ ha？DEMO</title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+
+
+  //在浏览器中，全局上下文环境下的this,就是window。
+  console.log(this);//window
+  console.log(this===window);//true
+
+
+  //函数直接调用
+  function foo(){
+    console.log(this);//window
+    console.log(this===window);//true
+  }
+
+  foo();
+
+
+  //严格模式函数直接调用
+  function staticfoo(){
+    'use strict';
+    console.log(this);//undefined
+    console.log(this===window);//false
+  }
+
+  staticfoo();
+
+</script>
+</html>
