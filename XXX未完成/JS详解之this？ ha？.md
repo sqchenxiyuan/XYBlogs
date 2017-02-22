@@ -20,25 +20,6 @@ console.log(this===window);//true
 
 ```
 
-### 函数上下文
-
-在函数中 `this` 的值与函数如何调用有关。
-
-#### 直接调用
-
-当将定义的函数直接调用时，它的 `this` 将指代的全局环境。
-
-``` javascript
-
-function foo(){
-  console.log(this);//window
-  console.log(this===window);//true
-}
-
-foo();
-
-```
-
 但是当函数是在严格模式下，那么它的 `this` 将为undefined。
 
 ``` javascript
@@ -53,6 +34,95 @@ staticfoo();
 
 ```
 
+### 函数上下文
+
+在函数中 `this` 的值与函数如何调用有关。
+
+#### 直接调用
+
+当将定义的函数直接调用时，函数内部的 `this` 将指代的全局环境。
+
+``` javascript
+
+function foo(){
+  console.log(this);//window
+  console.log(this===window);//true
+}
+
+foo();
+
+```
+
+#### 对象方法调用
+
+当以对象的方法调用时，函数内部的 `this` 将指代调用这个方法的对象。
+
+``` javascript
+
+var x=1;
+var y='1';
+
+var obj={
+  x:2,
+  foo:function(){
+    console.log(this.x,this.y);//2，undefined   
+
+    function foo2(){
+      console.log(this.x,this.y);//1，'1'   函数内部直接调用函数，this依然是全局变量   
+    }
+    foo2();
+  }
+};
+
+obj.foo();
+
+```
+
+##### 注意
+
+1.  函数中 `this` 的绑定行为不与函数的申明方式和申明位置有关，只与被调用的方式有关。
+
+    ``` javascript
+
+    var x=1;
+    var y='1';
+
+    var obj={
+      x:2,
+      foo:function(){
+        console.log(this.x,this.y);
+      }
+    };
+    var foo=obj.foo;
+
+    obj.foo();//2，undefined   
+    foo();//1，'1'
+
+    ```
+2. `this` 的绑定只受最近的调用对象绑定，与调用对象的来源无关。
+    ``` javascript
+
+    var x=1;
+    var y='1';
+
+    function foo(){
+      console.log(this.x,this.y);
+    }
+
+    var obj={
+      x:2,
+      foo:foo,
+      obj2:{
+        x:3,
+        foo:foo
+      }
+    };
+
+    foo();//1，'1'
+    obj.foo();//2，undefined   
+    obj.obj2.foo();//3，undefined   
+
+    ```
 
 ## END
 

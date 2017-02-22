@@ -4,6 +4,9 @@ var x=[1,2,4,4,5,6,6,5,4,10,"a","a","a"];
 
 
 function quc(arr){
+  //数值hash表
+  var hash_number={};
+
   var out=[];
   var hash={};
   var l=arr.length;
@@ -17,8 +20,9 @@ function quc(arr){
     if(type === 'function'||type === 'object'){
 
     }else{//可直接使用hash表示判断
-      if(!hash[item]){
-        hash[item]=true;
+      if(!hash[type])hash[type]={};
+      if(!hash[type][item]){
+        hash[type][item]=true;
         out.push(item);
       }
     }
