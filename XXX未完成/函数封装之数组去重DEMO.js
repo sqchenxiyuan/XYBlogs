@@ -61,3 +61,5 @@ console.timeEnd('纯数字数组测试');
 console.time('纯字符串数组测试');
 console.log(quc(stringarr).length);
 console.timeEnd('纯字符串数组测试');
+
+//
