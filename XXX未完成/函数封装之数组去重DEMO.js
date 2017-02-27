@@ -3,22 +3,35 @@ var x=[1,2,4,4,5,6,6,5,4,10,"a","a","a"];
 //1.会去除数组中的null和undefined元素
 
 
-function quc(arr){
-  //数值hash表
-  var hash_number={};
-
+function DuplicateRemoval(arr){
+  var i,str;
   var out=[];
   var hash={};
+  hash.object=[];
   var l=arr.length;
   var item,type;
-  for(var i=0;i<l;i++){
-    if(type === 'null' || type === 'undefined'){//去除数组中的null和undefined元素
-      continue;
-    }
+  loop1:
+  for(i=0;i<l;i++){
     item=arr[i];
     type=typeof item;
     if(type === 'function'||type === 'object'){
-
+      str='__sign__';
+      while(true){
+        if(typeof item[str]!=='undefined'){
+          if(item[str]===item){
+            continue loop1;
+          }else{//冲突避免
+            str+='_';
+            continue;
+          }
+        }else{
+          hash.object.push(item);
+          // console.log(hash.object.length);
+          item[str]=item;
+          out.push(item);
+          break;
+        }
+      }
     }else{//可直接使用hash表示判断
       if(!hash[type])hash[type]={};
       if(!hash[type][item]){
@@ -27,6 +40,26 @@ function quc(arr){
       }
     }
   }
+
+  //去除对象当中的引用
+  while(true){
+    item=hash.object.pop();
+    if(item){
+      str='__sign__';
+      while(true){
+        if(typeof item[str]==='object'&&item[str]===item){
+          delete item[str];
+          break;
+        }else{//冲突避免
+          str+='_';
+          continue;
+        }
+      }
+    }else{
+      break;
+    }
+  }
+
   return out;
 }
 
@@ -50,16 +83,49 @@ function makeStringArr(length, size) {
     return arr;
 }
 
+// 生成纯对象数组
+function makeObjectArr(length) {
+    var arr = new Array(length);
+    var objarray=[];
+    var newobj;
+    for (var i = 0; i < length; i++) {
+        if(Math.random()*2>1){
+          newobj={};
+          arr[i]=newobj;
+          objarray.push(newobj);
+        }else{
+          arr[i] = objarray[Math.floor(Math.random()*(objarray.length-1))];
+        }
 
-var numberarr=makeNumberArr(3000,3000);// 纯数字数组
-var stringarr=makeStringArr(3000,3000);// 纯字符串数组
+    }
+    return arr;
+}
 
-console.time('纯数字数组测试');
-console.log(quc(numberarr).length);
-console.timeEnd('纯数字数组测试');
 
-console.time('纯字符串数组测试');
-console.log(quc(stringarr).length);
-console.timeEnd('纯字符串数组测试');
+var numberarr=makeNumberArr(30000,30000);// 纯数字数组
+var stringarr=makeStringArr(30000,30000);// 纯字符串数组
+var objectarr=makeObjectArr(30000);//纯对象数组
 
-//
+console.time('纯数字数组测试-policy');
+console.log(DuplicateRemoval(numberarr).length);
+console.timeEnd('纯数字数组测试-policy');
+
+console.time('纯数字数组测试-Set');
+console.log(new Set(numberarr).size);
+console.timeEnd('纯数字数组测试-Set');
+
+console.time('纯字符串数组测试-policy');
+console.log(DuplicateRemoval(stringarr).length);
+console.timeEnd('纯字符串数组测试-policy');
+
+console.time('纯字符串数组测试-Set');
+console.log(new Set(stringarr).size);
+console.timeEnd('纯字符串数组测试-Set');
+
+console.time('纯对象数组测试-policy');
+console.log(DuplicateRemoval(objectarr).length);
+console.timeEnd('纯对象数组测试-policy');
+
+console.time('纯对象数组测试-Set');
+console.log(new Set(objectarr).size);
+console.timeEnd('纯对象数组测试-Set');
