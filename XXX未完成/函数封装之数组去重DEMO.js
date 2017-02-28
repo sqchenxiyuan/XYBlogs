@@ -1,9 +1,56 @@
 var x=[1,2,4,4,5,6,6,5,4,10,"a","a","a"];
 
-//1.会去除数组中的null和undefined元素
+function unique_2loop(arr){//最简单的双循环去重
+  var i,j;
+  var result=[];
+  var l=arr.length;
+  loop1:
+  for(i=0;i<l;i++){
+    var rl=result.length;
 
+    for(j=0;j<rl;j++){
+      if(arr[i]===result[j]||typeof arr[i] ==='number' && typeof result[i] ==='number' && isNaN(arr[i])&&isNaN(result[i])){
+        continue loop1;
+      }
+    }
+    result.push(arr[i]);
+  }
+  return result;
+}
 
-function DuplicateRemoval(arr){
+function unique_2loop_indexOf(arr){
+  var result=[];
+  var l=arr.length;
+  var haveNaN=false;//标记是否有了NaN
+
+  for(var i=0;i<l;i++){
+    var rl=result.length;
+    var data=arr[i];
+
+    if(result.indexOf(data)===-1||typeof data ==='number' && isNaN(data) && !haveNaN){
+      if(!haveNaN&&isNaN(data))haveNaN=true;
+      result.push(data);
+    }
+  }
+
+  return result;
+}
+
+function unique_2loop_indexOf_forEach(arr){
+  var result = [];
+  var haveNaN=false;//标记是否有了NaN
+
+  arr.forEach((data)=>{
+    if(result.indexOf(data)===-1||typeof data ==='number' && isNaN(data) && !haveNaN){
+      if(!haveNaN&&isNaN(data))haveNaN=true;
+      result.push(data);
+    }
+  });
+
+  return result;
+}
+
+function unique(arr){
   var i,str;
   var out=[];
   var hash={};
@@ -63,7 +110,9 @@ function DuplicateRemoval(arr){
   return out;
 }
 
-
+function unique_es6(arr){
+  return [...new Set(arr)];
+}
 
 // 生成纯数字数组
 function makeNumberArr(length, size) {
@@ -106,26 +155,23 @@ var numberarr=makeNumberArr(30000,30000);// 纯数字数组
 var stringarr=makeStringArr(30000,30000);// 纯字符串数组
 var objectarr=makeObjectArr(30000);//纯对象数组
 
-console.time('纯数字数组测试-policy');
-console.log(DuplicateRemoval(numberarr).length);
-console.timeEnd('纯数字数组测试-policy');
 
-console.time('纯数字数组测试-Set');
-console.log(new Set(numberarr).size);
-console.timeEnd('纯数字数组测试-Set');
+function test(foo,str){
+  console.time('纯数字数组测试-'+str);
+  console.log(foo(numberarr).length);
+  console.timeEnd('纯数字数组测试-'+str);
 
-console.time('纯字符串数组测试-policy');
-console.log(DuplicateRemoval(stringarr).length);
-console.timeEnd('纯字符串数组测试-policy');
+  console.time('纯字符串数组测试-'+str);
+  console.log(foo(stringarr).length);
+  console.timeEnd('纯字符串数组测试-'+str);
 
-console.time('纯字符串数组测试-Set');
-console.log(new Set(stringarr).size);
-console.timeEnd('纯字符串数组测试-Set');
+  console.time('纯对象数组测试-'+str);
+  console.log(foo(objectarr).length);
+  console.timeEnd('纯对象数组测试-'+str);
+}
 
-console.time('纯对象数组测试-policy');
-console.log(DuplicateRemoval(objectarr).length);
-console.timeEnd('纯对象数组测试-policy');
-
-console.time('纯对象数组测试-Set');
-console.log(new Set(objectarr).size);
-console.timeEnd('纯对象数组测试-Set');
+// test(unique_2loop,'2loop');
+test(unique_2loop_indexOf,'unique_2loop_indexOf');
+test(unique_2loop_indexOf_forEach,'unique_2loop_indexOf_forEach');
+// test(unique,'policy');
+// test(unique_es6,'es6');
