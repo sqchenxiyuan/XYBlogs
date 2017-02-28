@@ -50,6 +50,62 @@ function unique_2loop_indexOf_forEach(arr){
   return result;
 }
 
+function unique_hash_type_sign(arr){
+  var result = [];
+  var object=[];
+  var object_sign=[];
+  var hashMap={
+    'boolean':{},
+    'string':{},
+    'null':{},
+    'undefined':{},
+    'number':{}
+  };
+  var sign;//标记
+  var data;
+
+  // arr.forEach(function(data){
+  var l=arr.length;
+  for(var i=0;i<l;i++){
+    data=arr[i];
+    var type=typeof data;
+    if(type === 'object' || type === 'function'){
+      sign="__sign1__";//标记的键值
+      do{
+        if(data[sign] !== undefined){
+          if(data[sign]===data){
+            break;//存在重复的
+          }else{//冲突避免
+            sign+='_';
+          }
+        }else{
+          object.push({
+            obj:data,
+            str:sign
+          });
+          // object_sign.push(sign);
+          data[sign]=data;
+          result.push(data);
+          break;
+        }
+      }while(true);
+    }else{
+      if(!hashMap[type][data]){
+        hashMap[type][data]=true;
+        result.push(data);
+      }
+    }
+  }
+  // });
+
+  l=object.length;
+  for(i=0;i<l;i++){
+    object[i].obj[object[i].str]=undefined;
+  }
+
+  return result;
+}
+
 function unique(arr){
   var i,str;
   var out=[];
@@ -151,9 +207,9 @@ function makeObjectArr(length) {
 }
 
 
-var numberarr=makeNumberArr(30000,30000);// 纯数字数组
-var stringarr=makeStringArr(30000,30000);// 纯字符串数组
-var objectarr=makeObjectArr(30000);//纯对象数组
+var numberarr=makeNumberArr(300000,300000);// 纯数字数组
+var stringarr=makeStringArr(300000,300000);// 纯字符串数组
+var objectarr=makeObjectArr(300000);//纯对象数组
 
 
 function test(foo,str){
@@ -171,7 +227,8 @@ function test(foo,str){
 }
 
 // test(unique_2loop,'2loop');
-test(unique_2loop_indexOf,'unique_2loop_indexOf');
-test(unique_2loop_indexOf_forEach,'unique_2loop_indexOf_forEach');
-// test(unique,'policy');
-// test(unique_es6,'es6');
+// test(unique_2loop_indexOf,'unique_2loop_indexOf');
+// test(unique_2loop_indexOf_forEach,'unique_2loop_indexOf_forEach');
+test(unique_hash_type_sign,'unique_hash_type_sign');
+test(unique,'unique');
+test(unique_es6,'unique_es6');
