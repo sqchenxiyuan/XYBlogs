@@ -52,26 +52,16 @@ function unique_2loop_indexOf_forEach(arr){
 
 function unique_hash_type_sign(arr){
   var result = [];
-  var object=[];
-  var object_sign=[];
-  var hashMap={
-    'boolean':{},
-    'string':{},
-    'null':{},
-    'undefined':{},
-    'number':{}
-  };
-  var sign;//标记
-  var data;
+  var objs = [];
+  var hashMap={};
+  var data,sign,type,l=arr.length;//标记
 
-  // arr.forEach(function(data){
-  var l=arr.length;
   for(var i=0;i<l;i++){
     data=arr[i];
-    var type=typeof data;
+    type=typeof data;
     if(type === 'object' || type === 'function'){
-      sign="__sign1__";//标记的键值
-      do{
+      sign="__sign__";//标记的键值
+      while(true){
         if(data[sign] !== undefined){
           if(data[sign]===data){
             break;//存在重复的
@@ -79,94 +69,57 @@ function unique_hash_type_sign(arr){
             sign+='_';
           }
         }else{
-          object.push({
+          objs.push({
             obj:data,
             str:sign
           });
-          // object_sign.push(sign);
           data[sign]=data;
           result.push(data);
           break;
         }
-      }while(true);
+      }
     }else{
+      if(!hashMap[type])hashMap[type]={};
       if(!hashMap[type][data]){
         hashMap[type][data]=true;
         result.push(data);
       }
     }
   }
-  // });
 
-  l=object.length;
+  l=objs.length;
   for(i=0;i<l;i++){
-    object[i].obj[object[i].str]=undefined;
+    var obj=objs[i];
+    delete obj.obj[obj.str];
   }
 
   return result;
 }
 
-function unique(arr){
-  var i,str;
-  var out=[];
-  var hash={};
-  hash.object=[];
-  var l=arr.length;
-  var item,type;
-  loop1:
-  for(i=0;i<l;i++){
-    item=arr[i];
-    type=typeof item;
-    if(type === 'function'||type === 'object'){
-      str='__sign__';
-      while(true){
-        if(typeof item[str]!=='undefined'){
-          if(item[str]===item){
-            continue loop1;
-          }else{//冲突避免
-            str+='_';
-            continue;
-          }
-        }else{
-          hash.object.push(item);
-          // console.log(hash.object.length);
-          item[str]=item;
-          out.push(item);
-          break;
-        }
-      }
-    }else{//可直接使用hash表示判断
-      if(!hash[type])hash[type]={};
-      if(!hash[type][item]){
-        hash[type][item]=true;
-        out.push(item);
-      }
-    }
-  }
+function unique_hash_sort(arr){
+  if(arr.length===0)return [];
+  arr= arr.slice().sort();
+  var result=[];
+  var haveNaN=false;
+  result.push(arr[0]);
+  arr.reduce((last,data)=>{
 
-  //去除对象当中的引用
-  while(true){
-    item=hash.object.pop();
-    if(item){
-      str='__sign__';
-      while(true){
-        if(typeof item[str]==='object'&&item[str]===item){
-          delete item[str];
-          break;
-        }else{//冲突避免
-          str+='_';
-          continue;
-        }
-      }
-    }else{
-      break;
+    if(data !== last||typeof data ==='number' && isNaN(data) && !haveNaN){
+      if(!haveNaN&&isNaN(data))haveNaN=true;
+      result.push(data);
     }
-  }
 
-  return out;
+    return data;
+  });
+
+  return result;
 }
 
-function unique_es6(arr){
+function unique_ES6_arrFrom(arr){
+  return Array.from(new Set(arr));
+}
+
+function unique_ES6_Set(arr){
   return [...new Set(arr)];
 }
 
@@ -210,25 +163,44 @@ function makeObjectArr(length) {
 var numberarr=makeNumberArr(300000,300000);// 纯数字数组
 var stringarr=makeStringArr(300000,300000);// 纯字符串数组
 var objectarr=makeObjectArr(300000);//纯对象数组
+var arrData={
+  number:[],
+  string:[],
+  object:[]
+};
+
+var data=[10,100,1000,10000,100000,500000,1000000];
+data.forEach((num)=>{
+  arrData.number.push(makeNumberArr(num,num));
+  arrData.string.push(makeStringArr(num,num));
+  arrData.object.push(makeObjectArr(num));
+});
+
 
 
 function test(foo,str){
-  console.time('纯数字数组测试-'+str);
-  console.log(foo(numberarr).length);
-  console.timeEnd('纯数字数组测试-'+str);
+  var i,j=10;
+  data.forEach((num,index)=>{
+    var numberTime=testTime(arrData.number[index],foo,100);
+    var stringTime=testTime(arrData.number[index],foo,100);
+    var objectTime=testTime(arrData.number[index],foo,100);
 
-  console.time('纯字符串数组测试-'+str);
-  console.log(foo(stringarr).length);
-  console.timeEnd('纯字符串数组测试-'+str);
+    console.log('测试-'+str+'-'+num+' : '+(numberTime+stringTime+objectTime)/3+' ms');
+  });
+}
 
-  console.time('纯对象数组测试-'+str);
-  console.log(foo(objectarr).length);
-  console.timeEnd('纯对象数组测试-'+str);
+function testTime(arr,foo,time = 1){
+  var start=new Date().getTime();
+  for(var i=0;i<time;i++){
+    foo(arr);
+  }
+  return (new Date().getTime()-start)/time;
 }
 
 // test(unique_2loop,'2loop');
 // test(unique_2loop_indexOf,'unique_2loop_indexOf');
 // test(unique_2loop_indexOf_forEach,'unique_2loop_indexOf_forEach');
-test(unique_hash_type_sign,'unique_hash_type_sign');
-test(unique,'unique');
-test(unique_es6,'unique_es6');
+// test(unique_hash_type_sign,'unique_hash_type_sign');
+// test(unique_hash_sort,'unique_hash_sort');
+// test(unique_ES6_arrFrom,'unique_ES6_arrFrom');
+test(unique_ES6_Set,'unique_ES6_Set');
