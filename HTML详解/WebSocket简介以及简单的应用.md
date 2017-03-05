@@ -539,6 +539,8 @@ function sendData(client,data){
 
 ![](http://o7yupdhjc.bkt.clouddn.com/17-3-5/11970768-file_1488699996497_8b64.png)
 
+详细DEMO可以查看参考资料
+
 ## 后记
 
 这个DEMO的功能做的很简单，离正真的聊天室功能还差很多，但是。。。不然为嘛叫DEMO呢=、=
@@ -551,7 +553,7 @@ function sendData(client,data){
 
 [MDN_WebSocket](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)
 
-[DEMO](sad)
+[DEMO地址](https://github.com/sqchenxiyuan/CUI/tree/master/XYBlog-DEMO/WebSocket%E7%AE%80%E4%BB%8B%E4%BB%A5%E5%8F%8A%E7%AE%80%E5%8D%95%E7%9A%84%E5%BA%94%E7%94%A8)
 
 ## END
 
