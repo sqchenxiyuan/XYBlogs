@@ -4,6 +4,8 @@ HTML5的时代来到了，由于前端负责的数据处理越来越大，单单
 
 ## 简单的实例
 
+<iframe width="100%" height="300" src="http://jsfiddle.net/sqchenxiyuan/g3snybbv/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
 使用webWorker我们可以将一些大量计算的事情放置在另一个线程进行处理，这时候我们页面不会被卡死，让网页使用流畅。
 
 比如我们进行一个50亿次的加法计算。

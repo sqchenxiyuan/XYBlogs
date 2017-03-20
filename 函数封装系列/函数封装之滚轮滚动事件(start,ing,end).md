@@ -9,20 +9,22 @@
 
 function scrollExtend(obj){
   var handler=null;
-  var start=obj.scrollstart;
-  var scroll=obj.scrolling;
-  var end=obj.scrollend;
+  var start=obj.scrollStart;
+  var scroll=obj.scrollIng;
+  var end=obj.scrollEnd;
   var delay=obj.delay||200;
+
+  function scrollend(){
+      handler=null;
+      end.call(this);
+  }
+
   return function(){
-      var that=this;
-      if(!handler&&start) start.call(that);
+      if(!handler&&start) start.call(this);
       if(handler) clearTimeout(handler);
-      if(scroll) scroll.call(that);
+      if(scroll) scroll.call(this);
       if(end&&delay){
-          handler=setTimeout(function(){
-              handler=null;
-              end.call(that);
-          },delay);
+          handler=setTimeout(scrollend.bind(this),delay);
       }
   };
 }
@@ -34,13 +36,13 @@ function scrollExtend(obj){
 ```javascript
 
 element.addEventListener('scroll',scrollExtend({
-	scrollstart:function(){
+	scrollStart:function(){
 		//这里添加滑动开始的时候的事件
 	},
-	scrolling:function(){
+	scrollIng:function(){
 		//这里添加滑动的时候的事件
 	},
-	scrollend:function(){
+	scrollEnd:function(){
 		//这里添加滑动结束的时候的事件
 	},
 	delay://这里添加判断滑动结束的时间长 默认200ms
@@ -63,17 +65,17 @@ element.addEventListener('scroll',scrollExtend({
 new Vue({
 	methods:{
 		scroll:scrollExtend({
-      scrollstart:function(){
-        console.log('scrollstart');
-      },
-      scrolling:function(){
-        console.log('scrolling');
-      },
-      scrollend:function(){
-        console.log('scrollend');
-      },
-      delay:200
-    }
+          scrollStart:function(){
+            console.log('scrollstart');
+          },
+          scrollIng:function(){
+            console.log('scrolling');
+          },
+          scrollEnd:function(){
+            console.log('scrollend');
+          },
+          delay:200
+        }
 	}
 })
 
@@ -85,7 +87,7 @@ new Vue({
 
 ## END
 
-> 2017-2-12   修复直接使用this,无法传递this环境的BUG
+> 2017-3-20     修复直接使用this,无法传递this环境的BUG
 
 > 2017-2-12		结合VUE，可以直接使用，同时函数内的this环境为vue对象
 
