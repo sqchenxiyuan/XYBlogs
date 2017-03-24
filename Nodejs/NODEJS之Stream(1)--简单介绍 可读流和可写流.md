@@ -1,6 +1,6 @@
-# NODEJS之Stream(1)--简单介绍
+# Nodejs之Stream(1)--简单介绍 可读流和可写流
 
-NODEJS中有一个十分重要的数据类型，就是 Stream（流），然而晃眼一看是很难一下理解node中流的使用方法的，这篇文章将依靠node的文件流详细讲述 stream 在node中的基本使用方法。
+NODEJS中有一个十分重要的数据类型，就是 Stream（流），然而晃眼一看是很难一下理解node中流的使用方法的，这篇文章将依靠node的文件流简单的讲述 stream 在的可写流和可读流，在node中的基本使用方法。
 
 ## 可读流（Readable Streams）
 
@@ -82,12 +82,59 @@ fileReadStream.on('close',function(){
 
 可写流和可读流相对应，它是对数据的终点所做出的抽象，它只能接受数据而不能输出数据。
 
-### 建立文件可写流以及write方法。
+### 建立文件可写流以及write方法
+
+在node中我们可以使用 `fs.createWriteStream` 方法获取一个文件可写流来将数据写入文件当中。
+
+``` javascript
+
+let fileWriteStream=fs.createWriteStream(path.resolve(__dirname,'./test-out.txt'));
+
+fileWriteStream.write('这是输出数据！');
+
+```
+
+![](http://o7yupdhjc.bkt.clouddn.com/17-3-24/33445419-file_1490357570561_c2e0.png)
+
+使用 `write` 方法可以将数据写入到流当中，将数据交给可写流处理。
+
+## 可读流的pipe()
+
+`pipe()` 方法是将可读流的数据接到可写流上，实现流数据的自动传递，这样即使是可读流较快，目标可写流也不会超负荷（overwhelmed），可以减少一些对数据负荷处理的代码编写。
+
+``` javascript
+
+let fileReadStream=fs.createReadStream(path.resolve(__dirname,'./test.txt'));
+let fileWriteStream=fs.createWriteStream(path.resolve(__dirname,'./test-out.txt'));
+
+fileReadStream.pipe(fileWriteStream,{ end: false });
+
+fileReadStream.on('end',function(){
+    fileWriteStream.end('这是输出数据！')
+});
+
+```
+
+![](http://o7yupdhjc.bkt.clouddn.com/17-3-24/43328047-file_1490358531646_f942.png)
+
+我们可以在可读流和可写流中加入一些其他的数据处理流来完成一些操作，比如：压缩文件
+
+![](http://o7yupdhjc.bkt.clouddn.com/17-3-24/71207022-file_1490358971871_12bae.png)
+
+![](http://o7yupdhjc.bkt.clouddn.com/17-3-24/55348980-file_1490358998658_f82d.png)
+
+## 后记
+
+这篇文章就大概讲述到这里了，以前的文章都是一口气写了很多，以至于每篇都讲述的过于全面而导致内容很片面，从今以后的文章将会慢慢采用分解的方式讲述，由浅入深，这样我也学习的更加深入，所能写出的文章内容也更加深刻。
+
+这篇文章只是简单的讲述了Steam的可读流和可写流，如果想要了解的更加详细，还是建议去API看看，下一篇文章将讲述双向流，即同时实现了可读流和可写流的Stream(Duplex 流与 Transform 流)。
 
 ## 参考资料
 
 [NODE Stream 中文官方文档](http://nodejs.cn/api/stream.html)
 
 ## END
+
+> 2017-3-24 完成
 
 > 2017-3-5 立项
