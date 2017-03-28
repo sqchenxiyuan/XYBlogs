@@ -112,6 +112,196 @@ ws.onmessage=function(event){
 
 例如我们需要模拟一应一答的请求就需要添加一个 `key` 来分辨请求。依据key来分辨请求是否为目标的答应。
 
+#### 注意
+
+这里我的格式全采用的JSON格式，这不是固定的，只需要能将数据区分开，其他格式都是可以的。
+
+### listen 监听服务器响应
+
+这里我们只需要传入需要监听的响应类型以及响应函数就可以了
+
+>   listen(type,callback)
+
+我们只需要依据 `type` 将相应的函数存储到一个hashmap的对应 `type` 数组当中就可以了
+
+``` javascript
+
+let listenMap={};
+
+function listen(type,callback){
+    if(!listenMap[type])listenMap[type]=[];
+    if(listenMap[type].indexOf(fun)!==-1)listenMap[type].push(fun);
+}
+
+```
+
+### send 发送数据
+
+这个函数只是负责发送数据，所以只需要传入请求类型和数据就可以了
+
+>   send(type,data)
+
+同时我们需要注意这时候内部的WebSocket的状态，如果未连接，需要尝试连接后在发送，在连接成功发送之前我们可以将数据存储到一个数组当中。
+
+``` javascript
+
+let ws=;//WebSocket连接
+let dataList=[];
+
+function send(type,data){
+    data=JSON.stringify({//这里我采用JSON格式的解析方式
+        type,
+        data
+    });
+
+    if(!ws||ws.readyState>1){//WebSocket关闭
+        connect();//重启连接WebSocket
+        dataList.push(data)
+    }else{
+        ws.send(data);
+    }
+}
+
+```
+
+### vhttp 一应一答请求
+
+这个请求其实就是将 `listen` 和 `send` 结合起来
+
+>   vhttp(type,data,callback)
+
+``` javascript
+
+let ws=;//WebSocket连接
+let dataList=[];
+let keyMap={};
+
+function vhttp(type,data){
+    let key=Math.random()*1000000000;
+    data=JSON.stringify({
+        type,
+        data,
+        key
+    });
+
+    if(!ws||ws.readyState>1){//已关闭
+        connect();
+        dataList.push(data)
+    }else{
+        ws.send(data);
+    }
+
+    keyMap[key]=callback;
+}
+
+```
+
+### 最终的类 WsCilent
+
+有了上面的3个函数的需求我们就能快速的写出我们封装的构造函数。
+
+``` javascript
+
+class WsCilent{
+
+    constructor(path,options){
+        this.listenMap={};  //监听时间
+        this.keyMap=[];     //监听VHTTP的函数
+        this.dataList=[];   //待发送的数据
+
+        this.ws=null;
+        this.path=path;
+        if(this.path)this.connect();
+    }
+
+    connect(path = this.path){
+        if(!window.WebSocket){//判断WebSocket的
+            console.error('当前环境，不支持WebSocket！');
+            return false;
+        }
+
+        if(this.ws&&this.ws.readyState<=1&&(this.path===path||!path))return;
+        this.path=path;
+
+        let listenMap=this.listenMap;
+        let keyMap=this.keyMap;
+        let dataList=this.dataList;
+
+        this.ws=new WebSocket(path);
+        let ws=this.ws;
+
+        ws.addEventListener('open',event => {
+
+            dataList.forEach((data)=>{
+              ws.send(data);
+            });
+            dataList=[];
+
+        });
+
+        ws.addEventListener('message',event => {
+            let data=event.data;
+
+            try{
+                data=JSON.parse(data);
+            }catch(e){
+                console.info(e);
+                data=event.data;
+            }
+
+            if(data.key&&keyMap[data.key]){
+                let foo=keyMap[data.key];
+                keyMap[data.key]=undefined;
+
+                if(typeof foo === 'function')foo(null,data.data);
+                return ;
+            }
+
+            if(listenMap[data.type]){
+                listenMap[data.type].forEach((foo)=>{
+                    if(typeof foo === 'function')foo(null,data.data);
+                });
+            }
+        });
+
+        ws.addEventListener('close',event => {
+            for(let key in keyMap){
+                if(typeof keyMap[key] === 'function')keyMap[key](event);
+            }
+            keyMap={};
+
+            listenMap.forEach((foolist)=>{
+                foolist.forEach((foo)=>{
+                    if(typeof foo === 'function')foo(event);
+                })
+            });
+        });
+
+        ws.addEventListener('error',event => {
+
+            for(let key in keyMap){
+                if(typeof keyMap[key] === 'function')keyMap[key](event);
+            }
+            keyMap={};
+
+            listenMap.forEach((foolist)=>{
+                foolist.forEach((foo)=>{
+                    if(typeof foo === 'function')foo(event);
+                })
+            });
+
+            ws=null;
+            window.alert('WebSocket连接出错');
+        });
+    }
+
+
+
+
+}
+
+```
+
 ## END
 
-> 2017-3-8 立项
+>   2017-3-8 立项
