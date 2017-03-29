@@ -198,7 +198,7 @@ function vhttp(type,data){
 
 ### 最终的类 WsCilent
 
-有了上面的3个函数的需求我们就能快速的写出我们封装的构造函数。
+有了上面的3个函数的需求我们就能快速的写出我们封装的一个 `WebSocket` 类。
 
 ``` javascript
 
@@ -215,11 +215,7 @@ class WsCilent{
     }
 
     connect(path = this.path){
-        if(!window.WebSocket){//判断WebSocket的
-            console.error('当前环境，不支持WebSocket！');
-            return false;
-        }
-
+        if(!window.WebSocket)return false;
         if(this.ws&&this.ws.readyState<=1&&(this.path===path||!path))return;
         this.path=path;
 
@@ -290,18 +286,98 @@ class WsCilent{
                 })
             });
 
-            ws=null;
+            this.ws=null;
             window.alert('WebSocket连接出错');
         });
+
     }
 
+    close(code,reason){
+        return this.ws.close(code,reason);
+    }
 
+    listen(type,fun){
+        let listenMap=this.listenMap;
 
+        if(!listenMap[type])listenMap[type]=[];
+        listenMap[type].push(fun);
+
+        return {
+          remove(type,fun){
+              return this.remove(type,fun);
+          }
+        };
+    }
+
+    send(type,data){
+        let ws=this.ws;
+        let dataList=this.dataList;
+
+        data=JSON.stringify({
+            type,
+            data
+        });
+
+        if(!ws||ws.readyState>1){//已关闭
+            connectWebSocket();
+            dataList.push(data)
+        }else{
+            ws.send(data);
+        }
+    }
+
+    vhttp(type,data,callback){
+        let ws=this.ws;
+        let dataList=this.dataList;
+        let keyMap=this.keyMap;
+
+        let key=Math.random()*1000000000;
+        data=JSON.stringify({
+            type,
+            data,
+            key
+        });
+
+        if(!ws||ws.readyState>1){//已关闭
+            connectWebSocket();
+            dataList.push(data)
+        }else{
+            ws.send(data);
+        }
+
+        keyMap[key]=callback;
+    }
+
+    remove(type,fun){
+        let listenMap=this.listenMap;
+
+        if(!listenMap[type])return true;
+        for(let i=0;i<listenMap[type].length;i++){
+          if(listenMap[type][i] === fun){
+              listenMap[type].splice(i,1);
+          }
+        }
+        return true;
+    }
 
 }
 
 ```
 
+## 服务器端
+
+在web端我们封装了需要的类型，我们同样需要在服务器端进行类似的封装，不然服务器的开发依然很复杂。
+
+虽然服务器对于WebSocket的处理可能没有那么复杂了，但是多个连接可能存在的一定的相互依赖关系，导致服务器端需要一些方法来支持这样的管理。例如群发，分组等等。
+
+下次我将会详细的讲述服务端的WebSocket的一些封装方法。（虽然这次的就已经把我写晕了）
+
+## 参考资料
+
+1.  如果工程较大可以推荐使用 [Socket.Io](https://socket.io/) 其中的命名空间的设计还是不错的，但是必须后台是Node这就比较尴尬了。
+
 ## END
+
+>   2017-3-29 完成-缺少详细的讲述，只有代码
 
 >   2017-3-8 立项
