@@ -1,13 +1,16 @@
-Promise.prototype.and=function(promise){
-    if(!(promise instanceof Promise)){
-        console.error('错误的promise')
-        return void(0)
+Promise.prototype.and=function(){
+    let promises=[...arguments];
+    for(let i=0;i<promises.length;i++){
+        if(!(promises[i] instanceof Promise)){
+            console.error('错误的promise')
+            return void(0)
+        }
     }
 
-    return Promise.all([a,b]).then( val => {
+    return Promise.all([this].concat(promises)).then( val => {
         return Promise.resolve(val.reduce( (l,data) => {
             if(Array.isArray(data)){
-                l.concat(data)
+                l=l.concat(data)
             }else{
                 l.push(data)
             }
@@ -18,9 +21,12 @@ Promise.prototype.and=function(promise){
 }
 
 Promise.prototype.or=function(promise){
-    if(!(promise instanceof Promise)){
-        console.error('错误的promise')
-        return void(0)
+    let promises=[...arguments];
+    for(let i=0;i<promises.length;i++){
+        if(!(promises[i] instanceof Promise)){
+            console.error('错误的promise')
+            return void(0)
+        }
     }
 
     return Promise.race([a,b]).then( val => {
@@ -61,14 +67,14 @@ let c=new Promise( (resolve,reject) => {
 })
 
 
-let d=Promise.all([a,b,c]).then( val => {
-    console.log(val);
-});
+// let d=Promise.all([a,b,c]).then( val => {
+//     console.log(val);
+// });
+//
+// let e=Promise.race([a,b,c]).then( val => {
+//     console.log(val);
+// });
 
-let e=Promise.race([a,b,c]).then( val => {
-    console.log(val);
-});
-
-a.and(b).and(c).then( val => {
+a.and(b,c).then( val => {
     console.log(val);
 });
