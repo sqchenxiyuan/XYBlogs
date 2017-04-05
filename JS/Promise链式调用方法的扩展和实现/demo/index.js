@@ -1,4 +1,4 @@
-Promise.prototype.all=function(){
+Promise.prototype.and=function(){
     let promises=[...arguments];
     for(let i=0;i<promises.length;i++){
         if(!(promises[i] instanceof Promise)){
@@ -34,28 +34,22 @@ Promise.prototype.or=function(promise){
     }),Promise.all(promises)])
 }
 
-let a=new Promise( (resolve,reject) => {
-    //dosomething
-    resolve(['a1','a2'])
-    console.log('end a',new Date().getTime())
-})
+function getTimeRandomPromise(val){
+    return new Promise( (resolve,reject) => {
+        //dosomething
+        setTimeout(()=>{
+            resolve(val)
+            console.log('end '+val,new Date().getTime())
+        },Math.random()*1000)
+    })
+}
 
-let b=new Promise( (resolve,reject) => {
-    //dosomething
-    setTimeout(()=>{
-        resolve('b')
-        console.log('end b',new Date().getTime())
-    },1000)
-})
-
-let c=new Promise( (resolve,reject) => {
-    //dosomething
-    setTimeout(()=>{
-        // resolve('c')
-        reject('c');
-        console.log('end c',new Date().getTime())
-    },2000)
-})
+let a=getTimeRandomPromise('a'),
+    b=getTimeRandomPromise('b'),
+    c=getTimeRandomPromise('c'),
+    d=getTimeRandomPromise('d'),
+    e=getTimeRandomPromise('e'),
+    f=getTimeRandomPromise('f');
 
 
 // let testall=Promise.all([a,b]).then( val => {
@@ -77,7 +71,7 @@ let c=new Promise( (resolve,reject) => {
 //    //dosomething
 // });
 
-a.all(b).race(c).then(val=>{
+a.and(b).or(c,d).or(e,f).then(val=>{
     console.log(val,new Date().getTime());
    //dosomething
 });
