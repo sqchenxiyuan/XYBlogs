@@ -3,10 +3,9 @@
 
 ---
 准备写的的:
-> 函数封装之数组去重
->
-> 效果实现之AJAX请求上传和下载进度获取
->
-> webworker异步处理
 
-[博客地址](http://www.cxyblogbiu.com/)
+>   JS双等号(==)和三等号(===)详解
+
+>   JS滚轮滚动事件封装(start,ing,end)   _更新文章_
+
+[博客地址 http://www.cxyblogbiu.com/](http://www.cxyblogbiu.com/)

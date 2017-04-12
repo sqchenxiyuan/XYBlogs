@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.bg{
+				height: 1000px;
+				width: 100%;
+				background: linear-gradient(top,rgba(255,0,0,0),rgba(255,0,0,1));
+				background: -webkit-linear-gradient(top,rgba(255,0,0,0),rgba(255,0,0,1));
+				background: -moz-linear-gradient(top,rgba(255,0,0,0),rgba(255,0,0,1));
+				border: 3px solid -moz-linear-gradient(top,rgba(0,0,255,0),rgba(0,0,255,1));
+			}
+		</style>
+	</head>
+	<body>
+		<div class='bg'></div>
+	</body>
+	<script>
+
+
+	// function scrollExtend(obj){
+	//   var handler=null;
+	//   var start=obj.scrollStart;
+	//   var scroll=obj.scrollIng;
+	//   var end=obj.scrollEnd;
+	//   var delay=obj.delay||200;
+	//
+	//   function scrollend(){
+	//       handler=null;
+	//       end.call(this);
+	//   }
+	//
+	//   return function(){
+	//       if(!handler&&start) start.call(this);
+	//       if(handler) clearTimeout(handler);
+	//       if(scroll) scroll.call(this);
+	//       if(end){
+	//           handler=setTimeout(scrollend.bind(this),delay);
+	//       }
+	//   };
+	// }
+
+	function scrollExtend({
+	    scrollStart,
+	    scrollIng,
+	    scrollEnd,
+	    delay = 200
+	}){
+	  let handler=null;
+
+	  return function(){
+	      if(!handler&&scrollStart) scrollStart.call(this);
+	      if(handler) clearTimeout(handler);
+	      if(scroll) scrollIng.call(this);
+	      if(scrollEnd){
+	          handler=setTimeout(()=>{
+	              handler=null;
+	              scrollEnd.call(this);
+	          },delay);
+	      }
+	  };
+	}
+
+
+		var x=0;
+		var time=new Date().getTime();
+
+		window.addEventListener('scroll',scrollExtend({
+			scrollStart:function(){
+				console.log("start");
+			},
+			scrollIng:function(){
+				console.log("ing");
+			},
+			scrollEnd:function(){
+				console.log("end");
+			},
+			delay:300
+		}));
+	</script>
+</html>

@@ -1,9 +1,11 @@
-# 函数封装之滚轮滚动事件(start,ing,end)
+# JS滚轮滚动事件封装(start,ing,end)
 
 最近在实习中遇到了需要使用原生JS完成滚轮滚动结束事件的监听，基于原生的scroll事件我完成了scrollstart，scrollend的扩展。
 
 ---
 ## 源码
+
+### ES5- 版
 
 ```javascript
 
@@ -23,7 +25,7 @@ function scrollExtend(obj){
       if(!handler&&start) start.call(this);
       if(handler) clearTimeout(handler);
       if(scroll) scroll.call(this);
-      if(end&&delay){
+      if(end){
           handler=setTimeout(scrollend.bind(this),delay);
       }
   };
@@ -31,7 +33,44 @@ function scrollExtend(obj){
 
 ```
 
+### ES6+ 版
+
+```javascript
+
+function scrollExtend({
+    scrollStart,
+    scrollIng,
+    scrollEnd,
+    delay = 200
+}){
+  let handler=null;
+
+  return function(){
+      if(!handler&&scrollStart) scrollStart.call(this);
+      if(handler) clearTimeout(handler);
+      if(scroll) scrollIng.call(this);
+      if(scrollEnd){
+          handler=setTimeout(()=>{
+              handler=null;
+              scrollEnd.call(this);
+          },delay);
+      }
+  };
+}
+
+```
+
 ## 用法
+
+### 参数说明
+
+|参数|类型|是否必传|说明|
+|:--|:--|:--|
+|scrollStart|Funciton|否|滑动开始的时候的事件|
+|scrollIng|Funciton|否|滑动中的时候的事件|
+|scrollEnd|Funciton|否|滑动结束的时候的事件|
+|delay|Number|否|判断滑动结束的时间延迟|
+
 
 ```javascript
 
@@ -86,6 +125,11 @@ new Vue({
 主要就是使用settimeout()和clearTimeout()来延长时间，以及使用匿名函数的思想。
 
 ## END
+
+> 2017-4-12     
+>   +   文章改名
+>   +   增加ES6语法的编写
+>   +   增加参数说明
 
 > 2017-3-20     修复直接使用this,无法传递this环境的BUG
 
