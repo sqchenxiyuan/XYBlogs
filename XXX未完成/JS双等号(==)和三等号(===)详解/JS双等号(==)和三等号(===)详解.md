@@ -80,6 +80,7 @@ JS中双等号(==)的判断是很简单，它的规则也同样简单。
 
 3.  Return `SameValueNonNumber(x, y)`.
 
+
 #### 精简
 
 三等号(===)的运算规则就很简单：
@@ -88,15 +89,93 @@ JS中双等号(==)的判断是很简单，它的规则也同样简单。
 
 2.  数值类型 `NaN` 永远返回 `false`
 
+3.  其余的基础类型直接比较值是否相等
+
+    对象比较引用是否相同。
+
+### 特别的转换函数
+
+上面可以看到，在运算中使用了 `ToNumber`,`ToPrimitive`,`SameValueNonNumber`这3个函数，虽然看名字就能知道它是干啥的，但是其中还是有一些坑
+
+#### ToNumber
+
+|Argument Type   |	Result
+|:--             |:--
+|Undefined	     |Return `NaN`.
+|Null	         |Return `+0`.
+|Boolean	     |Return `1` if argument is `true`. Return `+0` if argument is `false`.
+|Number	         |Return argument (no conversion).
+|String	         |See grammar and conversion algorithm below.
+|Symbol	         |Throw a `TypeError` exception.
+|Object          |Apply the following steps:<br>Let `primValue` be ? `ToPrimitive(argument, hint Number)`.<br>Return ? `ToNumber(primValue)`.
+
+其中 `String` 到 `Number` 的转换是最复杂的，将单开一片文章进行讲解。
+
+#### ToPrimitive
+
+这个方法的算法看似复杂，其实就是主要将对象转换为基本数据类型。
+
+详细可参看参考资料中的链接[ToPrimitive](http://www.ecma-international.org/ecma-262/7.0/#sec-strict-equality-comparison)
+
+只需要记住：
+
+1.  优先转换为 `String` 时，依次调用对象的 `toString` 和 `valueOf` ,获取最先返回不是对象的那个值
+
+2.  优先转换为 `Number` 时，依次调用对象的 `valueOf` 和 `toString` ,获取最先返回不是对象的那个值Number
+
+3.  默认转换是默认转换为 `Number`。
+
+#### SameValueNonNumber
+
+1.  Assert: `Type(x)` is not `Number`.
+
+2.  Assert: `Type(x)` is the same as `Type(y)`.
+
+3.  If `Type(x)` is `Undefined`, return `true`.
+
+4.  If `Type(x)` is `Null`, return `true`.
+
+5.  If `Type(x)` is `String`, then
+
+    If `x` and `y` are exactly the `same sequence of code units` (same length and same code units at corresponding indices), return `true`;
+
+    otherwise, return `false`.
+
+6.  If `Type(x)` is `Boolean`, then
+
+    If `x` and `y` are `both true` or `both false`, return `true`;
+
+    otherwise, return `false`.
+
+7.  If `Type(x)` is `Symbol`, then
+
+    If `x` and `y` are both the same `Symbol value`, return `true`;
+
+    otherwise, return `false`.
+
+8.  Return `true` if `x` and `y` are the same Object value.
+
+    Otherwise, return `false`.
+
+从上面的算法不难看出其实就是很普通的比较，相信看一看就能懂。
+
+## 归纳
+
+结合上面的一堆算法我们就可以简单的总结出一些东西了。
+
+## 奇怪的情况
+
 ## 参考资料
 
 [双等号运算规则](http://www.ecma-international.org/ecma-262/7.0/#sec-abstract-relational-comparison)
 
 [三等号运算规则](http://www.ecma-international.org/ecma-262/7.0/#sec-abstract-equality-comparison)
 
-[ToNumber](http://www.ecma-international.org/ecma-262/7.0/#sec-tonumber)
+[ToNumber](http://www.ecma-international.org/ecma-262/7.0/#sec-abstract-equality-comparison)
 
-[ToPrimitive](http://www.ecma-international.org/ecma-262/7.0/#sec-toprimitive)
+[ToPrimitive](http://www.ecma-international.org/ecma-262/7.0/#sec-strict-equality-comparison)
+
+
 
 ## END
 
