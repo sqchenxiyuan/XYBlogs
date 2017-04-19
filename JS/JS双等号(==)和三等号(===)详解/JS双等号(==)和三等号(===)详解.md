@@ -115,7 +115,7 @@ JS中双等号(==)的判断是很简单，它的规则也同样简单。
 
 这个方法的算法看似复杂，其实就是主要将对象转换为基本数据类型。
 
-详细可参看参考资料中的链接[ToPrimitive](http://www.ecma-international.org/ecma-262/7.0/#sec-strict-equality-comparison)
+详细可参看参考资料中的链接[ToPrimitive](http://www.ecma-international.org/ecma-262/7.0/#sec-toprimitive)
 
 只需要记住：
 
@@ -126,6 +126,8 @@ JS中双等号(==)的判断是很简单，它的规则也同样简单。
 3.  默认转换是默认转换为 `Number`。
 
 #### SameValueNonNumber
+
+这个方法就是比较不是数字的两个值
 
 1.  Assert: `Type(x)` is not `Number`.
 
@@ -159,11 +161,41 @@ JS中双等号(==)的判断是很简单，它的规则也同样简单。
 
 从上面的算法不难看出其实就是很普通的比较，相信看一看就能懂。
 
-## 归纳
+## 一些感到奇怪的情况
 
-结合上面的一堆算法我们就可以简单的总结出一些东西了。
+这里将列出一些让人感觉奇怪的等式，并给出转换过程
 
-## 奇怪的情况
+### [] == false     为true
+
+>   [] == false
+
+>   [] == 0 //转换boolean
+
+>   '' == 0 //转换对象 调用array的toString
+
+>   0 == 0  //转换string为number
+
+### [0] == false    为true
+
+>   [0] == false
+
+>   [0] == 0 //转换boolean
+
+>   '0' == 0 //转换对象 由于Array是调用的Object的valueOf,返回的为对象，将继续调用array的toString来获取非对象类型数值
+
+>   0 == 0  //转换string为number
+
+### '2' == true    为false
+
+>   '2' == true
+
+>   '2' == 1    //转换boolean
+
+>   2 == 1  //转换string
+
+### undefined == 0 和 null == 0  为false
+
+`undefined` 和 `null` 必须相互比较或者相同才会为 `true`
 
 ## 参考资料
 
@@ -171,12 +203,15 @@ JS中双等号(==)的判断是很简单，它的规则也同样简单。
 
 [三等号运算规则](http://www.ecma-international.org/ecma-262/7.0/#sec-abstract-equality-comparison)
 
-[ToNumber](http://www.ecma-international.org/ecma-262/7.0/#sec-abstract-equality-comparison)
+[ToNumber](http://www.ecma-international.org/ecma-262/7.0/#sec-tonumber)
 
-[ToPrimitive](http://www.ecma-international.org/ecma-262/7.0/#sec-strict-equality-comparison)
+[ToPrimitive](http://www.ecma-international.org/ecma-262/7.0/#sec-toprimitive)
 
+[SameValueNonNumber](http://www.ecma-international.org/ecma-262/7.0/#sec-samevaluenonnumber)
 
 
 ## END
+
+>   2017-4-19   完成
 
 >   2017-4-12   立项
