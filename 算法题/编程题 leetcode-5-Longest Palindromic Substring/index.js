@@ -35,17 +35,8 @@ let longestPalindrome = function(s) {
 
     }
 
-    // console.log(s.substring(ci - p[ci], ci + p[ci] + 1).split('').filter((data, index) => {
-    //     if (ci % 2 === index % 2){
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }).join(''))
-    // console.log(s.substring(ci - p[ci], ci + p[ci] + 1))
-
     return s.substring(ci - p[ci], ci + p[ci] + 1).split('').filter((data, index) => {
-        if ((ci+p[ci]+1) % 2 === index % 2){
+        if (1 === index % 2){
             return true;
         } else {
             return false;
