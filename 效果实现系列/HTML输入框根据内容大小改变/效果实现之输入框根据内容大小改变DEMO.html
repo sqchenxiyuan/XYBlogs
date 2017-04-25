@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text">
+  <script>
+    document.querySelector("input").addEventListener("input",$0_0({
+      minWidth:100,
+      maxWidth:300,
+      widthChange(newWidth){
+        this.style.width=newWidth+'px';
+      }
+    }));
+    function $0_0(obj){
+        let {
+            minWidth = 0,
+            maxWidth = Infinity,
+            back = true,
+            widthChange
+        } = obj;
+
+        return function(){
+            if(this.scrollWidth<minWidth||this.scrollWidth>maxWidth)return;
+
+            if(back)
+                this.style.width=minWidth+"px";
+
+            if(typeof widthChange === 'function')
+                widthChange.call(this,((this.scrollWidth<maxWidth)?this.scrollWidth:maxWidth))
+        }
+    }
+  </script>
+</body>
+</html>
