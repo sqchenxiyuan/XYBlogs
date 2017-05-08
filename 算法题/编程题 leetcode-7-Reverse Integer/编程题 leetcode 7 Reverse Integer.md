@@ -44,9 +44,11 @@ let reverse = function(x) {
 ```
 ## 在线链接
 
-[leetcode 6 Reverse Integer](https://leetcode.com/problems/reverse-integer)
+[leetcode 7 Reverse Integer](https://leetcode.com/problems/reverse-integer)
 
 ## END
+
+>   2017-5-8    修复错误的连接名称
 
 >   2017-5-7    完成
 
