@@ -1,0 +1,54 @@
+<textarea id="t1"></textarea>
+<textarea id="t2"></textarea>
+<textarea id="t3"></textarea>
+<script type="text/javascript">
+    inputTab(document.getElementById('t1'));
+    changeInput(document.getElementById('t2'),65,'a');
+    document.getElementById('t3').addEventListener('keydown',changeKeyDownInput('\n','123'))
+
+    function inputTab(dom){
+        dom.addEventListener('keydown',function(e){
+            if(e.keyCode === 9){
+                let start = this.selectionStart;
+                let l = this.selectionEnd - this.selectionStart;
+                let value = this.value.split('');
+                value.splice(start,l,'\t')
+                this.value = value.join('');
+                //处理
+                e.preventDefault();
+            }
+        })
+    }
+
+    function changeInput(dom,keyCode,input){
+        dom.addEventListener('keydown',function(e){
+            if(e.keyCode === keyCode){
+                let start = this.selectionStart;
+                let l = this.selectionEnd - this.selectionStart;
+                let value = this.value.split('');
+                value.splice(start,l,input)
+                this.value = value.join('');
+                //处理
+                e.preventDefault();
+            }
+        })
+    }
+
+    function changeKeyDownInput(keyCode,input){
+        if(typeof keyCode === 'string'){
+            keyCode = keyCode.charCodeAt(0)
+        }
+
+        return function(e){
+            if(e.keyCode === keyCode){
+                let start = this.selectionStart;
+                let l = this.selectionEnd - this.selectionStart;
+                let value = this.value.split('');
+                value.splice(start,l,input)
+                this.value = value.join('');
+                //处理
+                e.preventDefault();
+            }
+        }
+    }
+</script>
