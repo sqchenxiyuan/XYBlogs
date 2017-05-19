@@ -1,19 +1,35 @@
-<style media="screen">
-html,body{
-    padding: 0;
-    margin: 0;
-}
-div.out{
-height: 100%;
-width:100%;
-overflow: hidden;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style media="screen">
+        html,body{
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        div.out{
+            position: relative;
+            height: 100%;
+            width:100%;
+            overflow: hidden;
+        }
 
-img.in{
-    /*position: absolute;*/
-}
+        img.in{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
 
-</style>
+    </style>
+</head>
+<body>
+
 <div id="test1" class="out">
     <!-- <div class="in"></div> -->
     <img id="test2" class="in" src="./test.jpg" alt="">
@@ -23,15 +39,44 @@ img.in{
     let img = document.getElementById('test2');
     let imgp = img.parentElement;
 
-    let px = 270;
-    let py = 100;
-    let pw = 946;
-    let ph = 672;
+    let imgw = 0;
+    let imgh = 0;
+
+    let cx = 270;
+    let cy = 100;
+    let cw = 946;
+    let ch = 672;
+
+    let imgProportion = 1;
+    let x = new Image()
+    x.src = img.src;
+    x.onload = () => {
+        imgProportion = x.width/x.height;
+        imgw = x.width
+        imgh = x.height
+    }
+
+    let centerProportion = cw / ch;
+
+
 
     setInterval(()=>{
         // console.log(img,imgp)
         let pw = imgp.clientWidth;
         let ph = imgp.clientHeight;
-        console.log(pw,ph)
-    },1000)
+        let np = pw / ph;
+        console.log(np, imgProportion, centerProportion)
+
+        if(np < imgProportion){
+            img.style.height = "100%"
+            img.style.width = ""
+        } else {
+            img.style.height = ""
+            img.style.width = "100%"
+        }
+
+
+    },33)
 </script>
+</body>
+</html>

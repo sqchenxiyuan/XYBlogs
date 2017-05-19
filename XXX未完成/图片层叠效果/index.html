@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style media="screen">
+        html,body{
+            padding: 0;
+            margin: 0;
+        }
+
+        img{
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+    <img src="test.jpg" alt="">
+</body>
+<script>
+    let sw = 0.4;
+    let sy = 0.5;
+    document.addEventListener('mousemove',function(e){
+        let winW = window.innerWidth;
+        let winH = window.innerHeight;
+
+        let x = e.clientX;
+        let y = e.clientY;
+
+        let px = x / winW;
+        let py = y / winH;
+
+
+
+    },true)
+</script>
+</html>
