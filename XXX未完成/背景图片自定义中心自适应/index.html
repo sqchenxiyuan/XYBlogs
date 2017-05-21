@@ -7,76 +7,65 @@
     <title>Document</title>
     <style media="screen">
         html,body{
-            height: 100%;
-            width: 100%;
             padding: 0;
             margin: 0;
-        }
-        div.out{
-            position: relative;
+            width: 100%;
             height: 100%;
-            width:100%;
-            overflow: hidden;
-        }
-
-        img.in{
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
         }
 
     </style>
 </head>
-<body>
-
-<div id="test1" class="out">
-    <!-- <div class="in"></div> -->
-    <img id="test2" class="in" src="./test.jpg" alt="">
-</div>
 <script type="text/javascript">
-
-    let img = document.getElementById('test2');
-    let imgp = img.parentElement;
-
-    let imgw = 0;
-    let imgh = 0;
-
-    let cx = 270;
-    let cy = 100;
-    let cw = 946;
-    let ch = 672;
-
-    let imgProportion = 1;
-    let x = new Image()
-    x.src = img.src;
-    x.onload = () => {
-        imgProportion = x.width/x.height;
-        imgw = x.width
-        imgh = x.height
+    window.onload=function(){
+      console.log(111232113)
     }
+</script>
+<body>
+    <div style="height:2000px"></div>
+</body>
+<script>
 
-    let centerProportion = cw / ch;
+    ScrollBackGround('test.jpg')
 
+    function ScrollBackGround(src,options){
+        if(!options) options = {};
+        let showAreaP = options.showAreaP || 0.618;
+        let imgw = 100;
+        let imgh = 100;
 
-
-    setInterval(()=>{
-        // console.log(img,imgp)
-        let pw = imgp.clientWidth;
-        let ph = imgp.clientHeight;
-        let np = pw / ph;
-        console.log(np, imgProportion, centerProportion)
-
-        if(np < imgProportion){
-            img.style.height = "100%"
-            img.style.width = ""
-        } else {
-            img.style.height = ""
-            img.style.width = "100%"
+        let img = new Image();
+        img.src = src;
+        img.onload = function(){
+            imgw = img.width;
+            imgh = img.height;
+            scroll();
+            img.onload = undefined;
         }
 
+        document.body.style.backgroundImage = 'url("'+ src + '")';
+        document.body.style.backgroundAttachment = 'fixed';
 
-    },33)
+        document.addEventListener('scroll',scroll)
+        function scroll(){
+            console.log('scroll!',imgw,imgh)
+            let p = document.body.scrollTop / (document.body.scrollHeight - document.body.clientHeight);
+
+            let bodyh = document.body.clientHeight;
+            let bodyw = document.body.clientWidth;
+
+            let imgH,imgW;
+
+            imgH = bodyh / showAreaP;
+            imgW = imgw * imgH / imgh;
+            if(imgW < bodyw){
+                imgW = bodyw;
+                imgH = imgh * imgW / imgw;
+            }
+
+            document.body.style.backgroundSize = `${imgW}px`;
+            document.body.style.backgroundPosition = `${bodyw/2 - imgW/2}px ${- imgH * (1 - showAreaP) * p}px`;
+        }
+    }
+
 </script>
-</body>
 </html>

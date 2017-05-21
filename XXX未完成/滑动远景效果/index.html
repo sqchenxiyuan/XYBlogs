@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style media="screen">
+        html,body{
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body{
+            background-image: url("test.jpg");
+            background-attachment: fixed;
+        }
+
+        /*img{
+            position: fixed;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }*/
+
+    </style>
+</head>
+<body>
+    <!-- <img id="test"  src="test.jpg" alt=""> -->
+    <div style="height:2000px"></div>
+</body>
+<script>
+
+
+    let imgw = 1680;
+    let imgh = 1050;
+
+    let showAreaP = 0.618;
+
+    document.addEventListener('scroll',function(e){
+        let p = document.body.scrollTop / (document.body.scrollHeight - document.body.clientHeight);
+
+        let bodyh = document.body.clientHeight;
+        let bodyw = document.body.clientWidth;
+
+        let imgH,imgW;
+
+        imgH = bodyh / showAreaP;
+        imgW = imgw * imgH / imgh;
+        if(imgW < bodyw){
+            imgW = bodyw;
+            imgH = imgh * imgW / imgw;
+        }
+
+        document.body.style.backgroundSize = `${imgW}px`;
+        document.body.style.backgroundPosition = `${bodyw/2 - imgW/2}px ${- imgH * (1 - showAreaP) * p}px`;
+    })
+
+    class ImageProspect{
+        constructor(controlDom,showDom,w,h){
+            this.controlDom = controlDom;
+            this.showDom = showDom;
+
+            this.showW = w;
+            this.showH = h;
+            controlDom.addEventListener('mousemove',this.move.bind(this))
+        }
+
+        move(e){
+            let containerDom = this.showDom.offsetElement || document.body;
+
+
+            //计算当前进度
+            let x = e.offsetX;
+            let y = e.offsetY;
+
+            let controlw = this.controlDom.clientWidth || document.body.clientWidth;
+            let controlh = this.controlDom.clientHeight || document.body.clientHeight;
+            let px = x / controlw;//进度
+            let py = y / controlh;
+            if(px > 1) px = 1;
+            if(px < 0) px = 0;
+            if(py > 1) py = 1;
+            if(py < 0) py = 0;
+
+            //完全区域大小
+            let cw = containerDom.clientWidth;
+            let ch = containerDom.clientHeight;
+
+            let viewh = ch / (1 - sy);
+            let vieww = cw / (1 - sx);
+
+
+            //设置远景大小
+            let imgW,imgH;
+
+            let imgh = this.showH;
+            let imgw = this.showW;
+
+            if(vieww / viewh > imgw / imgh){
+                imgW = vieww;
+                imgH = imgh * vieww / imgw;
+            } else {
+                imgW = imgw * viewh / imgh;
+                imgH = viewh;
+            }
+
+            this.showDom.style.width = imgW+'px';
+            this.showDom.style.height = imgH+'px';
+
+            this.showDom.style.left = `-${(imgW / 2 - vieww / 2) + vieww * sx * px}px`
+            this.showDom.style.top = `-${(imgH / 2 - viewh / 2) + viewh * sy * py}px`
+        }
+    }
+
+    // new ImageProspect(document,document.getElementById("test"),1920,900)
+
+</script>
+</html>
