@@ -4,8 +4,8 @@
 ---
 准备写的的:
 
->   效果实现之自定义滚动条插件
+>   WebSocketAPI结构设计以及实现-服务端
 
->   浏览器事件捕获和冒泡
+>   WebSocketAPI结构设计以及实现-客户端
 
 [博客地址 http://www.cxyblogbiu.com/](http://www.cxyblogbiu.com/)
