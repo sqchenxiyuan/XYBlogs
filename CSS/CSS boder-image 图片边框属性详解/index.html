@@ -1,0 +1,20 @@
+<style media="screen">
+    div{
+        margin: 100px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .borderImage{
+        /*border-image-source: url("border1.png");*/
+        /*border-image-source: linear-gradient(red, blue);*/
+        border-image-source: radial-gradient(red, blue);
+        border-image-slice: 20;
+        border-style: solid;
+        border-width: 10px;
+        border-image-width: 10px 20px 30px 40px;
+        border-image-outset: 10px 20px 30px 40px;
+        border-image-repeat: round;
+    }
+</style>
+<div class="borderImage">123</div>
