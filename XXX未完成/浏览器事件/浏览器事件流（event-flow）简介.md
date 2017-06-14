@@ -1,6 +1,6 @@
-# 浏览器DOM树的事件流（event-flow）
+# 浏览器事件流（event-flow）简介
 
-这篇文章将讲述详细浏览器DOM树的事件流（event-flow）相关的知识，主要包括事件的流程、事件的监听等。
+这篇文章将讲简单述详细浏览器DOM树的事件流（event-flow）相关的知识，主要包括事件的流程、事件的监听等。
 
 ## 简介
 
@@ -179,9 +179,123 @@ document.getElementById("out").addEventListener("click",function(event){
 
     事件的名称（不区分大小写）。
 
-## 参考资料
+## 事件流程
 
-。
+浏览器的事件流分为捕获(capture)，触发(target)以及冒泡(bubble)3个阶段。
+
+![](https://www.w3.org/TR/uievents/images/eventflow.svg)
+
+### 捕获(capture)阶段
+
+这个阶段事件的消息会从 `window` 对象向下朝触发的元素传递。
+
+比如这样监听：
+
+``` javascript
+
+window.addEventListener("click",function(e){
+    console.log("window",e);
+},true);
+
+document.addEventListener("click",function(e){
+    console.log("document",e);
+},true);
+
+document.body.parentElement.addEventListener("click",function(e){
+    console.log("html",e);
+},true);
+
+document.body.addEventListener("click",function(e){
+    console.log("body",e);
+},true);
+
+document.getElementById("out").addEventListener("click",function(e){
+    console.log("out",e);
+},true);
+
+document.getElementById("in").addEventListener("click",function(e){
+    console.log("in",e);
+},true);
+
+```
+
+那么点击id为`in`的元素时，输出的结果就会按着`window` 对象到id为`in`的元素的传递顺序显示出来
+
+![](http://o7yupdhjc.bkt.clouddn.com/17-6-14/29840401.jpg)
+
+### 触发(target)阶段
+
+这个阶段其实就是消息到达目标后，目标做出响应的阶段，如果这个消息是不会冒泡的，那么这个阶段以后就不会在冒泡了。
+
+### 冒泡(bubble)阶段
+
+这个阶段事件的消息和捕获相反，会从触发的元素向上朝 `window` 对象传递。
+
+比如这样监听：
+
+``` javascript
+
+window.addEventListener("click",function(e){
+    console.log("window",e);
+},false);
+
+document.addEventListener("click",function(e){
+    console.log("document",e);
+},false);
+
+document.body.parentElement.addEventListener("click",function(e){
+    console.log("html",e);
+},false);
+
+document.body.addEventListener("click",function(e){
+    console.log("body",e);
+},false);
+
+document.getElementById("out").addEventListener("click",function(e){
+    console.log("out",e);
+},false);
+
+document.getElementById("in").addEventListener("click",function(e){
+    console.log("in",e);
+},false);
+
+```
+
+结果就是这样了
+
+![](http://o7yupdhjc.bkt.clouddn.com/17-6-14/58067840.jpg)
+
+
+## 总结
+
+1.  任何事件都有捕获和触发阶段，但是不一定有冒泡阶段
+
+    例如 `focus`，`blur`等事件，虽然不能在冒泡阶段阶段获取消息，但是可以在捕获阶段获取消息
+
+    ``` javascript
+
+    document.getElementById("in").addEventListener("focus",function(e){
+        console.log("in",e);
+    },true);
+
+    document.getElementById("text").addEventListener("focus",function(e){
+        console.log("text",e);
+    },true);
+
+    document.getElementById("in").addEventListener("focus",function(e){
+        console.log("in",e);
+    },false);
+
+    ```
+
+    ![](http://o7yupdhjc.bkt.clouddn.com/17-6-14/39045854.jpg)
+
+    从结果我们可以看到捕获阶段的监听是触发了的。
+
+2.  `stopPropagation()` 函数将会直接中断整个传播流程，而不是只中断冒泡。
+
+
+## 参考资料
 
 [UI Events W3C Working Draft, 04 August 2016](https://www.w3.org/TR/uievents)
 
@@ -190,5 +304,7 @@ document.getElementById("out").addEventListener("click",function(event){
 [MDN_Event](https://developer.mozilla.org/zh-CN/docs/Web/API/Event)
 
 ## END
+
+>   2017-6-14    完成
 
 >   2017-5-6    立项

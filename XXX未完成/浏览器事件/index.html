@@ -1,0 +1,138 @@
+<style media="screen">
+    #out{
+        width: 200px;
+        height: 200px;
+        border: 1px blue solid;
+    }
+
+    #in{
+        margin: 10px;
+        width: 100px;
+        height: 100px;
+        border: 1px red solid;
+    }
+
+</style>
+<div id="out">
+    <div id="in">
+        <input id="btn" type="button" name="" value="an">
+        <input id="text" type="text" name="" value="">
+    </div>
+</div>
+<script type="text/javascript">
+    // window.addEventListener("click",function(){
+    //     console.log("window!");
+    // },true)
+    //
+    // document.addEventListener("click",function(){
+    //     console.log("document!");
+    // })
+
+    // document.getElementById("out").onclick=function(){
+    //     console.log("out!")
+    // }
+    //
+    // document.getElementById("in").onclick=function(){
+    //     console.log("in!")
+    // }
+
+    // function clickout(){
+    //     console.log("out!");
+    // }
+    //
+    // document.getElementById("out").addEventListener("click",clickout);
+    // document.getElementById("out").removeEventListener("click",clickout);
+    //
+    // document.getElementById("in").addEventListener("click",function(){
+    //     console.log("in!")
+    // })
+
+    // document.getElementById("out").addEventListener("click",function(e){
+    //     console.log(arguments)
+    //     console.log("out!");
+    // });
+    // document.getElementById("out").removeEventListener("click",function(){
+    //     console.log("out!");
+    // });
+    //
+    // document.getElementById("in").addEventListener("click",function(){
+    //     console.log("in!")
+    // })
+
+    // window.addEventListener("click",function(e){
+    //     console.log("window",e);
+    // },true);
+    //
+    // document.addEventListener("click",function(e){
+    //     console.log("document",e);
+    // },true);
+    //
+    // document.body.parentElement.addEventListener("click",function(e){
+    //     console.log("html",e);
+    // },true);
+    //
+    // document.body.addEventListener("click",function(e){
+    //     console.log("body",e);
+    // },true);
+    //
+    // document.getElementById("out").addEventListener("click",function(e){
+    //     console.log("out",e);
+    // },true);
+    //
+    // document.getElementById("in").addEventListener("click",function(e){
+    //     console.log("in",e);
+    // },true);
+
+    // window.addEventListener("click",function(e){
+    //     console.log("window",e);
+    // },false);
+    //
+    // document.addEventListener("click",function(e){
+    //     console.log("document",e);
+    // },false);
+    //
+    // document.body.parentElement.addEventListener("click",function(e){
+    //     console.log("html",e);
+    // },false);
+    //
+    // document.body.addEventListener("click",function(e){
+    //     console.log("body",e);
+    // },false);
+    //
+    // document.getElementById("out").addEventListener("click",function(e){
+    //     console.log("out",e);
+    // },false);
+    //
+    // document.getElementById("in").addEventListener("click",function(e){
+    //     console.log("in",e);
+    // },false);
+
+
+
+    // document.getElementById("in").addEventListener("focus",function(e){
+    //     console.log("in",e);
+    // },true);
+    //
+    // document.getElementById("text").addEventListener("focus",function(e){
+    //     console.log("text",e);
+    // },true);
+    //
+    // document.getElementById("in").addEventListener("focus",function(e){
+    //     console.log("in",e);
+    // },false);
+
+
+    document.getElementById("in").addEventListener("click",function(e){
+        console.log("in",e);
+        e.bubbles=false;
+    },true);
+
+    document.getElementById("text").addEventListener("click",function(e){
+        console.log("text",e);
+    },true);
+
+    document.getElementById("in").addEventListener("click",function(e){
+        console.log("in",e);
+    },false);
+
+</script>
