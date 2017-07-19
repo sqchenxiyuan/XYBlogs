@@ -79,7 +79,7 @@ AJAX可以允许网页异步与服务器进行数据交换，是一个使用频�
 
 ``` javascript
   req.send(reqData);
-  //reqData:发生的数据，为string类型
+  //reqData:发生的数据，为string类型 或者 formData对象
 ```
 
 #### 获取服务器返回的状态和数据
@@ -115,33 +115,37 @@ AJAX一般是用来获取后台的数据，然后反馈给用户，所以我们�
 				reqUploadProgress:请求发出的进度
 */
 function ajax(obj){
-	var reqURL=obj.reqURL;
-	var reqMethod=obj.reqMethod||"get";
-	var reqAsync=(obj.reqAsync===undefined?true:obj.reqAsync);
-	var reqData=obj.reqData||"";//直接传数据不解析
-	var reqHeader=obj.reqHeader;
-	var reqUserName=obj.reqUserName||"";
-	var reqUserPassWord=obj.reqUserPassWord||"";
+	var reqURL = obj.reqURL;
+	var reqMethod = obj.reqMethod||"get";
+	var reqAsync = (obj.reqAsync===undefined?true:obj.reqAsync);
+	var reqData = obj.reqData||"";//直接传数据不解析
+	var reqHeader = obj.reqHeader;
+	var reqUserName = obj.reqUserName||"";
+	var reqUserPassWord = obj.reqUserPassWord||"";
 
-	var reqSuccess=obj.reqSuccess;
-	var reqError=obj.reqError;
-	var reqBefore=obj.reqBefore;
-	var reqProgress=obj.reqProgress;
-	var reqUploadProgress=obj.reqUploadProgress;
+	var reqSuccess = obj.reqSuccess;
+	var reqError = obj.reqError;
+	var reqBefore = obj.reqBefore;
+	var reqProgress = obj.reqProgress;
+	var reqUploadProgress = obj.reqUploadProgress;
 
-	var req=new XMLHttpRequest();
-	req.onreadystatechange=function(){
-		if(req.readyState==4)
+	var req = new XMLHttpRequest();
+	req.onreadystatechange = function(){
+		if(req.readyState === 4)
 		{
-			if(req.status==200){
-				if(reqSuccess&&typeof reqSuccess === 'function')reqSuccess(req.responseText);
+			if(parseInt(req.status / 100) <= 2){//200请求系列都是成功
+				if(reqSuccess && typeof reqSuccess === 'function')reqSuccess(req.responseText);
 			}else{
-				if(reqError&&typeof reqError === 'function')reqError(req.responseText);
+				if(reqError && typeof reqError === 'function')reqError(req);
 			}
 		}
-	};
+    };
+    req.onerror = function() {
+        if(reqError && typeof reqError === 'function')reqError(req);
+    }
 	req.onprogress=reqProgress;
 	req.upload.onprogress=reqUploadProgress;
+
 
 	req.open(reqMethod,reqURL,reqAsync,reqUserName,reqUserPassWord);
 	if(reqHeader){
@@ -204,6 +208,8 @@ function post(url,data,success,error){
 
 ## 版本
 还在修改中，在学习和开发过程中遇到问题会及时修正和更新~~
+
+> 2017-7-18   修复无法捕捉网络错误的问题，将100和200系列响应认为默认为正确
 
 > 2017-2-8    修复GET函数多个?的缺陷，增加请求进度的控制
 
