@@ -1,0 +1,56 @@
+ <style>
+    .container{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-items:center;
+        flex-flow: column;
+        //justify-content: center;
+    }
+
+    .box{
+        font-size: 50px;
+    }
+
+    .box1{
+        flex: 0 0 auto;
+        background: red;
+        order:1;
+        width: 50px;
+        height: 100px;
+        -webkit-transition: width 0.7s ease-out;
+        transition: width 0.7s ease-out;
+    }
+
+    .box2{
+        flex: 0 0 auto;
+        width: 50px;
+        background: yellow;
+        order:2;
+        height: 200px;
+    }
+
+    .box3{
+        flex: 0 0 auto;
+        width: 50px;
+        background: green;
+        order: 1;
+        height: 300px;        
+    }
+
+</style>
+
+
+<div class="container">
+
+    <div class="box box1">
+        1
+    </div>
+    <div class="box box2">
+        2
+    </div>
+    <div class="box box3">
+        3
+    </div>
+
+</div> 
