@@ -23,7 +23,9 @@ AJAX可以允许网页异步与服务器进行数据交换，是一个使用频�
 (现在浏览器主要都是内建的这个对象，IE5,6为ActiveXObject，基本已被淘汰，不考虑这个)
 
 ``` javascript
+
   var req=new XMLHttpRequest();
+
 ```
 
 #### 设置响应事件
@@ -44,15 +46,17 @@ AJAX可以允许网页异步与服务器进行数据交换，是一个使用频�
 >
 > 4: 请求已完成，且响应已就绪
 
-例如设置一下代码可以监听AJAX完成事件
+例如设置以下代码便可以监听AJAX完成事件
 
 ``` javascript
-  req.onreadystatechange=function(){
-    if(req.readyState==4)
+
+  req.onreadystatechange = function(){
+    if(req.readyState === 4)
     {
       //填写AJAX完成后的事件
     }
   };
+
 ```
 #### 设置请求信息
 
@@ -139,13 +143,12 @@ function ajax(obj){
 				if(reqError && typeof reqError === 'function')reqError(req);
 			}
 		}
-    };
-    req.onerror = function() {
-        if(reqError && typeof reqError === 'function')reqError(req);
-    }
+  };
+  req.onerror = function() {
+      if(reqError && typeof reqError === 'function')reqError(req);
+  }
 	req.onprogress=reqProgress;
 	req.upload.onprogress=reqUploadProgress;
-
 
 	req.open(reqMethod,reqURL,reqAsync,reqUserName,reqUserPassWord);
 	if(reqHeader){
