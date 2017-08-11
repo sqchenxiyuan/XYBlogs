@@ -2,11 +2,25 @@
 
 这篇文章将集合我在使用node开发一些特别功能时，所找到的简单易用，功能强大的包，用来和大家分享。
 
+## 网络解析相关
+
+### FROM表单
+
+####  multer
+
+npm : [https://www.npmjs.org/package/multer](https://www.npmjs.org/package/multer)
+
+repository : [https://github.com/expressjs/multer](https://github.com/expressjs/multer)
+
+推荐理由：
+
+>   一个集合express的 multipart/form-data的解析功能，当然，最强大的还是它的文件解析功能~~用了都说好！
+
 ## 文件相关
 
-### 压缩
+### 压缩与解压
 
-####  archiver 2+
+####  archiver
 
 npm : [https://www.npmjs.org/package/archiver](https://www.npmjs.org/package/archiver)
 
@@ -16,7 +30,19 @@ repository : [https://github.com/archiverjs/node-archiver](https://github.com/ar
 
 >   尝试了多个node端的压缩工具，(不要给我说 `cmd` 才是王)，这个包封装的更高，使用方便，解决了 `tar` 莫名其妙的路径问题，简单易用~~~
 
+####  unzip
+
+npm : [https://www.npmjs.org/package/unzip](https://www.npmjs.org/package/unzip)
+
+repository : [https://github.com/EvanOxfeld/node-unzip](https://github.com/EvanOxfeld/node-unzip)
+
+推荐理由：
+
+>   archiver 提供了方便的压缩功能，当然需要一个方便的解压包啦~~，对于ZIP文件这个包提供了直接解压文件到文件目录的功能
+
 ## END
+
+>   2017-8-11    添加 multer 和 unzip
 
 >   2017-8-8    添加 压缩文件包  archiver
 
