@@ -10,25 +10,25 @@
 ```javascript
 
 function scrollExtend(obj){
-  var handler=null;
-  var start=obj.scrollStart;
-  var scroll=obj.scrollIng;
-  var end=obj.scrollEnd;
-  var delay=obj.delay||200;
+    var handler=null;
+    var start=obj.scrollStart;
+    var scroll=obj.scrollIng;
+    var end=obj.scrollEnd;
+    var delay=obj.delay||200;
 
-  function scrollend(){
-      handler=null;
-      end.call(this);
-  }
-
-  return function(){
-      if(!handler&&start) start.call(this);
-      if(handler) clearTimeout(handler);
-      if(scroll) scroll.call(this);
-      if(end){
-          handler=setTimeout(scrollend.bind(this),delay);
-      }
-  };
+    return function(){
+        var that = this;
+        var _argumrnts = arguments;
+        if(!handler&&start) start.apply(this, arguments);
+        if(handler) clearTimeout(handler);
+        if(scroll) scroll.apply(this, arguments);
+        if(end){
+            handler = setTimeout(function() {
+            handler=null;
+            end.apply(that, _argumrnts);
+            }, delay);
+        }
+    };
 }
 
 ```
@@ -37,25 +37,27 @@ function scrollExtend(obj){
 
 ```javascript
 
-function scrollExtend({
-    scrollStart,
-    scrollIng,
-    scrollEnd,
-    delay = 200
-}){
-  let handler=null;
+function scrollExtend(options){
+    let handler=null;
+    let {
+        scrollStart,
+        scrollIng,
+        scrollEnd,
+        delay = 200
+    } = options
 
-  return function(){
-      if(!handler&&scrollStart) scrollStart.call(this);
-      if(handler) clearTimeout(handler);
-      if(scroll) scrollIng.call(this);
-      if(scrollEnd){
-          handler=setTimeout(()=>{
-              handler=null;
-              scrollEnd.call(this);
-          },delay);
-      }
-  };
+    return function(){
+        let _arguments = arguments
+        if(!handler&&scrollStart) scrollStart.apply(this, _arguments)
+        if(handler) clearTimeout(handler)
+        if(scrollIng) scrollIng.apply(this, _arguments)
+        if(scrollEnd){
+            handler = setTimeout(()=>{
+                handler = null
+                scrollEnd.apply(this, _arguments)
+            },delay)
+        }
+    };
 }
 
 ```
@@ -126,13 +128,15 @@ new Vue({
 
 ## END
 
-> 2017-4-12     
+>   2017-9-3   允许传递事件参数
+
+>   2017-4-12
 >   +   文章改名
 >   +   增加ES6语法的编写
 >   +   增加参数说明
 
-> 2017-3-20     修复直接使用this,无法传递this环境的BUG
+>   2017-3-20     修复直接使用this,无法传递this环境的BUG
 
-> 2017-2-12		结合VUE，可以直接使用，同时函数内的this环境为vue对象
+>   2017-2-12		结合VUE，可以直接使用，同时函数内的this环境为vue对象
 
-> 2016-10-22 	完成
+>   2016-10-22 	完成
