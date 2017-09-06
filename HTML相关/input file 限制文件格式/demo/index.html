@@ -1,0 +1,48 @@
+<button onclick="select()">select</button>
+<script>
+    const accept = '.pdf, text/*, image/png'
+
+    function select() {
+        let input = document.createElement('input')
+        input.type = 'file'
+        input.accept = accept
+        input.onchange = function(){           
+            console.log(checkFileType(this.files[0], accept))
+        }
+        input.click()
+    }
+    
+
+    function checkFileType(file, accept){
+        let acceptArr = accept.split(',').map(a => a.trim())
+        let name = file.name
+        let type = file.type
+
+
+        if(acceptArr.length === 0) 
+            return true
+
+        return acceptArr.some(function(accept){
+            if(accept === '*'){//全部
+                return true
+            }
+
+            if(/^\..+$/.test(accept)){ //文件后缀名
+                let reg = new RegExp(`.+\\${accept}$`)
+                return reg.test(name)
+            }
+
+            if(/^.+\/\*/.test(accept)){ //文件MIME部分
+                accept = accept.replace('*','')
+                let reg = new RegExp(`^${accept}.+`)
+                return reg.test(type)
+            }
+
+            if(accept === name || accept === type){
+                return true
+            }
+
+            return false
+        })
+    }
+</script>
