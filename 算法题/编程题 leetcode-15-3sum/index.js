@@ -1,3 +1,4 @@
+///////////////////简化版
 /**
  * @param {number[]} nums
  * @return {number[][]}
