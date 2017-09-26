@@ -41,17 +41,27 @@
 
 ### 原始的事件绑定
 
-JS最原始的事件绑定是通过对DOM对象的事件属性绑定函数实现。
+JS最原始的事件绑定是通过对DOM对象的事件属性绑定函数实现。可以通过内联的方式调用要执行的代码，或者使用JS获取DOM对象来设置事件属性。
 
-``` javascript
+``` html
 
-document.getElementById("btn").onclick=function(){
-    console.log("button!")
-}
+<input id="btn" type="button" name="" value="an" click="clickFun()">
 
 ```
 
-这样当我点击id为`btn`的元素时，便会输出`button!`
+或
+
+``` javascript
+
+function clickFun(){
+    console.log("button!")
+}
+
+document.getElementById("btn").onclick = clickFun
+
+```
+
+这样当点击id为`btn`的元素时，便会输出`button!`
 
 这样就实现了一个事件的监听，但是这个存在一定的问题，当有多个地方需要监听相同事件时，便会冲突
 
@@ -67,11 +77,11 @@ document.getElementById("btn").onclick=function(){
 
 ```
 
-这时点击只会输出`button?`，因为第二个绑定的函数覆盖了前一个函数。
+这时点击只会输出`button?`，因为第二个绑定的函数覆盖了前一个函数。对同一个节点的监听只能同时有一个实例。
 
 ## 事件监听器(EventListener)
 
-事件监听器是目前最推荐的监听事件的方法，应为它解决了上面原始的监听方法的弊端，同时可以选择在事件的哪个阶段触发监听器,而原始的绑定方法都是在冒泡阶段触发。
+为了解决上面原始的监听方法的弊端，推出了事件监听器，它允许多个实例对事件进行订阅，同时可以选择在事件的哪个阶段触发监听器,而原始的绑定方法都是在只在冒泡阶段触发。
 
 ### addEventListener(type,callback,capture = false)
 
@@ -119,11 +129,11 @@ document.getElementById("in").addEventListener("click",function(){
 ``` javascript
 
 document.getElementById("out").addEventListener("click",function(){
-    console.log("out!");
-});
+    console.log("out!")
+})
 document.getElementById("out").removeEventListener("click",function(){
-    console.log("out!");
-});
+    console.log("out!")
+})
 
 document.getElementById("in").addEventListener("click",function(){
     console.log("in!")
@@ -132,6 +142,19 @@ document.getElementById("in").addEventListener("click",function(){
 ```
 
 是没有用的，因为填充的是匿名函数，虽然代码执行是相同的，但是在计算机内是不同的两个对象。
+
+### 小提示
+
+>   1.当属性绑定和监听器绑定相同函数时，依然会触发两次
+>    ``` javascript
+>        function clickout(){
+>            console.log("out!");
+>        }
+>        
+>        document.getElementById("out").onclick = clickout
+>        document.getElementById("out").addEventListener("click",clickout);
+>        document.getElementById("out").addEventListener("click",clickout);
+>    ```
 
 ## 事件对象
 
@@ -304,6 +327,8 @@ document.getElementById("in").addEventListener("click",function(e){
 [MDN_Event](https://developer.mozilla.org/zh-CN/docs/Web/API/Event)
 
 ## END
+
+>   2017-9-26    更新了简单的内联调用的说明，添加了一个小提示
 
 >   2017-6-14    完成
 
