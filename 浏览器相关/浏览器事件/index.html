@@ -36,13 +36,17 @@
     //     console.log("in!")
     // }
 
-    // function clickout(){
-    //     console.log("out!");
-    // }
-    //
-    // document.getElementById("out").addEventListener("click",clickout);
-    // document.getElementById("out").removeEventListener("click",clickout);
-    //
+        
+    function clickout(){
+        console.log("out!");
+    }
+    
+    document.getElementById("out").onclick = clickout
+    document.getElementById("out").addEventListener("click",clickout);
+    document.getElementById("out").addEventListener("click",clickout);
+    
+
+
     // document.getElementById("in").addEventListener("click",function(){
     //     console.log("in!")
     // })
@@ -122,17 +126,17 @@
     // },false);
 
 
-    document.getElementById("in").addEventListener("click",function(e){
-        console.log("in",e);
-        e.bubbles=false;
-    },true);
+    // document.getElementById("in").addEventListener("click",function(e){
+    //     console.log("in",e);
+    //     e.bubbles=false;
+    // },true);
 
-    document.getElementById("text").addEventListener("click",function(e){
-        console.log("text",e);
-    },true);
+    // document.getElementById("text").addEventListener("click",function(e){
+    //     console.log("text",e);
+    // },true);
 
-    document.getElementById("in").addEventListener("click",function(e){
-        console.log("in",e);
-    },false);
+    // document.getElementById("in").addEventListener("click",function(e){
+    //     console.log("in",e);
+    // },false);
 
 </script>

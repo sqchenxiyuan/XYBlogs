@@ -1,0 +1,26 @@
+
+<div id="div3">
+    <button id="button">click1</button>
+</div>
+<script>
+    document.getElementById("div3").addEventListener("diy_event",function(e){
+        console.log(e,"capture");
+        e.cancel = true
+    },true)
+
+    document.getElementById("button").addEventListener("diy_event",function(e){
+        console.log(e,"button");
+    },true)
+
+    document.getElementById("div3").addEventListener("diy_event",function(e){
+        console.log(e,"bubbel");
+    },false)
+
+    document.getElementById("button").addEventListener("click",function(){
+        let e = new Event("diy_event", {
+            bubbles: true,
+            cancelable: true
+        })
+        this.dispatchEvent(e)
+    })
+</script>
