@@ -1,0 +1,137 @@
+<div id="contianer">
+    <div id="content"></div>
+</div>
+
+<script>
+    class ResizeWatcher{
+        constructor(){
+            this._destroyed = false
+            this.elementsArr = []
+
+
+            let resizeO = new MutationObserver(() => {
+                this.check()
+            })
+
+            window.addEventListener("resize",() => {
+                this.check()
+            })
+
+            resizeO.observe(document,
+            {
+                childList: true,
+                attributes: true,
+                characterData: true,
+                subtree:true
+            })
+
+            // this.check()
+        }
+
+        append(element){
+            this.elementsArr.push({
+                element,
+                width: element.clientWidth,
+                height: element.clientHeight,                
+            })
+        }
+
+        destroy(){
+            this._destroyed = true
+        }
+
+        check(){
+            if(this._destroyed) return
+            this.elementsArr.forEach(e => {
+                let nw = e.element.clientWidth
+                let nh = e.element.clientHeight
+
+                if(nw !== e.width || nh !== e.height){
+                    e.width = nw
+                    e.height = nh
+                }
+
+                e.element.dispatchEvent(new Event("element_resize",{
+                    bubbles:false
+                }))
+            })
+
+            // requestAnimationFrame(this.check.bind(this))
+        }
+    }
+
+    let watcher = new ResizeWatcher()
+</script>
+
+<script>
+    let contianer = document.getElementById("contianer")
+    let content = document.getElementById("content")
+
+    for(let i = 0;i< 100; i++){
+        let div = document.createElement("div")
+        div.className = "content"
+        contianer.appendChild(div)
+        watcher.append(div)
+    }
+
+    contianer.addEventListener("click",function(){
+        this.style.width = Math.random() * 100 + 100 + 'px'
+    })
+
+    content.addEventListener("click",function(){
+        this.style.width = Math.random() * 100 + 100 + 'px'
+    })
+
+    content.addEventListener("transitionend",function(){
+        console.log(123)
+    })
+
+    watcher.append(contianer)
+
+    contianer.addEventListener("element_resize", function(){
+        console.log("resize!")
+    })
+
+
+    // let resizeO = new MutationObserver(function(){
+    //     console.log(arguments)    
+    // })
+
+    // window.addEventListener("resize",function(){
+    //     console.log(213)
+    // })
+
+    // resizeO.observe(document,
+    // {
+    //     childList: true,
+    //     attributes: true,
+    //     characterData: true,
+    //     subtree:true
+    // })
+
+</script>
+
+<style>
+    #contianer{
+        width: 100%;
+        height: 100%;
+        background: red;
+        transition: width 0.001s;
+    }
+
+    #content{
+        width: 50%;
+        height: 100px;
+        background: blue;
+        transition: width 0.001s;
+    }
+
+    .content{
+        position: absolute;
+        height: 100%;
+        width: 50%;
+        top: 0;
+        left: 0;
+    }
+
+</style>
