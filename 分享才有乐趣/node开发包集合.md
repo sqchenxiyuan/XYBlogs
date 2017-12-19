@@ -40,7 +40,23 @@ repository : [https://github.com/EvanOxfeld/node-unzip](https://github.com/EvanO
 
 >   archiver 提供了方便的压缩功能，当然需要一个方便的解压包啦~~，对于ZIP文件这个包提供了直接解压文件到文件目录的功能
 
+## 计算相关
+
+### 大数计算
+
+#### bignumber.js
+
+npm : [https://www.npmjs.com/package/bignumber.js](https://www.npmjs.com/package/bignumber.js)
+
+repository : [https://www.npmjs.com/package/bignumber.js](https://www.npmjs.com/package/bignumber.js)
+
+推荐理由：
+
+>   bignumber.js 实现了大数计算的相关底层算法，方便快捷，并且活跃，big-number 已经2年没有更新了
+
 ## END
+
+>   2017-12-19    添加 bignumber.js 用于大数计算
 
 >   2017-8-11    添加 multer 和 unzip
 
