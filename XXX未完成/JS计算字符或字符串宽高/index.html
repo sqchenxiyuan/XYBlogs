@@ -1,0 +1,12 @@
+<body>
+    
+</body>
+<script>
+    let str = "我爱JS"
+
+    let span = document.createElement("span")
+    span.innerHTML = str
+    document.body.appendChild(span)
+    console.log(span.getBoundingClientRect().width)
+    document.body.remove(span)
+</script>
