@@ -67,7 +67,7 @@ function scrollExtend(options){
 ### 参数说明
 
 |参数|类型|是否必传|说明|
-|:--|:--|:--|
+|:--|:--|:--|:--|
 |scrollStart|Funciton|否|滑动开始的时候的事件|
 |scrollIng|Funciton|否|滑动中的时候的事件|
 |scrollEnd|Funciton|否|滑动结束的时候的事件|
@@ -127,6 +127,8 @@ new Vue({
 主要就是使用settimeout()和clearTimeout()来延长时间，以及使用匿名函数的思想。
 
 ## END
+
+>   2018-2-24   修复错误的MD语法
 
 >   2017-9-3   允许传递事件参数
 
