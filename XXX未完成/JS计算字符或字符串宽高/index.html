@@ -1,12 +1,55 @@
-<body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            let str = "我我我我asldjgfsljsgjasgljsgfhf我我我"
+        
+            function getCharSize(char){
+                let span = document.createElement("span")
+                span.style.font = "16px 宋体"
+                span.style.lineHeight = "16px"
+                span.innerHTML = str
+                document.body.appendChild(span)
+                let rect = span.getBoundingClientRect()
+                let width = rect.width
+                let height = rect.height
+                document.body.removeChild(span)
+                return {
+                    width,
+                    height
+                }
+            }
+        
+            var ctx = document.createElement('canvas').getContext('2d')
+            function getCharSize2(char){
+                ctx.font = "16px 宋体"
+                var text = ctx.measureText(char) // TextMetrics object
+                return {
+                    width: text.width
+                }
+            }
+            
+            const COUNT = 10000
     
-</body>
-<script>
-    let str = "我爱JS"
-
-    let span = document.createElement("span")
-    span.innerHTML = str
-    document.body.appendChild(span)
-    console.log(span.getBoundingClientRect().width)
-    document.body.remove(span)
-</script>
+            let startTime = Date.now()
+            for(let i = 0; i < COUNT; i++){
+                getCharSize(str)
+            }
+            let endTime = Date.now()
+            console.log((endTime - startTime) / COUNT + 'ms')
+    
+            startTime = Date.now()
+            for(let i = 0; i < COUNT; i++){
+                getCharSize2(str)
+            }
+            endTime = Date.now()
+            console.log((endTime - startTime) / COUNT + 'ms')
+        </script>
+    </body>
+</html>
