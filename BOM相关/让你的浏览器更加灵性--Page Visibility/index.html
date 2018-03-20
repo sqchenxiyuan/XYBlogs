@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>欢迎来到德莱联盟</title>
+    </head>
+    <body>
+    </body>
+    <script>
+        function visibilityChange(){
+            if(document.hidden){
+                document.title = "哎！别走啊"
+            } else {
+                document.title = "我就知道你会回来的~~"
+            }
+        }
+
+        document.addEventListener("visibilitychange", visibilityChange)
+    </script>
+</html>
