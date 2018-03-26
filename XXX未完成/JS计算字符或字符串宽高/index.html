@@ -4,52 +4,84 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>JS计算字符宽高</title>
     </head>
     <body>
         <script>
-            let str = "我我我我asldjgfsljsgjasgljsgfhf我我我"
-        
-            function getCharSize(char){
+            //浏览器下
+            function getCharSize(char, style = {}){
+                let {
+                    fontSize = 14,
+                    fontFamily = "SimSun"
+                } = style
+
                 let span = document.createElement("span")
-                span.style.font = "16px 宋体"
-                span.style.lineHeight = "16px"
-                span.innerHTML = str
+                let scale = fontSize / 20
+                span.style.fontSize = "20px"
+                span.style.fontFamily = fontFamily
+                span.style.lineHeight = "0"
+                span.style.transform = `scale(${scale})`
+                span.style.display = "inline-block"
+                span.innerHTML = char
                 document.body.appendChild(span)
                 let rect = span.getBoundingClientRect()
                 let width = rect.width
                 let height = rect.height
-                document.body.removeChild(span)
+                // document.body.removeChild(span)
                 return {
                     width,
-                    height
+                    height: fontSize
                 }
             }
-        
-            var ctx = document.createElement('canvas').getContext('2d')
-            function getCharSize2(char){
-                ctx.font = "16px 宋体"
-                var text = ctx.measureText(char) // TextMetrics object
-                return {
+
+            //利用Canvas
+            const ctx = document.createElement('canvas').getContext('2d')
+            // let map = new Map()
+
+            function getCharSizeByCanvas(char, style = {}){
+                let {
+                    fontSize = 14,
+                    fontFamily = "SimSun"
+                } = style
+                // if(map.has(char)) return map.get(char)
+                
+                ctx.font = `${fontSize}px ${fontFamily}`
+                let text = ctx.measureText(char) // TextMetrics object
+                console.log(text)
+                let result = {
+                    height: fontSize,
                     width: text.width
                 }
+                // map.set(char, result)
+
+                return result
             }
+
+
+            // let str = "我SSSSSSSSSSSSSSSSSSSSSSasdas阿斯达斯大苏打"
+        
             
-            const COUNT = 10000
+        
+            
+            
+            // console.log(getCharSize(str))
+            // console.log(getCharSize2(str))
+
+            // const COUNT = 100000
     
-            let startTime = Date.now()
-            for(let i = 0; i < COUNT; i++){
-                getCharSize(str)
-            }
-            let endTime = Date.now()
-            console.log((endTime - startTime) / COUNT + 'ms')
+            // let startTime = Date.now()
+            // for(let i = 0; i < COUNT; i++){
+            //     getCharSize(str)
+            // }
+            // let endTime = Date.now()
+            // console.log((endTime - startTime) + 'ms')
     
-            startTime = Date.now()
-            for(let i = 0; i < COUNT; i++){
-                getCharSize2(str)
-            }
-            endTime = Date.now()
-            console.log((endTime - startTime) / COUNT + 'ms')
+            // startTime = Date.now()
+            // for(let i = 0; i < COUNT; i++){
+            //     getCharSize2(str)
+            // }
+            // endTime = Date.now()
+            // console.log((endTime - startTime) + 'ms')
         </script>
     </body>
 </html>
