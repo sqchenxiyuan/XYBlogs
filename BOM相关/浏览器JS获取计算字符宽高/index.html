@@ -7,15 +7,18 @@
         <title>JS计算字符宽高</title>
     </head>
     <body>
+        <!-- <canvas id="canvas" width="200" height="200"></canvas> -->
         <script>
-            //浏览器下
+            //利用span
+            let span = document.createElement("span")
+            span.style.positon = "ablsolute"
+
             function getCharSize(char, style = {}){
                 let {
                     fontSize = 14,
                     fontFamily = "SimSun"
                 } = style
-
-                let span = document.createElement("span")
+                
                 let scale = fontSize / 20
                 span.style.fontSize = "20px"
                 span.style.fontFamily = fontFamily
@@ -26,8 +29,7 @@
                 document.body.appendChild(span)
                 let rect = span.getBoundingClientRect()
                 let width = rect.width
-                let height = rect.height
-                // document.body.removeChild(span)
+                document.body.removeChild(span)
                 return {
                     width,
                     height: fontSize
@@ -35,38 +37,33 @@
             }
 
             //利用Canvas
-            const ctx = document.createElement('canvas').getContext('2d')
-            // let map = new Map()
+            let canvas = document.createElement('canvas')
+            canvas.style.positon = "ablsolute"
+            let ctx = canvas.getContext('2d')
 
             function getCharSizeByCanvas(char, style = {}){
                 let {
                     fontSize = 14,
-                    fontFamily = "SimSun"
+                    fontFamily = "Arial"
                 } = style
-                // if(map.has(char)) return map.get(char)
-                
+                // document.body.appendChild(canvas)
                 ctx.font = `${fontSize}px ${fontFamily}`
+                // document.body.removeChild(canvas)
                 let text = ctx.measureText(char) // TextMetrics object
                 console.log(text)
+                ctx.fillText(char, 50, 50)
                 let result = {
                     height: fontSize,
                     width: text.width
                 }
-                // map.set(char, result)
-
                 return result
             }
 
+            getCharSizeByCanvas("啊ass")
 
-            // let str = "我SSSSSSSSSSSSSSSSSSSSSSasdas阿斯达斯大苏打"
-        
+            // 性能比较
+            // let str = "我"
             
-        
-            
-            
-            // console.log(getCharSize(str))
-            // console.log(getCharSize2(str))
-
             // const COUNT = 100000
     
             // let startTime = Date.now()
@@ -74,14 +71,14 @@
             //     getCharSize(str)
             // }
             // let endTime = Date.now()
-            // console.log((endTime - startTime) + 'ms')
+            // console.log("方法一：", (endTime - startTime) + 'ms')
     
             // startTime = Date.now()
             // for(let i = 0; i < COUNT; i++){
-            //     getCharSize2(str)
+            //     getCharSizeByCanvas(str)
             // }
             // endTime = Date.now()
-            // console.log((endTime - startTime) + 'ms')
+            // console.log("方法二：", (endTime - startTime) + 'ms')
         </script>
     </body>
 </html>

@@ -1,4 +1,4 @@
-# JS计算字符宽高
+# 浏览器JS获取计算字符宽高
 
 在开发中遇到了需要获取一段文字的长度的技术性需求，这篇文章将会讲述我是如何解决这样的问题的
 
@@ -128,10 +128,121 @@ function getCharSizeByCanvas(char, style = {}){
 }
 ```
 
+#### 问题
+
+1.  chrome浏览器存在BUG，如果canvas不在DOM树上设置字体大小小于12px时，字体大小会强制设置为12px
+
+    ``` javascript
+
+    //setfont before append
+    const canvas1 = document.createElement('canvas')
+    canvas1.width = 100
+    canvas1.height = 100
+    const ctx1 = canvas1.getContext('2d')
+    ctx1.font = "8px Arial"
+    ctx1.fillText(ctx1.font, 0, 50)
+    document.body.appendChild(canvas1)
+
+    //set font after append
+    const canvas2 = document.createElement('canvas')
+    canvas2.width = 100
+    canvas2.height = 100
+    const ctx2 = canvas2.getContext('2d')
+    document.body.appendChild(canvas2)
+    ctx2.font = "8px Arial"
+    ctx2.fillText(ctx2.font, 0, 50)
+
+    ```
+
+    ![](http://o7yupdhjc.bkt.clouddn.com/18-3-31/89113489.jpg)
+
+## 代码整理
+
+下面给出优化后的代码
+
+### 方法一：span
+
+``` javascript
+let span = document.createElement("span")
+span.style.positon = "ablsolute"
+
+function getCharSize(char, style = {}){
+    let {
+        fontSize = 14,
+        fontFamily = "SimSun"
+    } = style
+    
+    let scale = fontSize / 20
+    span.style.fontSize = "20px"
+    span.style.fontFamily = fontFamily
+    span.style.lineHeight = "0"
+    span.style.transform = `scale(${scale})`
+    span.style.display = "inline-block"
+    span.innerHTML = char
+    document.body.appendChild(span)
+    let rect = span.getBoundingClientRect()
+    let width = rect.width
+    document.body.removeChild(span)
+    return {
+        width,
+        height: fontSize
+    }
+}
+```
+
+### 方法二：canvas计算
+
+``` javascript
+let canvas = document.createElement('canvas')
+canvas.style.positon = "ablsolute"
+let ctx = canvas.getContext('2d')
+
+function getCharSizeByCanvas(char, style = {}){
+    let {
+        fontSize = 14,
+        fontFamily = "Arial"
+    } = style
+    document.body.appendChild(canvas)
+    ctx.font = `${fontSize}px ${fontFamily}`
+    document.body.removeChild(canvas)
+    let text = ctx.measureText(char) // TextMetrics object
+    ctx.fillText(char, 50, 50)
+    let result = {
+        height: fontSize,
+        width: text.width
+    }
+    return result
+}
+```
+
+## 性能比较
+
+数据为进行10000次单字符计算
+
+1.  都需要插入DOM的情况下(方法二兼容chrome，且字体都为12px以下)
+
+    ![](http://o7yupdhjc.bkt.clouddn.com/18-3-31/30782320.jpg) ![](http://o7yupdhjc.bkt.clouddn.com/18-3-31/80601993.jpg) ![](http://o7yupdhjc.bkt.clouddn.com/18-3-31/55948947.jpg)
+
+    方法二效率比方法一快: 150%左右
+
+2.  方法二字体都为12px以上
+
+    ![](http://o7yupdhjc.bkt.clouddn.com/18-3-31/42526653.jpg) ![](http://o7yupdhjc.bkt.clouddn.com/18-3-31/33213498.jpg) ![](http://o7yupdhjc.bkt.clouddn.com/18-3-31/82711810.jpg)
+
+    方法二效率比方法一快: 1500%左右
+
+从效率上来讲，canvas效率是极高的，同时canvas还有还在制定的标准，可以提供更加详细的文本信息，chrome只需要去`chrome://flags/`开启`Experimental canvas features`就可以提前使用该功能
+
+![](http://o7yupdhjc.bkt.clouddn.com/18-3-31/41988249.jpg)
+
 ## 参考资料
 
 [CanvasRenderingContext2D.measureText()](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/measureText)
 
+[TextMetrics](https://developer.mozilla.org/zh-CN/docs/Web/API/TextMetrics)
+
 ## END
 
->   2017-12-13   立项
+>   2018-03-31  完成
+
+>   2017-12-13  立项

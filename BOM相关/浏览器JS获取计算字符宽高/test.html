@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+</head>
+<body>
+    <script>
+        //setfont before append
+        const canvas1 = document.createElement('canvas')
+        canvas1.width = 100
+        canvas1.height = 100
+        const ctx1 = canvas1.getContext('2d')
+        ctx1.font = "8px Arial"
+        ctx1.fillText(ctx1.font, 0, 50)
+        document.body.appendChild(canvas1)
+
+        //set font after append
+        const canvas2 = document.createElement('canvas')
+        canvas2.width = 100
+        canvas2.height = 100
+        const ctx2 = canvas2.getContext('2d')
+        document.body.appendChild(canvas2)
+        ctx2.font = "8px Arial"
+        ctx2.fillText(ctx2.font, 0, 50)
+    </script>
+</body>
+</html>
