@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <title>浏览器缓存之谜</title>
+</head>
+<body>
+    <h3>Cache-Control</h3>
+    <p><button id="max-age-10">max-age=10</button></p>
+    <p><button id="max-age-10-no-cache">max-age=10,no-cache</button></p>
+    <p><button id="last-modified">last-modified</button></p>
+    <p><button id="etag-test">etag-test</button></p>
+</body>
+<script>
+$("#max-age-10").bind("click", function(e){
+    $.get("/cache-control-test",{control: "max-age=10"}, function(err, data){
+        console.log(data)
+    })
+})
+
+$("#max-age-10-no-cache").bind("click", function(e){
+    $.get("/cache-control-test",{control: "max-age=10,no-cache"}, function(err, data){
+        console.log(data)
+    })
+})
+
+$("#last-modified").bind("click", function(e){
+    $.get("/last-modified-test", function(err, data){
+        console.log(data)
+    })
+})
+
+$("#etag-test").bind("click", function(e){
+    $.get("/etag-test", function(err, data){
+        console.log(data)
+    })
+})
+
+</script>
+</html>
