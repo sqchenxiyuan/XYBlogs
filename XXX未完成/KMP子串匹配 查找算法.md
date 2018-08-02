@@ -1,4 +1,4 @@
-# KMP子串匹配 查找算法
+# 字符串子串匹配算法-BF RK KMP BM Sunday
 
 ## END
 
