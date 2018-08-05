@@ -90,7 +90,7 @@ let projectionArea = function(grid) {
 ```
 ## 在线链接
 
-[divide-two-integers](https://leetcode.com/problems/projection-area-of-3d-shapes)
+[projection-area-of-3d-shapes](https://leetcode.com/problems/projection-area-of-3d-shapes)
 
 ## END
 
