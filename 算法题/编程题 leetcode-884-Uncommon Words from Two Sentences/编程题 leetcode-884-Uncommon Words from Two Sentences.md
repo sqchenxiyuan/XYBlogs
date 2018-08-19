@@ -1,6 +1,6 @@
-# 编程题 leetcode 888 Uncommon Words from Two Sentences
+# 编程题 leetcode 884 Uncommon Words from Two Sentences
 
-leetcode 888 Uncommon Words from Two Sentences 解析
+leetcode 884 Uncommon Words from Two Sentences 解析
 
 ## 题目
 
@@ -73,6 +73,8 @@ let uncommonFromSentences = function(A, B) {
 
 ## END
 
+>   2018-08-19  更新题号
+> 
 >   2018-08-13  完成
 > 
 >   2018-08-12  立项
