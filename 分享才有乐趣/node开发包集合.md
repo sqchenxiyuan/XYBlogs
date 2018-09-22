@@ -54,8 +54,24 @@ repository : [https://www.npmjs.com/package/bignumber.js](https://www.npmjs.com/
 
 >   bignumber.js 实现了大数计算的相关底层算法，方便快捷，并且活跃，big-number 已经2年没有更新了
 
+## 解析操作相关
+
+### HTML字符串解析操作
+
+#### jsdom
+
+npm : [https://www.npmjs.com/package/jsdom](https://www.npmjs.com/package/jsdom)
+
+repository: [https://github.com/jsdom/jsdom](https://github.com/jsdom/jsdom)
+
+推荐理由：
+
+>   jsdom 可以在node端解析DOM并给你和在浏览器相同的体验
+
 ## END
 
+>   2018-09-22    添加 jsdom 用于node端HTML解析和对象操作
+> 
 >   2017-12-19    添加 bignumber.js 用于大数计算
 
 >   2017-8-11    添加 multer 和 unzip
