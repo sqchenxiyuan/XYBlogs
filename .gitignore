@@ -41,3 +41,4 @@ jspm_packages
 .project
 .vscode
 package-lock.json
+debug
