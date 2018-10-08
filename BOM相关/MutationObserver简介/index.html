@@ -26,16 +26,34 @@
     </style>
 </head>
 <body>
-    <div id="parent" class="parent" style="background: red;">
+    <!-- <div id="parent" class="parent" style="background: red;">
         <div id="center" class="center" style="background: green;">
             <div id="children" class="children" style="background: blue;">
     
             </div>
         </div>
-        asd
     </div>
     <div>
         <button id="btn-addchildnode">添加子节点</button>
+    </div> -->
+
+    <div style="padding: 10px">
+        <h3>属性更改</h3>
+        <div id="attributes-change" data-a="111" style="width: 200px;height: 200px;background: blue;"></div>
+    </div>
+    <div style="padding: 10px">
+        <h3>文本内容更改</h3>
+        <div id="characterdata-change">
+            这是文本
+        </div>
+    </div>
+    <div style="padding: 10px">
+        <h3>子节点增删更改</h3>
+        <div id="childlist-change">
+            <div>1</div>
+            <div>2</div>
+        </div>
+        <button id="childlist-change-btn">添加和删除节点</button>
     </div>
 </body>
 <script src="./index.js"></script>
