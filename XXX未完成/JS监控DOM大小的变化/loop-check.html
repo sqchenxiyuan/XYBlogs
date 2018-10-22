@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>循环检测</title>
+</head>
+<body>
+    <div id="test" style="background: red;width: 100px;height: 100px"></div>
+    <script>
+        class DomResizeWatcher{
+            constructor(){
+                this.datas = new Map()
+
+                this._init()
+            }
+
+            _init(){
+                this._check()
+            }
+
+            _check(){
+                Array.from(this.datas.values()).forEach(data => {
+                    data.check()
+                })
+
+                requestAnimationFrame(this._check.bind(this))
+            }
+
+            addResizeEventListener(dom, fun){
+                let data = this.datas.get(dom)
+                if(!data){
+                    data = new DomResizeWatcherData(dom)
+                    this.datas.set(dom, data)
+                }
+                data.addResizeEventListener(fun)
+            }
+
+            removeResizeEventListener(dom, fun){
+                let data = this.datas.get(dom)
+                if(!data) return
+
+                data.removeResizeEventListener(fun)
+
+                if(data.getFunCount() > 0) return
+
+                this.datas.delete(dom)
+            }
+        }
+
+        class DomResizeWatcherData{
+            constructor(dom){
+                this.dom = dom
+                this.funs = new Set()
+                this.size = this._getDomSize()
+            }
+
+            _getDomSize(){
+                let height = this.dom.clientHeight
+                let width = this.dom.clientWidth
+
+                return {
+                    height,
+                    width
+                }
+            }
+
+            _trigger(){
+                let dom = this.dom
+                this.funs.forEach(fun => {
+                    fun.apply(dom)
+                })
+            }
+
+            getFunCount(){
+                return this.funs.size
+            }
+
+            addResizeEventListener(fun){
+                this.funs.add(fun)
+            }
+
+            removeResizeEventListener(fun){
+                this.funs.delete(fun)
+            }
+
+            check(){
+                let size = this._getDomSize()
+                if(size.height !== this.size.height 
+                    || size.width !== this.size.width){
+                    this._trigger()
+                    this.size = size
+                }
+            }
+        }
+
+        let dom = document.getElementById("test")
+
+        let watcher = new DomResizeWatcher()
+        watcher.addResizeEventListener(dom, _ => {
+            console.log("resize")
+        })
+    </script>
+</body>
+</html>
