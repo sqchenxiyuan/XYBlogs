@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,13 @@
     <title>循环检测</title>
 </head>
 <body>
-    <div id="test" style="background: red;width: 100px;height: 100px"></div>
+    <div id="test1" style="background: red;width: 80%;height: 400px;">
+        <div id="test2" style="background: blue;padding: 20px;display: inline-block;">
+            <div id="test3" style="background: green;width: 100px;height: 100px">
+        
+            </div>
+        </div>
+    </div>
     <script>
         class DomResizeWatcher{
             constructor(){
@@ -95,12 +101,28 @@
             }
         }
 
-        let dom = document.getElementById("test")
-
         let watcher = new DomResizeWatcher()
-        watcher.addResizeEventListener(dom, _ => {
-            console.log("resize")
+        watcher.addResizeEventListener(document.getElementById("test1"), _ => {
+            console.log("test1 resize!")
         })
+        watcher.addResizeEventListener(document.getElementById("test2"), _ => {
+            console.log("test2 resize!")
+        })
+        watcher.addResizeEventListener(document.getElementById("test3"), _ => {
+            console.log("test3 resize!")
+        })
+        
+        //循环创建
+        // for(let i = 0; i < 5000; i++){
+        //     let div = document.createElement("div")
+        //     div.style="background: red;width: 80%;height: 20px;"
+        //     div.innerHTML = i
+        //     document.body.appendChild(div)
+        //     watcher.addResizeEventListener(div, _ => {
+        //         //do someting
+        //     })
+        // }
+
     </script>
 </body>
 </html>

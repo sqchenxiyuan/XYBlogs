@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #outside{
+            position: absolute;
+            overflow: auto;
+            width: 80%;
+            height: 100px;
+            border: 1px solid blue;
+            resize: both;
+        }
+    </style>
+    <div id="outside">
+    </div>
+    <script>
+        // let outsideDom = document.getElementById("outside")
+        // let smallDom = document.getElementById("small-listener")
+        // let bigDom = document.getElementById("big-listener")
+
+        // smallDom.scrollTop = 2e10 + 1
+        // smallDom.scrollLeft = 2e10 + 1
+        // console.log( bigDom.scrollTop)
+        // bigDom.scrollTop = 2e10 + 1
+        // bigDom.scrollLeft = 2e10 + 1
+        // console.log( bigDom.scrollTop)
+
+
+        // let resized = false
+        // smallDom.addEventListener("scroll", e => {
+        //     console.log(e)
+        //     bigDom.scrollTop = 2e10 + 1
+        //     bigDom.scrollLeft = 2e10 + 1
+        //     if(!resized) resized = true && requestAnimationFrame(resize)
+        // })
+
+        // bigDom.addEventListener("scroll", e => {
+        //     smallDom.scrollTop = 2e10 + 1
+        //     smallDom.scrollLeft = 2e10 + 1
+        //     if(!resized) resized = true && requestAnimationFrame(resize)
+        // })
+
+        // function resize(){
+        //     console.log("resize")
+        //     resized = false
+        // }
+        class FrameCounter{
+            
+            constructor(){
+                this.time = 0
+                this._run = false
+            }
+
+            _runFun(){
+                if(this._run){
+                    this.time++
+                    requestAnimationFrame(this._runFun.bind(this))
+                }
+            }
+
+            start(){
+                this._run = true
+                this._runFun()
+            }
+
+            stop(){
+                this._run = false
+            }
+        }
+
+        class DOMResizeWatcher{
+            constructor(){
+                this.datas = new Map()
+                this.timer = new FrameCounter()
+                this.timer.start()
+            }
+
+            addResizeEventListener(dom, fun){
+                let data = this.datas.get(dom)
+                if(!data){
+                    data = new DOMResizeWatcherData(dom, this.timer)
+                    this.datas.set(dom, data)
+                }
+                data.addResizeEventListener(fun)
+            }
+
+            removeResizeEventListener(dom, fun){
+                let data = this.datas.get(dom)
+                if(!data) return
+                
+                if(fun){
+                    data.removeResizeEventListener(fun)
+
+                    if(data.getFunCount() > 0) return
+                }
+
+                data.destory()
+                this.datas.delete(dom)
+            }
+        }
+
+        class DOMResizeWatcherData{
+
+            constructor(dom, timer){
+                this.dom = dom
+                this.funs = new Set()
+                this.trigged = false
+                this.timer = timer
+
+                this.insideBigEl = null
+                this.insideSmallEl = null
+
+                this._init()
+            }
+
+            _init(){
+                //监听变大的DOM
+                let insideBig = document.createElement("div")
+                insideBig.style = "position: absolute;top:0;left: 0;bottom: 0;right: 0;overflow: hidden;visibility: hidden;z-index:-1"
+                insideBig.innerHTML = `<div style="width:${DOMResizeWatcherData.bigNumber}px;height:${DOMResizeWatcherData.bigNumber}px"></div>`
+
+                //监听变小的DOM
+                let insideSmall = document.createElement("div")
+                insideSmall.style = "position: absolute;top:0;left: 0;bottom: 0;right: 0;overflow: hidden;visibility: hidden;z-index:-1"
+                insideSmall.innerHTML = `<div style="width:300%;height:300%"></div>`
+
+                this.insideBigEl = insideBig
+                this.insideSmallEl = insideSmall
+
+                try{
+                    this.dom.appendChild(insideBig)
+                    this.dom.appendChild(insideSmall)
+                } catch(e) {
+                    throw new Error("DOMElement can't appendChild! try another way!")
+                }
+                
+                insideSmall.scrollTop = DOMResizeWatcherData.bigNumber
+                insideSmall.scrollLeft = DOMResizeWatcherData.bigNumber
+                insideBig.scrollTop = DOMResizeWatcherData.bigNumber
+                insideBig.scrollLeft = DOMResizeWatcherData.bigNumber
+
+                insideBig.addEventListener("scroll", _ => {
+                    insideSmall.scrollTop = DOMResizeWatcherData.bigNumber
+                    insideSmall.scrollLeft = DOMResizeWatcherData.bigNumber
+                    this._trigger()
+                })
+                insideSmall.addEventListener("scroll", _ => {
+                    insideBig.scrollTop = DOMResizeWatcherData.bigNumber
+                    insideBig.scrollLeft = DOMResizeWatcherData.bigNumber
+                    this._trigger()
+                })
+            }
+
+            _trigger(){
+                if(this.triggertime === this.timer.time) return
+                this.triggertime = this.timer.time
+                
+                let dom = this.dom
+                this.funs.forEach(fun => {
+                    fun.apply(dom)
+                })
+            }
+
+            getFunCount(){
+                return this.funs.size
+            }
+
+            addResizeEventListener(fun){
+                this.funs.add(fun)
+            }
+
+            removeResizeEventListener(fun){
+                this.funs.delete(fun)
+            }
+        
+            destory(){
+                try{
+                    this.dom.removeChild(this.insideBigEl)
+                    this.dom.removeChild(this.insideSmallEl)
+                } catch(e){}
+            }
+        }
+        DOMResizeWatcherData.bigNumber = 9999999
+        
+        let outsideDom = document.getElementById("outside")
+        let watcher = new DOMResizeWatcher()
+        let count = 0
+        watcher.addResizeEventListener(outsideDom, _ => {
+            console.log("resize " + ++count)
+        })
+    </script>
+</body>
+</html>

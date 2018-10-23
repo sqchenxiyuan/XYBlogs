@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="outside" style="background: red; height: 200px; width: 200px;overflow: hidden;resize: both;">
+        <div id="inside" style="background: blue; height: 400px;"></div>
+    </div>
+    <div id="text"></div>
+    <script>
+        let outside = document.getElementById("outside")
+        let inside = document.getElementById("inside")
+        let text = document.getElementById("text")
+        
+        //让内容在最下面
+        outside.scrollTop = 10000
+
+        outside.addEventListener("scroll", updateText)
+        updateText()
+
+        function updateText(){
+            text.innerHTML = outside.scrollTop;
+        }
+    </script>
+</body>
+</html>

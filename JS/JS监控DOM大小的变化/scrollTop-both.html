@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="outside" style="position: relative; background: red; height: 200px; width: 200px;resize: both;overflow: auto;">
+        <div style="height:1000px;background: linear-gradient(red, blue)"></div>
+        <div id="inside-big" style="position: absolute;top:0;left: 0;bottom: 0;right: 0;overflow: hidden;visibility: hidden;">
+                <div style="height: 40000px;"></div>
+            </div>
+        <div id="inside-small" style="position: absolute;top:0;left: 0;bottom: 0;right: 0;overflow: hidden;visibility: hidden;">
+                <div style="height: 200%;"></div>
+        </div>
+    </div>
+    <div id="text"></div>
+    <script>
+        let outside = document.getElementById("outside")
+
+        let insideBig = document.getElementById("inside-big")
+        let insideSmall = document.getElementById("inside-small")
+        let text = document.getElementById("text")
+        
+        //让内容在最下面
+        insideBig.scrollTop = 1e20
+        insideSmall.scrollTop = 1e20
+
+        insideBig.addEventListener("scroll", _ => {
+            insideSmall.scrollTop = 1e20
+            updateText()
+        })
+        insideSmall.addEventListener("scroll", _ => {
+            insideBig.scrollTop = 1e20
+            updateText()
+        })
+
+        let count = 1;
+        function updateText(){
+            text.innerHTML = ++count;
+        }
+        updateText()
+    </script>
+</body>
+</html>
