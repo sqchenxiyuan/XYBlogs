@@ -10,7 +10,7 @@
 
 ## UML结构图
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-10-11/96618075.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-10-11/96618075.jpg)
 
 ## 实例
 
