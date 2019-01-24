@@ -16,6 +16,16 @@ repository : [https://github.com/expressjs/multer](https://github.com/expressjs/
 
 >   一个集合express的 multipart/form-data的解析功能，当然，最强大的还是它的文件解析功能~~用了都说好！
 
+####  form-data
+
+npm : [https://www.npmjs.com/package/form-data](https://www.npmjs.com/package/form-data)
+
+repository : [https://github.com/form-data/form-data](https://github.com/form-data/form-data)
+
+推荐理由：
+
+>   FormData的node api，和浏览器的操作一致，本质是一个可写流，可以通过流传递数据
+
 ## 文件相关
 
 ### 压缩与解压
@@ -70,12 +80,14 @@ repository: [https://github.com/jsdom/jsdom](https://github.com/jsdom/jsdom)
 
 ## END
 
+>   2019-01-24    添加 form-data:用于node端生成form表单
+> 
 >   2018-09-22    添加 jsdom 用于node端HTML解析和对象操作
 > 
 >   2017-12-19    添加 bignumber.js 用于大数计算
-
+>
 >   2017-8-11    添加 multer 和 unzip
-
+>
 >   2017-8-8    添加 压缩文件包  archiver
-
+>
 >   2017-8-7    立项
