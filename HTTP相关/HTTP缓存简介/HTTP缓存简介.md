@@ -14,11 +14,11 @@ HTTP缓存方式，主要依靠请求头信息来配置，通过是否在下次�
 
 缓存有效时
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-4-9/32591361.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-4-9/32591361.jpg)
 
 缓存无效时
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-4-9/96641016.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-4-9/96641016.jpg)
 
 ### Exprise
 
@@ -54,13 +54,13 @@ HTTP缓存方式，主要依靠请求头信息来配置，通过是否在下次�
 在客户端第一次请求数据时服务端除了数据还会将该数据的标识一同返回给客户端，客户端将标识和数据缓存在本地缓存数据库中，当再次请求数据时，客户端将备份的缓存标识附带在请求当中发送给服务端，服务端会根据标识来判断该请求的结果是否发生了变化，如果没有则响应304，否则正常响应并返回新的数据和标识
 
 第一次请求
-![](http://o7yupdhjc.bkt.clouddn.com/18-5-31/25784200.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-5-31/25784200.jpg)
 
 后续请求（缓存未变动）
-![](http://o7yupdhjc.bkt.clouddn.com/18-5-31/61091180.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-5-31/61091180.jpg)
 
 后续请求（缓存改变）
-![](http://o7yupdhjc.bkt.clouddn.com/18-5-31/73384480.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-5-31/73384480.jpg)
 
 ### Last-Modified/If-Modified-Since
 

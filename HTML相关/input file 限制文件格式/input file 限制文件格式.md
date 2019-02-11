@@ -16,7 +16,7 @@
 
 .pdf <input type="file" accept=".pdf">
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-9-6/31921828.jpg)
+![](http://blog-cdn.chenxiyuan.fun/17-9-6/31921828.jpg)
 
 这时可选择的文件就都是后缀为 `.pdf` 的了
 

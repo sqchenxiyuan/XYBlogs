@@ -30,7 +30,7 @@ console.timeEnd('启动页面');//启动页面: 2884.2ms
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-15/14669432-file_1489563686513_ba97.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-15/14669432-file_1489563686513_ba97.png)
 
 在我的电脑上是2秒多，但一般的电脑可能要慢很多，但是作为页面展示如果需要2秒的时间那么用户体验将是相当不好的,因为两秒种的时间用户都无法操作。
 
@@ -68,9 +68,9 @@ this.postMessage(x);
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-15/18765655-file_1489563927596_1184.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-15/18765655-file_1489563927596_1184.png)
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-15/41123916-file_1489563299699_11414.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-15/41123916-file_1489563299699_11414.png)
 
 使用webWorker可以避免大量的计算导致的拥塞，避免页面假死，充分利用客户端的物理资源。
 
@@ -82,7 +82,7 @@ this.postMessage(x);
 
 虽然作为HTM5的新特性，但是各大浏览器对 `webWorker` 的支持都是很好的,所以我们基本可以大胆的尝试在工程中使用。
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-15/32230454-file_1489570747547_c5a1.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-15/32230454-file_1489570747547_c5a1.png)
 
 ### 构造函数
 
@@ -113,7 +113,7 @@ var worker = new Worker(workerURL);
 
 我们可以看看输出worker实例对象。
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-15/76665581-file_1489572232506_103c0.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-15/76665581-file_1489572232506_103c0.png)
 
 我们可以看到它主要包含4个方法：
 
@@ -148,7 +148,7 @@ a=b;
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-15/91004190-file_1489588908863_45ce.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-15/91004190-file_1489588908863_45ce.png)
 
 这样我们就可以获取到内部的错误信息，并加以处理，但是一般对这方面的需求很少，主要获取内部运行的情况。
 
@@ -176,7 +176,7 @@ postMessage("I'm Worker");
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-16/41574675-file_1489631275255_11ff9.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-16/41574675-file_1489631275255_11ff9.png)
 
 这样我们就可以获取到内部的发出信息。
 
@@ -218,7 +218,7 @@ onmessage=function(e){
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-16/67303759-file_1489632117317_f7bc.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-16/67303759-file_1489632117317_f7bc.png)
 
 由于执行是异步的，所以还是要主线程的JS执行完毕后才能执行对事件的响应，第一个错误是因为对有函数的对象解析导致的，所以我们只能看到前面两个的字付串输出。
 
@@ -245,7 +245,7 @@ setTimeout(()=>{
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-16/60630320-file_1489632881761_1412a.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-16/60630320-file_1489632881761_1412a.png)
 
 我们可以看到这里只有 `123` 输出，虽然依然可以向worker发送消息，但是没什么卵用。
 
@@ -275,7 +275,7 @@ window.postMessage('123');
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-16/38853793-file_1489634098334_b8c4.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-16/38853793-file_1489634098334_b8c4.png)
 
 我们可以看到window是没有定义的，想要获取我们需要使用 `self`
 
@@ -287,7 +287,7 @@ self.postMessage('123');
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-16/86004010-file_1489634852286_ec81.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-16/86004010-file_1489634852286_ec81.png)
 
 这样我们就可以获取内部的全局变量了，其实self在浏览器环境下也是指向全局环境的。
 
@@ -309,7 +309,7 @@ console.info('console.info')
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-16/67870422-file_1489635585519_146f9.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-16/67870422-file_1489635585519_146f9.png)
 
 #### 对AJAX和webSocket的支持
 
@@ -445,7 +445,7 @@ onmessage=function(e){
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-16/49487941-file_1489639916878_e14e.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-16/49487941-file_1489639916878_e14e.png)
 
 
 ## Worker 和 SharedWorker
@@ -502,11 +502,11 @@ addEventListener("connect", function(e){
 
 当只有一个页面时
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-16/82481994-file_1489668478929_15fb2.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-16/82481994-file_1489668478929_15fb2.png)
 
 当有两个页面时
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-16/82403752-file_1489668538842_b11f.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-16/82403752-file_1489668538842_b11f.png)
 
 ### 注意
 

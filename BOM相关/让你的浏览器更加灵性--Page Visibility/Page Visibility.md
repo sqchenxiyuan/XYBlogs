@@ -41,7 +41,7 @@ function visibilityChange(){
 document.addEventListener("visibilitychange", visibilityChange)
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-3-20/55648724.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-3-20/55648724.jpg)
 
 如图可以看到切换出去和切换回来后，输出了`hidden`和`visible`
 
@@ -63,11 +63,11 @@ function visibilityChange(){
 document.addEventListener("visibilitychange", visibilityChange)
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-3-20/87430499.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-3-20/87430499.jpg)
 
 ## 结尾
 
-这个简单的API就这样讲的差不多了![](http://o7yupdhjc.bkt.clouddn.com/17-9-27/79506665.jpg)，除了可以改变标题让你的文档更加`灵性`，这个API还主要用在控制视频播放，Banner滚动，页面完全关闭前保存数据等等地方
+这个简单的API就这样讲的差不多了![](http://blog-cdn.chenxiyuan.fun/17-9-27/79506665.jpg)，除了可以改变标题让你的文档更加`灵性`，这个API还主要用在控制视频播放，Banner滚动，页面完全关闭前保存数据等等地方
 
 ## 参考资料
 

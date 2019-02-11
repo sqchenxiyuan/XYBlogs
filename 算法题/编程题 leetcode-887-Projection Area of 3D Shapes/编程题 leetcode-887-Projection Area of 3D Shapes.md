@@ -29,7 +29,7 @@ Output: 17
 Explanation: 
 Here are the three projections ("shadows") of the shape made with each axis-aligned plane.
 ```
-![](http://o7yupdhjc.bkt.clouddn.com/18-8-5/31724229.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-8-5/31724229.jpg)
 
 Example3:
 ```

@@ -62,13 +62,13 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer），是以安全�
 
 我们只需要去[git官网](https://git-scm.com/)下载git安装包就可以了
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/96561972.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/96561972.jpg)
 
 安装时在PATH选项中选择第3个选项，不然openssl不能直接使用
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/93808994.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/93808994.jpg)
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/69015890.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/69015890.jpg)
 
 安装完成后我们输入以下指令查看是否安装成功
 
@@ -76,7 +76,7 @@ HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer），是以安全�
 >
 >openssl version -a  //查看openssl安装是否成功
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/446083.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/446083.jpg)
 
 出现上图的效则表示成功了。
 
@@ -98,7 +98,7 @@ openssl x509 -req -days 365 -in csr.pem -signkey privateKey.pem -out certificate
 ```
 执行时根据提示输入相应信息即可。
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/55459594.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/55459594.jpg)
 
 执行完后会生成3个文件:
 
@@ -178,29 +178,29 @@ httpsServer.listen(3001,function(){
 
 > node sever.js
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/93424173.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/93424173.jpg)
 
 ### 访问HTTP
 
 访问 **127.0.0.1:3000**
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/15478502.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/15478502.jpg)
 
 ### 访问HTTPS
 
 访问 **127.0.0.1:3001**
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/19121590.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/19121590.jpg)
 
 注意！这是因为你没有加https的协议头，默认为http，所以服务器获取不了请求
 
 访问 **https://127.0.0.1:3001**
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/87542337.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/87542337.jpg)
 
 一般浏览器是会对非认证了的私密连接提醒警告的，这只需要继续就可以
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-11-5/21711164.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-11-5/21711164.jpg)
 
 这样我们就搭建了一个HTTPS服务器~~~~！
 

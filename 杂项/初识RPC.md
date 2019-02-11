@@ -50,7 +50,7 @@ function dosome(obj){
 
 ### 结构
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-5-25/36991398.jpg)
+![](http://blog-cdn.chenxiyuan.fun/17-5-25/36991398.jpg)
 
 客户端函数通过调用封装好的请求接口向服务端请求通信，服务端也同样通过封装好的响应接口来接受处理。
 

@@ -36,7 +36,7 @@ Controller是Model和View之间的中介，当用户操作View时(点击、输�
 >
 >Controller(控制器):控制
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-9-18/74405755.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-9-18/74405755.jpg)
 
 ## 简单示例
 

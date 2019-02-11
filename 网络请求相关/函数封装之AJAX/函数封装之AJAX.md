@@ -12,7 +12,7 @@ AJAX可以允许网页异步与服务器进行数据交换，是一个使用频�
 
 而且现在主流的浏览器都支持:
 
-![](http://o7yupdhjc.bkt.clouddn.com/16-9-16/93876512.jpg)
+![](http://blog-cdn.chenxiyuan.fun/16-9-16/93876512.jpg)
 
 ### 使用
 

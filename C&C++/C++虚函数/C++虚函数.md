@@ -28,7 +28,7 @@ int main()
 }
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-9-25/845589.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-9-25/845589.jpg)
 
 输出`8`意味着这个对象实例化后是`8`个字节，其中`4`个字节为`int`类型的`x`属性，另`4`个字节为`float`类型的`y`属性一半
 
@@ -84,7 +84,7 @@ int main()
 }
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-9-25/72420102.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-9-25/72420102.jpg)
 
 纯粹的只有函数的类，实例化后并不是不占用内存，而是依然占据的`1`个字节的内存，不为`0`的原因是占位，防止冲突，接下来看下虚函数的内存空间是如何的
 
@@ -111,7 +111,7 @@ int main()
 }
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-9-25/44163621.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-9-25/44163621.jpg)
 
 这里可以看到从`1`个占位字节上升到了`4`个字节，是不是很困惑？虚函数和普通函数的差别在哪呢？下面将会从面向对象编程的思维来看待
 
@@ -340,7 +340,7 @@ int main()
 }
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-9-26/28910857.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-9-26/28910857.jpg)
 
 `getPrinter`函数作为一个生产printer的函数，使用虚函数后外部就不需要知道其具体的类型能正确的执行各自的操作，而不使用虚函数就全部执行的指定的类型的函数
 
@@ -350,7 +350,7 @@ int main()
 
 在上面查看内存的时候发现添加了虚函数以后，空的类实例化会占据4个字节的内存，而这4个字节(在64位系统就是8字节)的内存其实就是一个指针，指向了一个虚函数表
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-9-26/75910568.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-9-26/75910568.jpg)
 
 大致结构就是这样，具体也可以在宇宙第一IDE种查看下面的类
 
@@ -369,7 +369,7 @@ class SimpleClass{
 
 可以看到它的结构是这样的
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-9-26/77527731.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-9-26/77527731.jpg)
 
 虚函数的多态，同名函数会覆盖父类的函数，不同名的会追加
 
@@ -409,7 +409,7 @@ int main()
 }
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/18-9-26/37806363.jpg)
+![](http://blog-cdn.chenxiyuan.fun/18-9-26/37806363.jpg)
 
 可以从图中看到，重写了的函数在虚函数表中的指针地址不一样，没有重写的保持和父类一致
 

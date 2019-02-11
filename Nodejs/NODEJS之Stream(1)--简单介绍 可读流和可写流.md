@@ -24,7 +24,7 @@ fileReadStream.on('data',function(data){
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-22/46751467-file_1490191505659_116ec.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-22/46751467-file_1490191505659_116ec.png)
 
 我们可以看到输出了 `BufferArray` 类型的数据,如果我们想要看到数据的字符内容我们可以在创建文档流的时候设置 `encoding`，在这里我的文档是 `utf-8` 的编码，所以我使用 `utf-8`，这个需要根据文件进行调整。
 
@@ -40,7 +40,7 @@ fileReadStream.on('data',function(data){
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-22/68496808-file_1490191795100_11465.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-22/68496808-file_1490191795100_11465.png)
 
 这样我们就可以将对 `BufferArray` 的操作改为对 `String` 的了。
 
@@ -74,7 +74,7 @@ fileReadStream.on('close',function(){
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-22/87062493-file_1490192544598_132a7.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-22/87062493-file_1490192544598_132a7.png)
 
 这3个事件是十分基础和常用的，我们先暂时了解到这里，下面我们看看数据的输出流--可写流。
 
@@ -94,7 +94,7 @@ fileWriteStream.write('这是输出数据！');
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-24/33445419-file_1490357570561_c2e0.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-24/33445419-file_1490357570561_c2e0.png)
 
 使用 `write` 方法可以将数据写入到流当中，将数据交给可写流处理。
 
@@ -115,13 +115,13 @@ fileReadStream.on('end',function(){
 
 ```
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-24/43328047-file_1490358531646_f942.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-24/43328047-file_1490358531646_f942.png)
 
 我们可以在可读流和可写流中加入一些其他的数据处理流来完成一些操作，比如：压缩文件
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-24/71207022-file_1490358971871_12bae.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-24/71207022-file_1490358971871_12bae.png)
 
-![](http://o7yupdhjc.bkt.clouddn.com/17-3-24/55348980-file_1490358998658_f82d.png)
+![](http://blog-cdn.chenxiyuan.fun/17-3-24/55348980-file_1490358998658_f82d.png)
 
 ## 后记
 
