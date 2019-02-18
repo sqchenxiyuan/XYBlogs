@@ -2,6 +2,20 @@
 
 这篇文章将集合我在使用node开发一些特别功能时，所找到的简单易用，功能强大的包，用来和大家分享。
 
+## NODE开发提升
+
+### require别名
+
+#### module-alias
+
+npm : [https://www.npmjs.com/package/module-alias](https://www.npmjs.com/package/module-alias)
+
+repository : [https://github.com/ilearnio/module-alias](https://github.com/ilearnio/module-alias)
+
+推荐理由：
+
+>   还在为`../../../../../index.js`这样恶心的代码烦恼吗，那就来用别名吧!!!
+
 ## 网络解析相关
 
 ### FROM表单
@@ -80,6 +94,8 @@ repository: [https://github.com/jsdom/jsdom](https://github.com/jsdom/jsdom)
 
 ## END
 
+>   2019-02-18    添加 module-alias:用于node引用文件使用别名
+> 
 >   2019-01-24    添加 form-data:用于node端生成form表单
 > 
 >   2018-09-22    添加 jsdom 用于node端HTML解析和对象操作
