@@ -92,8 +92,22 @@ repository: [https://github.com/jsdom/jsdom](https://github.com/jsdom/jsdom)
 
 >   jsdom 可以在node端解析DOM并给你和在浏览器相同的体验
 
+## 配置相关
+
+### config
+
+npm : [https://www.npmjs.com/package/config](https://www.npmjs.com/package/config)
+
+repository: [https://github.com/lorenwest/node-config](https://github.com/lorenwest/node-config)
+
+推荐理由：
+
+>   服务器都需要读取配置,config可以帮助你快速有效的管理不同环境的配置
+
 ## END
 
+>   2019-04-09    添加 config:用于管理node服务器运行配置
+> 
 >   2019-02-18    添加 module-alias:用于node引用文件使用别名
 > 
 >   2019-01-24    添加 form-data:用于node端生成form表单
