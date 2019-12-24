@@ -31,7 +31,7 @@ function getCharSize(char, style = {}){
 }
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/18-3-24/93782047.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-3-24/93782047.jpg)
 
 #### 问题
 
@@ -41,11 +41,11 @@ function getCharSize(char, style = {}){
         
     chrome:
 
-    ![](http://blog-cdn.chenxiyuan.fun/18-3-24/44366378.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/18-3-24/44366378.jpg)
 
     firefox:
 
-    ![](http://blog-cdn.chenxiyuan.fun/18-3-24/80572571.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/18-3-24/80572571.jpg)
 
     不知道为何`firefox`的高总是比`chrome`高2px，但这个我们可以通过直接获取传入的`fontSize`作为高，这样就可以统一了
 
@@ -63,13 +63,13 @@ function getCharSize(char, style = {}){
     }
     ```
 
-    ![](http://blog-cdn.chenxiyuan.fun/18-3-24/87422142.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/18-3-24/87422142.jpg)
 
 2.  浏览器对字体大小的限制
 
     chrome默认最小字体为12px，基本是人尽皆知的
 
-    ![](http://blog-cdn.chenxiyuan.fun/18-3-24/59748520.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/18-3-24/59748520.jpg)
 
     这里可以使用scale的方式实现
 
@@ -93,7 +93,7 @@ function getCharSize(char, style = {}){
     }
     ```
 
-    ![](http://blog-cdn.chenxiyuan.fun/18-3-26/82274935.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/18-3-26/82274935.jpg)
 
 #### 优点
 
@@ -103,7 +103,7 @@ function getCharSize(char, style = {}){
 
 1.  会受一些潜在的全局样式影响
 
-    ![](http://blog-cdn.chenxiyuan.fun/18-3-24/29555299.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/18-3-24/29555299.jpg)
 
 ### 解决方法二：Canvas measureText函数
 
@@ -154,7 +154,7 @@ function getCharSizeByCanvas(char, style = {}){
 
     ```
 
-    ![](http://blog-cdn.chenxiyuan.fun/18-3-31/89113489.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/18-3-31/89113489.jpg)
 
 ## 代码整理
 
@@ -221,19 +221,19 @@ function getCharSizeByCanvas(char, style = {}){
 
 1.  都需要插入DOM的情况下(方法二兼容chrome，且字体都为12px以下)
 
-    ![](http://blog-cdn.chenxiyuan.fun/18-3-31/30782320.jpg) ![](http://blog-cdn.chenxiyuan.fun/18-3-31/80601993.jpg) ![](http://blog-cdn.chenxiyuan.fun/18-3-31/55948947.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/18-3-31/30782320.jpg) ![](https://blog-cdn.chenxiyuan.fun/18-3-31/80601993.jpg) ![](https://blog-cdn.chenxiyuan.fun/18-3-31/55948947.jpg)
 
     方法二效率比方法一快: 150%左右
 
 2.  方法二字体都为12px以上
 
-    ![](http://blog-cdn.chenxiyuan.fun/18-3-31/42526653.jpg) ![](http://blog-cdn.chenxiyuan.fun/18-3-31/33213498.jpg) ![](http://blog-cdn.chenxiyuan.fun/18-3-31/82711810.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/18-3-31/42526653.jpg) ![](https://blog-cdn.chenxiyuan.fun/18-3-31/33213498.jpg) ![](https://blog-cdn.chenxiyuan.fun/18-3-31/82711810.jpg)
 
     方法二效率比方法一快: 1500%左右
 
 从效率上来讲，canvas效率是极高的，同时canvas还有还在制定的标准，可以提供更加详细的文本信息，chrome只需要去`chrome://flags/`开启`Experimental Extension APIs`（新版本）或`Experimental Extension APIs`（老版本）就可以提前使用该功能
 
-![](http://blog-cdn.chenxiyuan.fun/18-3-31/41988249.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-3-31/41988249.jpg)
 
 ## 参考资料
 

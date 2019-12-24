@@ -6,7 +6,7 @@
 
 简单例子
 
-![](http://blog-cdn.chenxiyuan.fun/2019-7-12/139ee627-0cef-4106-a6f3-1ada6e276551.gif)
+![](https://blog-cdn.chenxiyuan.fun/2019-7-12/139ee627-0cef-4106-a6f3-1ada6e276551.gif)
 
 ``` html
 <!DOCTYPE html>
@@ -48,7 +48,7 @@ IntersectionObserver的构造函数含有两个参数:`callback`和`options`
 
 回调的触发是收集的这段时间内触发阈值变化的内容,一个观察对象在这一次内跨过多个阈值只能产生一个`entry`,多个观察对象跨越阈值则会产生多个`entry`
 
-![](http://blog-cdn.chenxiyuan.fun/2019-7-12/20244429-96e5-4b97-b7ed-abb04affe5a9.gif)
+![](https://blog-cdn.chenxiyuan.fun/2019-7-12/20244429-96e5-4b97-b7ed-abb04affe5a9.gif)
 
 #### options
 
@@ -58,7 +58,7 @@ IntersectionObserver的构造函数含有两个参数:`callback`和`options`
 
 `rootMargin`可以用于扩展或搜索`root`的判断区域，例如`"-30px -30px -30px -30px"`表示判断的边框向内收缩`30px`
 
-![](http://blog-cdn.chenxiyuan.fun/2019-7-12/280d25f0-d5dc-4105-a685-e82bf29cdf78.gif)
+![](https://blog-cdn.chenxiyuan.fun/2019-7-12/280d25f0-d5dc-4105-a685-e82bf29cdf78.gif)
 
 `threshold`表示的触发的阈值，这个可以是一个数值，也可以是一个数值数组，但是值必须在`0~1`，触发时获取的比例不一定是触发的阈值
 
@@ -84,7 +84,7 @@ IntersectionObserver的构造函数含有两个参数:`callback`和`options`
 
 ### 兼容性
 
-![](http://blog-cdn.chenxiyuan.fun/2019-7-12/f36f63be-482b-41de-ad2d-54d722a02080.png)
+![](https://blog-cdn.chenxiyuan.fun/2019-7-12/f36f63be-482b-41de-ad2d-54d722a02080.png)
 
 ## 总结
 

@@ -244,7 +244,7 @@ document.getElementById("in").addEventListener("click",function(e){
 
 那么点击id为`in`的元素时，输出的结果就会按着`window` 对象到id为`in`的元素的传递顺序显示出来
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-14/29840401.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-14/29840401.jpg)
 
 ### 触发(target)阶段
 
@@ -286,7 +286,7 @@ document.getElementById("in").addEventListener("click",function(e){
 
 结果就是这样了
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-14/58067840.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-14/58067840.jpg)
 
 
 ## 总结
@@ -311,7 +311,7 @@ document.getElementById("in").addEventListener("click",function(e){
 
     ```
 
-    ![](http://blog-cdn.chenxiyuan.fun/17-6-14/39045854.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/17-6-14/39045854.jpg)
 
     从结果我们可以看到捕获阶段的监听是触发了的。
 

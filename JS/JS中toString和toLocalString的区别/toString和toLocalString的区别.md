@@ -28,7 +28,7 @@ console.log(date.toLocaleString());//2017-04-09 13:27:49
 
 当我将系统的语言配置切换为英语（美国后）
 
-![](http://blog-cdn.chenxiyuan.fun/17-4-9/89141664-file_1491717122749_cb5a.png)
+![](https://blog-cdn.chenxiyuan.fun/17-4-9/89141664-file_1491717122749_cb5a.png)
 
 ``` javascript
 

@@ -6,7 +6,7 @@ Linux内核规定在没有root权限时是不能占用1024以下的端口的。
 
 ------
 
-![](http://blog-cdn.chenxiyuan.fun/16-8-21/66227573.jpg)
+![](https://blog-cdn.chenxiyuan.fun/16-8-21/66227573.jpg)
 
 在没有root权限的情况下，直接监听80端口会报错
 
@@ -44,7 +44,7 @@ Linux内核规定在没有root权限时是不能占用1024以下的端口的。
 
 > sudo vi /etc/iptables.rules
 
-![](http://blog-cdn.chenxiyuan.fun/16-8-21/4258231.jpg)
+![](https://blog-cdn.chenxiyuan.fun/16-8-21/4258231.jpg)
 
 我们可以看到其中有我们刚刚添加的规则
 

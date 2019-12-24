@@ -19,19 +19,19 @@
 
 就可以看到下面的内容了
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-16/85160796.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-16/85160796.jpg)
 
 第一段就是在判断root权限下，需要输入`--user-data-dir`才能继续正常运行
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-16/7429030.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-16/7429030.jpg)
 
 这里把这段屏蔽掉，让他不判断，因为后面会添加默认的参数
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-16/67284258.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-16/67284258.jpg)
 
 文件最后可以看出是在传递参数，这里在最后加伤我们的参数就可以了～～～
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-16/62538589.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-16/62538589.jpg)
 
 图片里的路径可以自己设置哦，到现在在命令行里面调用`code`命令已经可以正常使用了
 
@@ -41,9 +41,9 @@
 
 修改`/usr/share/applications/code.desktop`和`/usr/share/applications/code-url-handler.desktop`文件中的`Exec`属性的路径就行了
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-16/62622068.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-16/62622068.jpg)
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-16/86494183.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-16/86494183.jpg)
 
 这样就可以在root身份下愉快的和vscode玩耍啦～～～
 

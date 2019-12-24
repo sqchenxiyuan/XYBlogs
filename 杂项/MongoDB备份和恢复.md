@@ -22,7 +22,7 @@
 
     备份的数据存放位置，例如：`c:\dbdata`，该目录需要提前建立，在备份完成后，系统自动在dump目录下建立一个和数据库名相同的目录，这个目录里面存放该数据库实例的备份数据。
 
-![](http://blog-cdn.chenxiyuan.fun/17-5-31/21997800.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-5-31/21997800.jpg)
 
 比如我执行
 
@@ -30,7 +30,7 @@
 
 就将我的数据备份出来了
 
-![](http://blog-cdn.chenxiyuan.fun/17-5-31/77252295.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-5-31/77252295.jpg)
 
 ## 恢复
 
@@ -58,7 +58,7 @@
 
 就会将数据加载到 `test` 这个数据库中
 
-![](http://blog-cdn.chenxiyuan.fun/17-5-31/24955988.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-5-31/24955988.jpg)
 
 我们就可以看到我的数据加载了进来
 

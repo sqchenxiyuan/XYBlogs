@@ -10,7 +10,7 @@
 
 ## URL结构图
 
-![](http://blog-cdn.chenxiyuan.fun/18-12-5/45163999.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-12-5/45163999.jpg)
 
 ## 示例
 

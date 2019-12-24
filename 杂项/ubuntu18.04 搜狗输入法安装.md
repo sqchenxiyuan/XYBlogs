@@ -12,15 +12,15 @@
 
 进入配置
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-7/55886559.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-7/55886559.jpg)
 
 打开语言配置，点击管理安装的语言
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-7/22082610.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-7/22082610.jpg)
 
 将IBUS替换为fcitx
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-7/52574816.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-7/52574816.jpg)
 
 然后重启系统
 
@@ -28,7 +28,7 @@
 
 访问搜狗输入法For Linux [https://pinyin.sogou.com/linux/?r=pinyin](https://pinyin.sogou.com/linux/?r=pinyin)，下载最新的安装包
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-7/66597256.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-7/66597256.jpg)
 
 然后重启系统
 
@@ -36,23 +36,23 @@
 
 点击右上角的小键盘
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-7/90634853.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-7/90634853.jpg)
 
 在config中查看输入法配置
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-7/49072183.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-7/49072183.jpg)
 
 如果已经有搜狗拼音了就已经可以用了，如果没有需要手动加一下（一般自动有了）
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-7/37796238.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-7/37796238.jpg)
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-7/95860296.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-7/95860296.jpg)
 
 好了咋们可以打中文啦～～～！
 
 哈哈哈
 
-![](http://blog-cdn.chenxiyuan.fun/18-11-7/44141222.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-11-7/44141222.jpg)
 
 ## END
 

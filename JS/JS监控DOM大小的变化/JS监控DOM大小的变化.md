@@ -61,15 +61,15 @@
 
 ##### 100节点监听
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/36185990.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/36185990.jpg)
 
 在前6秒里，可以看到以js的执行为主(毕竟没有重绘的需求),一直在执行dom大小的变化检测，但占据的性能并不是很多，大约1%。
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/23570392.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/23570392.jpg)
 
 在后4秒里，由于出现了dom的大小变化，页面还是执行渲染，在这段时间JS(这里JS只执行循环对比)的消耗比例很低，大约2.5%(在正常监听的时候会有一些操作，比例是会明显增大的)，反而是渲染会占据近乎2倍的消耗
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/76348288.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/76348288.jpg)
 
 ##### 其他数量的节点的测试数据
 
@@ -83,7 +83,7 @@
 
 根据上面的表可以看到静态和动态的时间大体是跟着监听的DOM节点的数量成正比的，动态消耗的时间比静态略多可能是由于对多一层调用的堆栈导致，在5000节点的时候，动态渲染消耗的时间反而少了，是由于5000节点同时改变大小，消耗了大量的资源进行重绘，这时候的帧数也开始明显降低
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/91304588.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/91304588.jpg)
 
 这个图可以看到资源几乎被完全利用了,而且大部分是渲染消耗的
 
@@ -109,28 +109,28 @@
 
 在一般情况下父元素变大是不会影响内容的
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/53804540.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/53804540.jpg)
 
 但是当父元素变大的幅度超过了剩余的内容，那么内容会跟着底部向下移动，导致`scrollTop`缩小
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/87010949.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/87010949.jpg)
 
 这样我们就能监听到`scroll`事件啦！
 
 <iframe height='265' scrolling='no' title='通过scroll监听DOM变大' src='//codepen.io/sqchenxiyuan/embed/gBdKjp/?height=265&theme-id=0&default-tab=html,result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/sqchenxiyuan/pen/gBdKjp/'>通过scroll监听DOM变大</a> by sqchenxiyuan (<a href='https://codepen.io/sqchenxiyuan'>@sqchenxiyuan</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/2970352.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/2970352.jpg)
 
 ##### 父元素变小
 
 放大了的原理理解了话，那么放小来看下
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/29354667.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/29354667.jpg)
 
 如果是父元素变小，如果内容的大小不变，那么`scrollTop`永远都不会发生变化，为了让其发生变化，这里需要让子元素能跟着父元素变化，而且必须变化幅度大于父元素，才能促使父元素由于超过展示范围，去改变`scrollTop`
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/33102416.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/33102416.jpg)
 
 当内容的高度是父元素的100%以上时，由于速度比父元素缩小的块，导致父元素必须修改`scrollTop`来达到允许的最大的`scrollTop`，通过这个原理我们就可以监听到父元素的缩小啦！！！
 
@@ -139,7 +139,7 @@
 <iframe height='265' scrolling='no' title='通过scroll监听DOM的缩小' src='//codepen.io/sqchenxiyuan/embed/mzGjqR/?height=265&theme-id=0&default-tab=html,result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/sqchenxiyuan/pen/mzGjqR/'>通过scroll监听DOM的缩小</a> by sqchenxiyuan (<a href='https://codepen.io/sqchenxiyuan'>@sqchenxiyuan</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/69546766.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/69546766.jpg)
 
 ##### 放大放小混合
 
@@ -148,7 +148,7 @@
 <iframe height='297' scrolling='no' title='通过Scroll监听元素大小变化' src='//codepen.io/sqchenxiyuan/embed/GYXXoQ/?height=297&theme-id=0&default-tab=html,result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/sqchenxiyuan/pen/GYXXoQ/'>通过Scroll监听元素大小变化</a> by sqchenxiyuan (<a href='https://codepen.io/sqchenxiyuan'>@sqchenxiyuan</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-![](http://blog-cdn.chenxiyuan.fun/18-10-23/72595702.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-10-23/72595702.jpg)
 
 #### 性能分析
 

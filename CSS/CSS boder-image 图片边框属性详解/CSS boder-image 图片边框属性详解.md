@@ -22,7 +22,7 @@
 
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-5/47483821.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-5/47483821.jpg)
 
 要使用图片做边框背景我们至少需要`border-image-source` 以及 `border-image-slice` 、 `border-style`。
 
@@ -49,7 +49,7 @@
 
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-5/50940272.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-5/50940272.jpg)
 
 这样我们就实现了一个简单的渐变色边框
 
@@ -89,7 +89,7 @@
 
 这样就只有上边有图片了，因为其他区域为0，切出来的图片区域为空，放上去当然也是没有啦。
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-6/25961306.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-6/25961306.jpg)
 
 这里基本对这个属性的作用就明白了，但还有一些需要注意的。
 
@@ -115,7 +115,7 @@
 
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-6/65882977.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-6/65882977.jpg)
 
 这个 `fill` 在MDN上说任意位置都可以但是谷歌浏览器上只能放在两边，个人认为还是放在两边好（好看~~）。
 
@@ -149,11 +149,11 @@
 
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-6/54761151.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-6/54761151.jpg)
 
 可以看到其实边框的宽度依然为10px,但是因为我们定义的 `border-image-width` 更大所以图片延伸到了内部，在里面加点字就更加明了了。
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-6/64173531.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-6/64173531.jpg)
 
 这个只是图片延伸了过去，不会影响内部的排版。
 
@@ -183,7 +183,7 @@
 
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-6/62904877.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-6/62904877.jpg)
 
 ### border-image-repeat
 
@@ -193,21 +193,21 @@
 
 `stretch` 这个值代表拉伸图片
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-6/35104440.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-6/35104440.jpg)
 
 `repeat` 这个值代表平铺图片，将不会压缩图片
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-6/75967862.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-6/75967862.jpg)
 
 `round` 这个值是`stretch`和`repeat`的折中，会优先拉伸，当可以放两个时在放两个，依次增加。
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-6/82600516.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-6/82600516.jpg)
 
 ## 后记
 
 boder-image 相关的属性一共就这五个，理解起来还是很快的。虽然用的少，但是说不定那天就要提枪上阵了呢。
 
-![](http://blog-cdn.chenxiyuan.fun/17-6-6/94127539.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-6-6/94127539.jpg)
 
 ## 参考资料
 

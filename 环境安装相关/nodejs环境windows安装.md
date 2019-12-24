@@ -10,21 +10,21 @@
 
 首先前往[nvm-window的开源仓库下载](https://github.com/coreybutler/nvm-windows/releases)下载最新版的windos-nvm包
 
-![](http://blog-cdn.chenxiyuan.fun/18-1-21/19755404.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-1-21/19755404.jpg)
 
 可以下载免安装版也可以下载安装版(PS：感觉就是是不是自动帮你绑定nvm的环境变量)
 
 下载后运行，next -> accept -> next我们就到了选择nvm安装路径的界面
 
-![](http://blog-cdn.chenxiyuan.fun/18-1-21/79971862.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-1-21/79971862.jpg)
 
 再next就到了选择node安装路径的界面
 
-![](http://blog-cdn.chenxiyuan.fun/18-1-21/43704049.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-1-21/43704049.jpg)
 
 之后就可以使用nvm啦
 
-![](http://blog-cdn.chenxiyuan.fun/18-1-21/67551233.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-1-21/67551233.jpg)
 
 ## 配置NVM
 
@@ -32,11 +32,11 @@
 
 前往nvm的安装目录会有一个setting文件
 
-![](http://blog-cdn.chenxiyuan.fun/18-1-21/32117610.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-1-21/32117610.jpg)
 
 修改其中的`node_mirror`为`http://npm.taobao.org/mirrors/node/`，`npm_mirror`为`https://npm.taobao.org/mirrors/npm/`
 
-![](http://blog-cdn.chenxiyuan.fun/18-1-21/28234260.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-1-21/28234260.jpg)
 
 改成这样后就可以去快速的安装node啦~~
 
@@ -46,13 +46,13 @@
 
     > nvm install 9.4.0
 
-![](http://blog-cdn.chenxiyuan.fun/18-1-21/21357568.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-1-21/21357568.jpg)
 
 然后使用命令使用9.4.0的node
 
     > nvm use 9.4.0
 
-![](http://blog-cdn.chenxiyuan.fun/18-1-21/10968544.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-1-21/10968544.jpg)
 
 于是就安完了~~
 

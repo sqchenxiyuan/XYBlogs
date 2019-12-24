@@ -10,7 +10,7 @@
 
 `<a>`标签的`download`属性会指示浏览器下载URL而不是导航到URL,比如`<a href="http://www.baidu.com" download="baidu"></a>`将会提示下载访问`http://www.baidu.com`得到的数据
 
-![](http://blog-cdn.chenxiyuan.fun/17-10-21/89343725.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-10-21/89343725.jpg)
 
 所以我们只需要构建一个`<a>`标签设置属性，并触发它就行了
 
@@ -52,7 +52,7 @@ let dataURL = URL.createObjectURL(blob)
 
 然后结合上面`<a>`标签下载数据的方式，我们就可以下载啦
 
-![](http://blog-cdn.chenxiyuan.fun/17-9-27/79506665.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-9-27/79506665.jpg)
 
 ### 整体流程
 
@@ -74,7 +74,7 @@ a.click()
         URL.createObjectURL(blob,{type: "image/png"})
     ```
     
-    ![](http://blog-cdn.chenxiyuan.fun/17-10-21/46165593.jpg)
+    ![](https://blog-cdn.chenxiyuan.fun/17-10-21/46165593.jpg)
 
 
 ## 参考资料

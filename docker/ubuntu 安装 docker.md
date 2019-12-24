@@ -20,7 +20,7 @@
     >
     > sudo apt-key fingerprint 0EBFCD88
 
-    ![](http://blog-cdn.chenxiyuan.fun/2019-2-2/eeb2de96-c457-4e66-8035-9c4cdfe14859.png)
+    ![](https://blog-cdn.chenxiyuan.fun/2019-2-2/eeb2de96-c457-4e66-8035-9c4cdfe14859.png)
 
 4. 执行命令添加对应的源,其中的arch是系统CPU架构
 
@@ -34,11 +34,11 @@
 
     > sudo apt-get install docker-ce docker-ce-cli containerd.io
 
-    ![](http://blog-cdn.chenxiyuan.fun/2019-2-2/e1ce93fc-1cf8-4263-8a8d-e3a17d6a7049.png)
+    ![](https://blog-cdn.chenxiyuan.fun/2019-2-2/e1ce93fc-1cf8-4263-8a8d-e3a17d6a7049.png)
 
 7. 安装完成~~~
 
-    ![](http://blog-cdn.chenxiyuan.fun/2019-2-2/44d867bb-ec69-4225-9503-584e37a8a06b.png)
+    ![](https://blog-cdn.chenxiyuan.fun/2019-2-2/44d867bb-ec69-4225-9503-584e37a8a06b.png)
 
 ## 安装docker-compose
 
@@ -56,7 +56,7 @@ docker-compose也是一个很重要的命令，我们继续安装docker-compose
 
 3. 安装完成
 
-    ![](http://blog-cdn.chenxiyuan.fun/2019-2-2/18b40a95-937d-4b54-a25e-ac040b5f88f0.png)
+    ![](https://blog-cdn.chenxiyuan.fun/2019-2-2/18b40a95-937d-4b54-a25e-ac040b5f88f0.png)
 
 ## 参考资料
 

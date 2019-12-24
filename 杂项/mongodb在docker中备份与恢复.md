@@ -10,17 +10,17 @@
 
 首先使用`docker exec -it <容器名/ID> /bin/sh`进入docker容器内部
 
-![](http://blog-cdn.chenxiyuan.fun/18-7-20/12292482.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-7-20/12292482.jpg)
 
 使用导出命令`mongodump -d <数据库名称> -o <导出目录>`导出数据到一个目录
 
-![](http://blog-cdn.chenxiyuan.fun/18-7-20/96834851.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-7-20/96834851.jpg)
 
 然后使用`docker cp <源路径> <目标路径>`，路径可以是宿主机路径，也可以是`<容器名/ID>:<容器内路径>`表示的容器路径
 
-![](http://blog-cdn.chenxiyuan.fun/18-7-20/97928558.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-7-20/97928558.jpg)
 
-![](http://blog-cdn.chenxiyuan.fun/18-7-20/56629401.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-7-20/56629401.jpg)
 
 这样就导出数据了~~
 
@@ -30,11 +30,11 @@
 
 使用`docker cp <源路径> <目标路径>`将数据从本地复制到容器当中
 
-![](http://blog-cdn.chenxiyuan.fun/18-7-20/27567875.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-7-20/27567875.jpg)
 
 使用`docker exec -it <容器名/ID> /bin/sh`进入docker容器内部，然后使用恢复命令`mongorestore -d <数据库名称> <数据目录>`将数据恢复即可
 
-![](http://blog-cdn.chenxiyuan.fun/18-7-20/27662039.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-7-20/27662039.jpg)
 
 ## END
 

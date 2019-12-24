@@ -23,7 +23,7 @@ setTimeout(_ => {
 }, 1000)
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/18-9-21/81639433.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-9-21/81639433.jpg)
 
 结果会很悲伤，为此我们可以通过节流的方式来进行限制，也就是100ms内只执行一次
 
@@ -53,7 +53,7 @@ setTimeout(_ => {
 }, 1000)
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/18-9-21/49516254.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-9-21/49516254.jpg)
 
 可以看到只有某些操作才正常执行了，有很多操作被忽略了
 
@@ -89,7 +89,7 @@ setTimeout(_ => {
 }, 1000)
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/18-9-21/16618706.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-9-21/16618706.jpg)
 
 可以看到函数只执行了第一次，后面的操作由于时间间隔太短都被忽略了
 
@@ -231,7 +231,7 @@ setTimeout(_ => {
 }, 1000)
 ```
 
-![](http://blog-cdn.chenxiyuan.fun/18-9-21/24133946.jpg)
+![](https://blog-cdn.chenxiyuan.fun/18-9-21/24133946.jpg)
 
 ## END
 

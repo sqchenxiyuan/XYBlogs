@@ -10,7 +10,7 @@ chrome 浏览器由于会对本地文件的读取权限做限制，导致提示 
 
 >   --allow-file-access-from-files
 
-![](http://blog-cdn.chenxiyuan.fun/17-9-3/81300218.jpg)
+![](https://blog-cdn.chenxiyuan.fun/17-9-3/81300218.jpg)
 
 ## 参考资料
 

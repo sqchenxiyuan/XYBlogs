@@ -26,7 +26,7 @@ JS严格模式下的奇葩问题
 
 这段代码会在IE和一些老的safira浏览器报错，原因是严格模式下元素的`style`属性不能修改！！！！，需要用`element.style.xxxx = yyyy`的模式修改才行
 
-![](http://blog-cdn.chenxiyuan.fun/2019-3-15/88efe278-eadc-4276-ac68-69afa0c6954a.png)
+![](https://blog-cdn.chenxiyuan.fun/2019-3-15/88efe278-eadc-4276-ac68-69afa0c6954a.png)
 
 ## ENd
 
