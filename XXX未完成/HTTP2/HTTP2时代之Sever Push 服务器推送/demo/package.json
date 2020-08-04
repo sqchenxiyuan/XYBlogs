@@ -10,7 +10,7 @@
     "http2":"3.3.6",
     "spdy":"3.4.7",
     "express":"4.15.3",
-    "morgan":"1.8.2"
+    "morgan":"1.9.1"
   },
   "author": "",
   "license": "ISC"
