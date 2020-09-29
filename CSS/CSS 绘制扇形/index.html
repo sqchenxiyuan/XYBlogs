@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        margin: 20px;
+    }
+</style>
+<body style="display: flex;">
+    <style>
+        .circle{
+            width: 50px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+        }
+    </style>
+    <div class="circle"></div>
+
+    <style>
+        [class|="sector"]{
+            width: 0;
+            height: 0;
+            border: 25px solid red;
+            border-radius: 50%;
+        }
+
+        .sector-90{
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+        }
+
+        .sector-180{
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+        }
+
+        .sector-270{
+            border-bottom-color: transparent;
+        }
+    </style>
+    <div class="sector-90"></div>
+    <div class="sector-180"></div>
+    <div class="sector-270"></div>
+
+    <style>
+        .clip-sector-45{
+            height: 50px;
+            width: 50px;
+            background: red;
+            clip-path: path('M 25 25 L 50 25 L 50 0 Z');
+            border-radius: 50%;
+        }
+    </style>
+    <div class="clip-sector-45"></div>
+
+    <div id="clip-sector-jsdeg"></div>
+    <style>
+        #clip-sector-jsdeg{
+            height: 50px;
+            width: 50px;
+            background: red;
+            border-radius: 50%;
+        }
+    </style>
+    <script>
+        let startTime = Date.now()
+        function render(){
+            let deg = 360 * (Date.now() - startTime % (3 * 1000)) / (3 * 1000)
+            let x = 25 + 25 * Math.cos(deg / 180 * Math.PI)
+            let y = 25 - 25 * Math.sin(deg / 180 * Math.PI)
+            let dom = document.getElementById("clip-sector-jsdeg")
+            dom.style.clipPath = `path('M 25 25 L 50 25 A 25 25 0 1 0 ${x} ${y} Z')`
+            requestAnimationFrame(render)
+        }
+        requestAnimationFrame(render)
+    </script>
+</body>
+</html>
